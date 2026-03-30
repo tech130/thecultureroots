@@ -157,7 +157,7 @@ export default function Navbar() {
                       style={{ position: "relative", cursor: "pointer", display: "inline-block" }}
                     >
                       <Link 
-                        href={`#${item.toLowerCase().replace(" ", "-")}`} 
+                        href={item === "Services" ? "/services" : `#${item.toLowerCase().replace(" ", "-")}`} 
                         onClick={() => setMenuOpen(false)} 
                         style={{
                           color: "white",
