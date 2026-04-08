@@ -7,12 +7,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const services = [
-  { num: "01", title: "Branding &\nStrategy", desc: "Lorem Ipsum Is Simply Dummy\nText Of The Printing And\nTypesetting Industry.\nLorem Ipsum Has Been The\nIndustry's Standard Dummy\nText Ever Since The 1500s,", img: "/images/services/Branding-and-Strategy.png" },
-  { num: "02", title: "Translation & Localization", desc: "Authentic localization, not just translation.", img: "/images/services/Translation-and-Localization.png" },
-  { num: "03", title: "Creative Development", desc: "Storytelling that connects communities.", img: "/images/services/Creative-Development.jpg" },
-  { num: "04", title: "Digital Advertising", desc: "Data-driven multicultural campaigns.", img: "/images/services/Digital-Advertising.jpg" },
-  { num: "05", title: "Influencer Collaboration", desc: "Partnering with cultural voices.", img: "/images/services/Community-influencer-Collaboration.png" },
-  { num: "06", title: "Multicultural PR", desc: "Earning trust across borders.", img: "/images/services/Multicultural-PR.png" },
+  { num: "01", title: "Branding &\nStrategy", desc: "Build a brand identity that resonates across cultures — from positioning and messaging to full visual strategy tailored for diverse markets.", img: "/images/services/Branding-and-Strategy.png" },
+  { num: "02", title: "Translation & Localization", desc: "Beyond words. We adapt your content to sound native, feel local, and land with precision across languages and cultural contexts.", img: "/images/services/Translation-and-Localization.png" },
+  { num: "03", title: "Creative Development", desc: "Campaigns, content, and creatives designed with cultural intelligence — visuals and messaging that your audience actually sees themselves in.", img: "/images/services/Creative-Development.jpg" },
+  { num: "04", title: "Digital Advertising", desc: "Performance-driven multicultural ad campaigns across platforms — targeted, optimised, and built to convert across every demographic.", img: "/images/services/Digital-Advertising.jpg" },
+  { num: "05", title: "Influencer Collaboration", desc: "Connect with authentic voices across 46+ ethnicities — creators who hold real trust within the communities your brand wants to reach.", img: "/images/services/Community-influencer-Collaboration.png" },
+  { num: "06", title: "Multicultural PR", desc: "Shape your brand's narrative across diverse media ecosystems — from ethnic press to mainstream outlets — with stories that earn attention.", img: "/images/services/Multicultural-PR.png" },
 ];
 
 export default function Services() {
@@ -166,7 +166,7 @@ export default function Services() {
           display: "flex",
           justifyContent: "center"
         }}>
-          <Link 
+          <Link
             href="/services"
             style={{
               display: "inline-flex",

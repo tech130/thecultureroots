@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import Ribbons from "@/components/Ribbons";
 
 const services = [
   {
@@ -63,6 +64,17 @@ export default function ServicesPage() {
     }}>
       <Navbar />
 
+      <div style={{ position: "absolute", inset: 0, zIndex: 99999999999, pointerEvents: "none" }}>
+        <Ribbons
+          baseThickness={60}
+          colors={["#f0542c", "#7b3d62", "#002cc3"]}
+          speedMultiplier={0.5}
+          maxAge={500}
+          enableFade={false}
+          enableShaderEffect={false}
+        />
+      </div>
+
       {/* Redesigned Hero Section ("What We Do") */}
       <section style={{
         minHeight: "100vh",
@@ -73,72 +85,35 @@ export default function ServicesPage() {
         justifyContent: "center",
         padding: "0 10%",
         overflow: "hidden",
-        backgroundColor: "#18191D",
-        backgroundImage: "url('/images/services/Frame-38.png')",
-        backgroundSize: "contain",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        // Precise full-screen color distribution as per Expected Design
+        background: "radial-gradient(circle at 80% 85%, #F0542C 0%, #7B3D62 40%, #002CC3 100%)",
       }}>
 
-        {/* Animated Ripple Background */}
+
+
+        {/* High-Fidelity Ripple Overlay using Image + Blend Mode */}
         <div style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
+          inset: 0,
           zIndex: 0,
           pointerEvents: "none",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end", // Emerge from bottom-right as in reference
-          paddingRight: "5vw",
-          overflow: "visible"
+          overflow: "hidden",
         }}>
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{
-                scale: [0.6, 1],
-                opacity: [0, (0.03 + (12 - i) * 0.03)]
-              }}
-              transition={{
-                duration: 2.5,
-                delay: i * 0.12,
-                ease: [0.16, 1, 0.3, 1], // cinematic smooth ease
-              }}
-              style={{
-                position: "absolute",
-                width: `${300 + i * 220}px`,
-                height: `${240 + i * 180}px`,
-                borderRadius: "160px",
-                border: "1.5px solid",
-                borderColor: i < 4 ? "rgba(255, 94, 0, 0.5)" : "rgba(74, 144, 226, 0.3)",
-                background: i === 0
-                  ? "radial-gradient(circle, rgba(255, 94, 0, 0.4) 0%, rgba(255, 94, 0, 0) 70%)"
-                  : "transparent",
-                filter: `blur(${10 + i * 2}px)`,
-                opacity: 0.1,
-                transform: "translate(15%, 15%)", // Shifted towards bottom-right
-              }}
-            />
-          ))}
-
-          {/* Main Expanding Glow Core */}
           <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 1.1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 3, ease: "easeOut" }}
             style={{
               position: "absolute",
-              width: "1400px",
-              height: "1400px",
-              background: "radial-gradient(circle at 70% 70%, rgba(255, 94, 0, 0.15) 0%, rgba(74, 144, 226, 0.1) 40%, transparent 80%)",
-              filter: "blur(100px)",
-              bottom: "-10%",
-              right: "0%",
-              zIndex: -1
+              inset: 0,
+              backgroundImage: "url('/images/services/Frame-38.png')",
+              backgroundSize: "contain",
+              backgroundPosition: "center right",
+              backgroundRepeat: "no-repeat",
+              mixBlendMode: "screen", // Creates the 'tinted' glow effect on arcs
+              opacity: 1, // Full visibility of the arcs
+              filter: "brightness(1.1)", // Slight boost to match vibrancy
             }}
           />
         </div>
@@ -152,12 +127,13 @@ export default function ServicesPage() {
             style={{ maxWidth: "800px" }}
           >
             <h1 style={{
-              fontSize: "clamp(6rem, 8vw, 8rem)",
-              opacity: 0.3,
+              fontSize: "clamp(6rem, 10vw, 10rem)",
+              opacity: 0.9, // Brighter as in reference
               fontWeight: 200,
-              lineHeight: 0.9,
+              lineHeight: 0.85,
               marginBottom: "3rem",
               letterSpacing: "-0.04em",
+              color: "#FFFFFF"
             }}>
               What We Do
             </h1>
@@ -181,7 +157,7 @@ export default function ServicesPage() {
             paddingTop: "15vh",
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-end"
+            alignItems: "end"
           }}>
             {/* Learn More Link */}
             <motion.div
@@ -195,7 +171,7 @@ export default function ServicesPage() {
                   display: "flex",
                   alignItems: "center",
                   gap: "0.5rem",
-                  color: "rgba(255,255,255,0.4)",
+                  color: "#fff",
                   textDecoration: "none",
                   fontSize: "1.25rem",
                   fontWeight: 500,
@@ -203,37 +179,38 @@ export default function ServicesPage() {
                   opacity: 0.3,
                 }}
                 onMouseOver={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "#FF5E00"}
-                onMouseOut={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "rgba(255,255,255,0.4)"}
+                onMouseOut={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "#fff"}
               >
                 Learn More
                 <ArrowRight size={20} />
               </Link>
             </motion.div>
 
-            {/* Get Started Button (P pill style) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.8, type: "spring" }}
+            {/* Get Started Button (P pill style) with Entance Animation */}
+            {/* <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.8, duration: 1, type: "spring" }} 
             >
               <button style={{
-                background: "rgba(255, 255, 255, 0.15)",
+                background: "rgba(255, 255, 255, 0.1)",
                 backdropFilter: "blur(30px)",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
-                padding: "2rem 5rem",
+                padding: "1rem 3rem",
                 borderRadius: "100px",
                 color: "white",
-                fontSize: "2rem",
+                fontSize: "1.2rem",
                 fontWeight: 600,
                 cursor: "pointer",
                 boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3), inset 0 0 25px rgba(255, 255, 255, 0.1)",
                 transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                marginTop: "-100px"
               }}
                 onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
                   const target = e.currentTarget;
-                  target.style.transform = "scale(1.05) translateY(-8px)";
+                  target.style.transform = "scale(1.02) translateY(-8px)";
                   target.style.background = "rgba(255, 255, 255, 0.25)";
-                  // target.style.boxShadow = "0 35px 70px rgba(255, 94, 0, 0.3), inset 0 0 45px rgba(255, 255, 255, 0.2)";
                 }}
                 onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
                   const target = e.currentTarget;
@@ -244,7 +221,7 @@ export default function ServicesPage() {
               >
                 Get Started
               </button>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </section>
@@ -482,6 +459,6 @@ export default function ServicesPage() {
 
 
       <Footer />
-    </main>
+    </main >
   );
 }

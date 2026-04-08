@@ -241,7 +241,7 @@ export default function Markets() {
           onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
           onMouseLeave={(e) => e.currentTarget.style.opacity = "0.8"}
         >
-          Learn More <span>&rarr;</span>
+          Explore USA → <span>&rarr;</span>
         </div>
       </div>
 

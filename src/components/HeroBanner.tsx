@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowDown } from "lucide-react";
+import GridDistortion from "./GridDistortion";
+import { ArrowRight } from "lucide-react";
 
 export default function HeroBanner() {
   return (
@@ -15,7 +15,7 @@ export default function HeroBanner() {
       justifyContent: "center",
       overflow: "hidden"
     }}>
-      {/* Background Image Container */}
+      {/* Background Image Container with Grid Distortion */}
       <div style={{
         position: "absolute",
         top: 0,
@@ -24,18 +24,18 @@ export default function HeroBanner() {
         bottom: 0,
         zIndex: -1
       }}>
-        <Image
-          src="/images/hero-section/hero-banner.png"
-          alt="Hero Background"
-          fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
-          priority
+        <GridDistortion
+          imageSrc="/images/hero-section/hero-banner.png"
+          grid={35}
+          mouse={0.1}
+          strength={0.15}
+          relaxation={0.9}
         />
         {/* Dark overlay for text readability */}
         <div style={{
           position: "absolute",
           top: 0, left: 0, right: 0, bottom: 0,
-          // background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%)"
+          background: "rgba(0,0,0,0.2)"
         }} />
       </div>
 
@@ -59,7 +59,7 @@ export default function HeroBanner() {
             letterSpacing: "-0.03em",
             marginBottom: "1.5rem"
           }}>
-            Culture Flows.Brands Follow.
+            Where Cultures Convert. Brands Win.
             {/* <span style={{ color: "var(--accent-orange)" }}>Brands Follow.</span> */}
           </motion.h1>
 
@@ -70,7 +70,7 @@ export default function HeroBanner() {
             marginBottom: "3rem",
             maxWidth: "600px"
           }}>
-            The world doesn't adapt to your brand — your brand adapts to the world          </p>
+            The multicultural marketing agency built for brands ready to lead in the world's most diverse markets.          </p>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -90,7 +90,7 @@ export default function HeroBanner() {
               gap: "0.5rem"
             }}
           >
-            Contact Us<ArrowDown size={20} />
+            Let's Talk<ArrowRight size={20} />
           </motion.button>
         </motion.div>
       </div>

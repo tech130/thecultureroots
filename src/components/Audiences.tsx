@@ -143,7 +143,7 @@ export default function Audiences() {
           fontWeight: 400,
           letterSpacing: "0.01em"
         }}>
-          Deep Roots, Wide Reach !
+          46+ Ethnicities. 5 Markets. One Agency That Reaches Them All.
         </p>
       </div>
     </section>

@@ -32,82 +32,82 @@ export default function Footer() {
           zIndex: 10,
           position: "relative"
         }}>
-           {/* Left Column */}
-           <div style={{ maxWidth: "500px" }}>
-             <h3 style={{
-               fontSize: "1.75rem",
-               fontWeight: 500,
-               color: "#333",
-               lineHeight: 1.4,
-               letterSpacing: "-0.02em",
-               marginBottom: "4rem"
-             }}>
-               Where Culture Meets Strategy,<br/>
-               Digital Marketing For A Diverse World
-             </h3>
-             
-             {/* Social Icons row */}
-             <div style={{ display: "flex", gap: "0.5rem" }}>
-                {[
-                  { alt: "Facebook", src: "/images/logos/FB.png" },
-                  { alt: "Instagram", src: "/images/logos/INSTA.png" },
-                  { alt: "Threads", src: "/images/logos/THREADS.png" },
-                  { alt: "YouTube", src: "/images/logos/YT.png" },
-                  { alt: "X", src: "/images/logos/X.png" },
-                  { alt: "LinkedIn", src: "/images/logos/LI.png" },
-                  { alt: "TikTok", src: "/images/logos/TK.png" }
-                ].map((icon, i) => (
-                  <div key={i} style={{
-                    width: "28px", height: "28px",
-                    borderRadius: "6px",
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    overflow: "hidden",
-                    position: "relative",
-                    backgroundColor: "white"
-                  }}>
-                    <Image src={icon.src} alt={icon.alt} fill style={{ objectFit: "contain" }} />
+          {/* Left Column */}
+          <div style={{ maxWidth: "500px" }}>
+            <h3 style={{
+              fontSize: "1.75rem",
+              fontWeight: 500,
+              color: "#333",
+              lineHeight: 1.4,
+              letterSpacing: "-0.02em",
+              marginBottom: "4rem"
+            }}>
+
+              Built for brands that mean business <br /> across every culture, in every market.
+            </h3>
+
+            {/* Social Icons row */}
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              {[
+                { alt: "Facebook", src: "/images/logos/FB.png" },
+                { alt: "Instagram", src: "/images/logos/INSTA.png" },
+                { alt: "Threads", src: "/images/logos/THREADS.png" },
+                { alt: "YouTube", src: "/images/logos/YT.png" },
+                { alt: "X", src: "/images/logos/X.png" },
+                { alt: "LinkedIn", src: "/images/logos/LI.png" },
+                { alt: "TikTok", src: "/images/logos/TK.png" }
+              ].map((icon, i) => (
+                <div key={i} style={{
+                  width: "28px", height: "28px",
+                  borderRadius: "6px",
+                  border: "1px solid rgba(0,0,0,0.15)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  overflow: "hidden",
+                  position: "relative",
+                  backgroundColor: "white"
+                }}>
+                  <Image src={icon.src} alt={icon.alt} fill style={{ objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "3rem", maxWidth: "450px" }}>
+            {/* Contact & Call Row */}
+            <div style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
+              {/* Contact Us */}
+              <div>
+                <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#FF5E00", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
+                  Contact Us
+                  <div style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <ArrowUpRight size={12} strokeWidth={3} />
                   </div>
-                ))}
-             </div>
-           </div>
+                </Link>
+                <div style={{ fontSize: "0.75rem", color: "#999", marginTop: "0.5rem", fontWeight: 500 }}>Let's Work Together</div>
+              </div>
 
-           {/* Right Column */}
-           <div style={{ display: "flex", flexDirection: "column", gap: "3rem", maxWidth: "450px" }}>
-             {/* Contact & Call Row */}
-             <div style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
-               {/* Contact Us */}
-               <div>
-                  <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#FF5E00", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
-                    Contact Us 
-                    <div style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <ArrowUpRight size={12} strokeWidth={3} />
-                    </div>
-                  </Link>
-                  <div style={{ fontSize: "0.75rem", color: "#999", marginTop: "0.5rem", fontWeight: 500 }}>Let's Work Together</div>
-               </div>
-               
-               {/* Call Us */}
-               <div>
-                  <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#111", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
-                    Call Us on 
-                    <div style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <ArrowUpRight size={12} strokeWidth={3} />
-                    </div>
-                  </Link>
-                  <div style={{ fontSize: "0.75rem", color: "#999", marginTop: "0.5rem", fontWeight: 500 }}>Book Your Free Discovery Call</div>
-               </div>
-             </div>
+              {/* Call Us */}
+              <div>
+                <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#111", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
+                  Call Us on
+                  <div style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <ArrowUpRight size={12} strokeWidth={3} />
+                  </div>
+                </Link>
+                <div style={{ fontSize: "0.75rem", color: "#999", marginTop: "0.5rem", fontWeight: 500 }}>Book Your Free Discovery Call</div>
+              </div>
+            </div>
 
-             {/* Location */}
-             <div>
-                <h4 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#222", marginBottom: "0.75rem" }}>Location</h4>
-                <p style={{ fontSize: "0.75rem", color: "#888", lineHeight: 1.6, fontWeight: 500 }}>
-                  WeWork Cinnabar Hills, Embassy Golf Links, Business Park,<br/>
-                  SY# 13/2. Location No.8, Challaghatta, Bangalore - 560 071.
-                </p>
-             </div>
-           </div>
+            {/* Location */}
+            <div>
+              <h4 style={{ fontSize: "1.1rem", fontWeight: 600, color: "#222", marginBottom: "0.75rem" }}>Location</h4>
+              <p style={{ fontSize: "0.75rem", color: "#888", lineHeight: 1.6, fontWeight: 500 }}>
+                WeWork Cinnabar Hills, Embassy Golf Links, Business Park,<br />
+                SY# 13/2. Location No.8, Challaghatta, Bangalore - 560 071.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Big Typography Header */}
@@ -160,7 +160,7 @@ export default function Footer() {
           </div>
 
           {/* Solid Foreground Text */}
-          <motion.h2 
+          <motion.h2
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}

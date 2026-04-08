@@ -39,9 +39,9 @@ export default function HeroGrid() {
             letterSpacing: "-0.01em",
             maxWidth: "250px"
           }}>
-            The Space<br />
-            Between Brands<br />
-            and People.
+            Campaign-ready.<br />
+            Culture-first.<br />
+            Every frame built to connect.
           </h2>
         </motion.div>
 

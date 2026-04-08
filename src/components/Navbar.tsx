@@ -10,6 +10,7 @@ import clsx from "clsx";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [countriesExpanded, setCountriesExpanded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,12 +45,12 @@ export default function Navbar() {
         }}
       >
         <Link href="/" style={{ display: "flex", alignItems: "center" }}>
-          <Image 
-            src="/images/logos/logo.png" 
-            alt="CultureRoots Logo" 
-            width={180} 
-            height={40} 
-            style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} 
+          <Image
+            src="/images/logos/logo.png"
+            alt="CultureRoots Logo"
+            width={180}
+            height={40}
+            style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
             priority
           />
         </Link>
@@ -76,7 +77,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100 }}>
-            
+
             {/* Dark Full-Screen Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -142,13 +143,15 @@ export default function Navbar() {
                 gap: "2.5rem",
                 marginTop: "-2rem" // Visual optical balance to vertically center properly including the upper X
               }}>
-                {["Services", "Countries", "Audiences", "Platforms", "Case Studies", "Contact Us"].map((item, i) => (
+                {["Services", "Countries", "Case Studies", "Contact Us"].map((item, i) => (
                   <motion.div
                     key={item}
                     initial={{ opacity: 0, x: 40 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.08, duration: 0.5, ease: "easeOut" }}
-                    style={{ display: "inline-block", width: "fit-content" }}
+                    style={{ display: "flex", flexDirection: "column", width: "fit-content" }}
+                    onMouseEnter={() => item === "Countries" && setCountriesExpanded(true)}
+                    onMouseLeave={() => item === "Countries" && setCountriesExpanded(false)}
                   >
                     <motion.div
                       initial="rest"
@@ -156,9 +159,19 @@ export default function Navbar() {
                       animate="rest"
                       style={{ position: "relative", cursor: "pointer", display: "inline-block" }}
                     >
-                      <Link 
-                        href={item === "Services" ? "/services" : `#${item.toLowerCase().replace(" ", "-")}`} 
-                        onClick={() => setMenuOpen(false)} 
+                      <Link
+                        href={
+                          item === "Services" ? "/services" :
+                            item === "Countries" ? "" :
+                              item === "Case Studies" ? "/case-studies" :
+                                item === "Contact Us" ? "/contact" :
+                                  `#${item.toLowerCase().replace(" ", "-")}`
+                        }
+                        onClick={(e) => {
+                          if (item !== "Countries") {
+                            setMenuOpen(false);
+                          }
+                        }}
                         style={{
                           color: "white",
                           textDecoration: "none",
@@ -188,6 +201,56 @@ export default function Navbar() {
                         }}
                       />
                     </motion.div>
+
+                    {/* Markets Dropdown */}
+                    {item === "Countries" && (
+                      <AnimatePresence>
+                        {countriesExpanded && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "1rem",
+                              overflow: "hidden",
+                              paddingTop: "1rem",
+                              paddingLeft: "1.5rem",
+                              borderLeft: "2px solid rgba(255,255,255,0.1)",
+                              marginLeft: "1rem",
+                              marginTop: "0.5rem"
+                            }}
+                          >
+                            {[
+                              { name: "Canada", slug: "canada" },
+                              { name: "United States", slug: "united-states" },
+                              { name: "United Kingdom", slug: "united-kingdom" },
+                              { name: "Australia", slug: "australia" },
+                              { name: "New Zealand", slug: "new-zealand" },
+                            ].map((market) => (
+                              <Link
+                                key={market.slug}
+                                href={`/countries/${market.slug}`}
+                                onClick={() => setMenuOpen(false)}
+                                style={{
+                                  color: "rgba(255,255,255,0.7)",
+                                  textDecoration: "none",
+                                  fontSize: "1.25rem",
+                                  fontWeight: 400,
+                                  transition: "color 0.2s ease"
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.color = "#FF5E00")}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
+                              >
+                                {market.name}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
                   </motion.div>
                 ))}
               </div>

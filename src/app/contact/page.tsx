@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import LightRays from "@/components/LightRays";
 
 export default function ContactUs() {
   const [isOn, setIsOn] = useState(false);
@@ -61,6 +62,25 @@ export default function ContactUs() {
           }} />
         </div>
 
+        {/* 🪄 Atmosphere Light Rays */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "100vh", zIndex: 0, pointerEvents: "none" }}>
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#FFFFFF"
+            raysSpeed={3}
+            lightSpread={0.3}
+            rayLength={4}
+            followMouse={true}
+            mouseInfluence={0.1}
+            noiseAmount={0}
+            distortion={0.1}
+            className="custom-rays"
+            pulsating={false}
+            fadeDistance={1.5}
+            saturation={1}
+          />
+        </div>
+
         {/* Top Section */}
         <section
           style={{
@@ -74,26 +94,7 @@ export default function ContactUs() {
             zIndex: 1,
           }}
         >
-          {/* Tubelight Effect */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isFlickering ? { 
-              opacity: [0, 1, 0, 1, 0.2, 1],
-              transition: { duration: 1.5, times: [0, 0.1, 0.2, 0.3, 0.4, 1] } 
-            } : { opacity: 1 }}
-            style={{
-              position: "absolute",
-              top: "10rem",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "clamp(200px, 60vw, 800px)",
-              height: "2px",
-              background: "#4A90E2",
-              borderRadius: "50%",
-              boxShadow: "0 0 20px #4A90E2, 0 0 40px #4A90E2, 0 0 60px #4A90E2",
-              zIndex: 0,
-            }}
-          />
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,10 +104,10 @@ export default function ContactUs() {
             {/* 'Your brand's' text */}
             <h2
               style={{
-                fontSize: "clamp(1.5rem, 3.5vw, 3rem)",
-                fontWeight: 400,
+                fontSize: "clamp(1.5rem, 5.5vw, 4.5rem)",
+                fontWeight: 300,
                 letterSpacing: "-0.01em",
-                marginBottom: "0.25rem",
+                marginBottom: "-2rem",
                 marginTop: 0,
               }}
             >
@@ -126,65 +127,81 @@ export default function ContactUs() {
               }}
             >
               gr
-              {/* Interactive Toggle Switch */}
+              {/* Toggle Switch with Gradient Border representing 'o' */}
               <motion.div
-                onClick={() => setIsOn(!isOn)}
                 style={{
                   display: "inline-block",
                   verticalAlign: "middle",
                   width: "clamp(120px, 18vw, 220px)",
-                  height: "clamp(56px, 8vw, 100px)",
-                  borderRadius: "100px",
-                  background: isOn 
-                    ? "linear-gradient(90deg, #FF5E00 0%, #FFFFFF 100%)" 
-                    : "linear-gradient(90deg, #FFFFFF 0%, #FF5E00 100%)",
+                  height: "clamp(56px, 8vw, 160px)",
+                  borderRadius: "600px",
+                  padding: "30px", // Increased padding for more 'around' space
+                  background: "linear-gradient(90deg, #FFFFFF 0%, #F0542c 100%)", // Gradient border
                   margin: "0 clamp(8px, 1vw, 16px)",
                   position: "relative",
-                  boxShadow: isOn 
-                    ? "0 0 30px rgba(255, 94, 0, 0.6), inset 0 4px 10px rgba(0,0,0,0.15)"
-                    : "inset 0 4px 10px rgba(0,0,0,0.15)",
+                  boxShadow: "0 0 40px rgba(255, 107, 74, 0.3)",
                   cursor: "pointer",
+                  marginTop: "6%",
                 }}
               >
-                {/* Glow Effect when ON */}
-                <AnimatePresence>
-                  {isOn && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1.1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      style={{
-                        position: "absolute",
-                        top: "-20%",
-                        left: "-10%",
-                        right: "-10%",
-                        bottom: "-20%",
-                        background: "radial-gradient(circle, rgba(255,94,0,0.3) 0%, rgba(255,94,0,0) 70%)",
-                        borderRadius: "100px",
-                        zIndex: -1,
-                      }}
-                    />
-                  )}
-                </AnimatePresence>
+                {/* Dark Inner Track (The 'Gap') */}
+                <div style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%",
+                  background: "#08081A",
+                  borderRadius: "700px",
+                  // Removed overflow: hidden to prevent clipping of the circle's glow
+                  zIndex: 2
+                }}>
+                  {/* Subtle track glow that moves with the knob */}
+                  <motion.div
+                    animate={{
+                      x: ["-100%", "100%"],
+                      opacity: [0.1, 0.3, 0.1]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      background: "linear-gradient(90deg, transparent, rgba(255, 107, 74, 0.2), transparent)",
+                      zIndex: 1,
+                      borderRadius: "700px"
+                    }}
+                  />
 
-                {/* White Circle */}
-                <motion.div
-                  animate={{ 
-                    x: isOn ? "calc(100% - clamp(48px, 7vw, 84px) - clamp(4px, 0.5vw, 8px) * 2)" : 0 
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  style={{
-                    position: "absolute",
-                    left: "clamp(4px, 0.5vw, 8px)",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    width: "clamp(48px, 7vw, 84px)",
-                    height: "clamp(48px, 7vw, 84px)",
-                    backgroundColor: "#fff",
-                    borderRadius: "50%",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(0,0,0,0.05)",
-                  }}
-                />
+                  {/* Circular Knob (Automatic left-to-right with progressive glow) */}
+                  <motion.div
+                    animate={{
+                      left: ["0%", "100%"],
+                      x: ["0%", "-100%"],
+                      boxShadow: [
+                        "0 15px 25px rgba(0,0,0,0.3), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)", // At 0% (No glow)
+                        "0 15px 30px rgba(255, 107, 74, 0.15), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)", // At 70% (Still low glow)
+                        "0 20px 45px rgba(255, 107, 74, 0.7), 0 0 60px rgba(255, 255, 255, 0.5), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)"  // At 100% (Full glow)
+                      ]
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      repeatType: "reverse", 
+                      ease: [0.45, 0.05, 0.55, 0.95],
+                      times: [0, 0.7, 1] // Glow appears late in the move to the right
+                    }}
+                    style={{
+                      position: "absolute",
+                      top: "-15%", 
+                      transform: "translateY(-50%)",
+                      width: "clamp(48px, 6vw, 84px)",
+                      height: "clamp(48px, 6vw, 84px)",
+                      backgroundColor: "#FFFFFF",
+                      borderRadius: "50%",
+                      border: "6px solid #F8F9FA",
+                      zIndex: 3,
+                    }}
+                  />
+                </div>
               </motion.div>
               wth
             </h1>
@@ -342,8 +359,8 @@ export default function ContactUs() {
           >
             <h2
               style={{
-                fontSize: "clamp(4rem, 10vw, 8rem)",
-                fontWeight: 300,
+                fontSize: "clamp(4rem, 12vw, 9rem)",
+                fontWeight: 200,
                 lineHeight: 1,
                 letterSpacing: "-0.02em",
                 margin: 0,
