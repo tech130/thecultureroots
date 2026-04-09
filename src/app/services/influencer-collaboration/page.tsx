@@ -68,7 +68,7 @@ export default function InfluencerCollaborationPage() {
       <Navbar />
 
       {/* 🚀 Hero Section */}
-      <section style={{
+      <section className="inner-hero-section" style={{
         backgroundColor: "#2C2C2C", // Adjusted dark background
         minHeight: "100vh",
         display: "flex",
@@ -121,8 +121,7 @@ export default function InfluencerCollaborationPage() {
               fontWeight: 300
             }}
           >
-            The world doesn&apos;t adapt to your brand — your brand adapts to the world. The world
-            doesn&apos;t adapt to your brand — your brand adapts to the world
+            We connect brands with creators who hold real trust inside the communities you want to reach — and build campaigns that feel genuine, not paid for.
           </motion.p>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "1rem" }}>
@@ -422,7 +421,7 @@ export default function InfluencerCollaborationPage() {
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "4rem", position: "relative", zIndex: 10, alignItems: "flex-start" }}>
+        <div className="contact-grid-layout" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "4rem", position: "relative", zIndex: 10, alignItems: "flex-start" }}>
           {/* Left Column: Staggered Heading */}
           <div style={{ paddingTop: "8rem" }}>
             <div style={{ fontSize: "clamp(5rem, 8vw, 9rem)", fontWeight: 200, lineHeight: 0.9, letterSpacing: "-0.04em" }}>
@@ -506,7 +505,7 @@ export default function InfluencerCollaborationPage() {
               boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
             }}
           >
-            Book Your Free Discovery Call
+            Book a Free Strategy Call
           </motion.button>
         </div>
       </section>
@@ -516,7 +515,7 @@ export default function InfluencerCollaborationPage() {
       <section style={{ padding: "2rem 5%", backgroundColor: "#FFFFFF" }}>
         <h2 style={{ textAlign: "center", fontSize: "2rem", fontWeight: 700, marginBottom: "4rem", letterSpacing: "-0.02em" }}>Other Services</h2>
 
-        <div style={{
+        <div className="other-services-carousel" style={{
           display: "flex",
           justifyContent: "center",
           maxWidth: "1400px",
@@ -531,6 +530,7 @@ export default function InfluencerCollaborationPage() {
                 zIndex: 50,
                 transition: { duration: 0.3, ease: "easeOut" },
               }}
+              className="other-services-card"
               style={{
                 width: "320px",
                 height: "560px",
@@ -580,6 +580,47 @@ export default function InfluencerCollaborationPage() {
           font-weight: normal;
           font-style: normal;
           font-display: swap;
+        }
+
+        @media (max-width: 1024px) {
+          .inner-hero-section {
+            flex-direction: column !important;
+            justify-content: center !important;
+            text-align: center;
+            padding-top: 5rem !important;
+          }
+          .inner-hero-section > div {
+            align-items: center;
+          }
+          .inner-hero-section h1 {
+            align-items: center !important;
+          }
+          .other-services-carousel {
+            justify-content: flex-start !important;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 2rem !important;
+          }
+          .other-services-card {
+            margin-left: 1rem !important;
+            scroll-snap-align: start;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .contact-grid-layout {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .contact-grid-layout > div {
+            padding-top: 2rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          #magnifier-frame, #revealed-layer {
+            display: none !important;
+          }
         }
 
         body {

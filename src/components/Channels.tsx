@@ -108,21 +108,23 @@ export default function Channels() {
             grid-row: span 1 !important;
             height: 280px;
           }
-          .channel-card:last-child {
-             grid-column: span 4 !important;
-             height: 400px;
-          }
+          // .channel-card:last-child {
+          //    grid-column: span 4 !important;
+          //    height: 400px;
+          // }
         }
 
         @media (max-width: 640px) {
           .channels-grid {
-            grid-template-columns: 1fr;
             display: flex;
             flex-direction: column;
           }
           .channel-card {
-            height: 300px !important;
+            height: 280px !important;
           }
+          // .channel-card:last-child {
+          //   height: 400px !important;
+          // }
         }
       `}} />
     </section>

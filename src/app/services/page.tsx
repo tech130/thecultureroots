@@ -12,44 +12,50 @@ const services = [
   {
     num: "01",
     title: "Branding & Strategy",
-    desc: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s,",
+    desc: "We build brands that earn genuine trust in multicultural markets — through positioning, identity and strategy grounded in cultural truth, not assumption.",
     img: "/images/services/Branding-and-Strategy.png",
-    features: ["Brand Positioning", "Cultural Strategy", "Market Entry Planning", "Campaign Architecture"]
+    features: ["Brand Positioning", "Cultural Messaging", "Market Entry Strategy", "Brand Architecture"],
+    slug: "/services/branding-strategy"
   },
   {
     num: "02",
     title: "Translation & Localization",
-    desc: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s,",
+    desc: "We make your brand voice feel native across languages, dialects and cultural contexts — so your message lands with the same weight in every market.",
     img: "/images/services/Translation-and-Localization.png",
-    features: ["Brand Positioning", "Cultural Strategy", "Market Entry Planning", "Campaign Architecture"]
+    features: ["Cultural Adaptation", "Dialect Mapping", "Content Localization", "Multilingual Copywriting"],
+    slug: "/services/translation-localization"
   },
   {
     num: "03",
     title: "Creative Development",
-    desc: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s,",
+    desc: "We develop campaigns and content built with cultural intelligence at the core — every visual and every word designed to connect with the audience you are trying to reach.",
     img: "/images/services/Creative-Development.jpg",
-    features: ["Brand Positioning", "Cultural Strategy", "Market Entry Planning", "Campaign Architecture"]
+    features: ["Cultural Storytelling", "Visual Identity", "Content Strategy", "Campaign Creative"],
+    slug: "/services/creative-development"
   },
   {
     num: "04",
     title: "Digital Advertising",
-    desc: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s,",
+    desc: "We run precision multicultural ad campaigns across platforms and markets — built to reach the right communities and built to perform.",
     img: "/images/services/Digital-Advertising.jpg",
-    features: ["Brand Positioning", "Cultural Strategy", "Market Entry Planning", "Campaign Architecture"]
+    features: ["Audience Targeting", "| Paid Media Strategy", "Performance Optimisation", "Cross-Market Campaigns"],
+    slug: "/services/digital-advertising"
   },
   {
     num: "05",
     title: "Influencer Collaboration",
-    desc: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s,",
+    desc: "We connect brands with creators who hold genuine trust across 46+ ethnicities — building campaigns that feel organic to the community and deliver real results.",
     img: "/images/services/Community-Influencer-Collaboration.png",
-    features: ["Brand Positioning", "Cultural Strategy", "Market Entry Planning", "Campaign Architecture"]
+    features: ["Creator Sourcing ", "Campaign Management", "Community Alignment ", "Authentic Partnerships"],
+    slug: "/services/influencer-collaboration"
   },
   {
     num: "06",
     title: "Multicultural PR",
-    desc: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500s,",
+    desc: "We shape brand narratives across diverse media ecosystems — from ethnic press to mainstream outlets — building credibility where it counts most. ",
     img: "/images/services/Multicultural-PR.png",
-    features: ["Brand Positioning", "Cultural Strategy", "Market Entry Planning", "Campaign Architecture"]
+    features: ["Earned Media Strategy", "Ethnic Media Outreach", " Brand Narrative", "Reputation Building"],
+    slug: "/services/multicultural-pr"
   },
 ];
 
@@ -76,19 +82,23 @@ export default function ServicesPage() {
       </div>
 
       {/* Redesigned Hero Section ("What We Do") */}
-      <section style={{
-        minHeight: "100vh",
-        width: "100%",
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "0 10%",
-        overflow: "hidden",
-        // Precise full-screen color distribution as per Expected Design
-        background: "radial-gradient(circle at 80% 85%, #F0542C 0%, #7B3D62 40%, #002CC3 100%)",
-      }}>
-
+      <section
+        className="services-hero-section"
+        style={{
+          minHeight: "100vh",
+          width: "100%",
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "0 10%",
+          overflow: "hidden",
+          background: `
+      radial-gradient(#F0542C 0%, #7B3D62 40%, #002CC3 100%),
+      #18191D
+    `,
+        }}
+      >
 
 
         {/* High-Fidelity Ripple Overlay using Image + Blend Mode */}
@@ -126,8 +136,8 @@ export default function ServicesPage() {
             transition={{ duration: 0.8, delay: 0.5 }}
             style={{ maxWidth: "800px" }}
           >
-            <h1 style={{
-              fontSize: "clamp(6rem, 10vw, 10rem)",
+            <h1 className="services-hero-title" style={{
+              fontSize: "clamp(4.5rem, 10vw, 10rem)",
               opacity: 0.9, // Brighter as in reference
               fontWeight: 200,
               lineHeight: 0.85,
@@ -146,8 +156,9 @@ export default function ServicesPage() {
               fontWeight: 300,
               letterSpacing: "-0.01em",
             }}>
-              The world doesn&apos;t adapt to your brand — your brand adapts to the world.
-              The world doesn&apos;t adapt to your brand — your brand adapts to the world.
+              We Are the Bridge Between Your Brand and the World's Most Diverse Markets. <br />
+
+              From strategy to storytelling to performance — we give brands the cultural intelligence, creative depth and media reach to grow where it matters most.
             </p>
           </motion.div>
 
@@ -361,66 +372,26 @@ export default function ServicesPage() {
                     <div style={{
                       display: "flex",
                       flexWrap: "wrap",
-                      gap: "0.75rem",
+                      gap: "1rem",
                       marginBottom: "3rem"
                     }}>
                       {svc.features.map((feature, fIdx) => (
-                        <div key={fIdx} style={{
-                          padding: "0.7rem 1.4rem",
-                          borderRadius: "100px",
-                          background: fIdx % 2 === 0
-                            ? "linear-gradient(270deg, #FF8465 0%, #517BFF 100%)"
-                            : "linear-gradient(270deg, #FF8465 0%, #517BFF 100%)",
-                          color: "#FFFFFF",
-                          fontSize: "0.85rem",
-                          fontWeight: 600,
-                          letterSpacing: "0.01em",
-                          opacity: 0.9
-                        }}>
-                          {feature}
+                        <div key={fIdx} className="feature-tag-wrapper">
+                          <div className="feature-tag-content">
+                            {feature}
+                          </div>
                         </div>
                       ))}
                     </div>
 
                     {/* Learn More pill */}
                     <Link
-                      href="#"
-                      style={{
-                        width: "fit-content",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.75rem",
-                        padding: "0.75rem 1.5rem",
-                        borderRadius: "100px",
-                        border: "1px solid #E5E5E5",
-                        color: "#000000",
-                        fontSize: "0.95rem",
-                        fontWeight: 600,
-                        textDecoration: "none",
-                        transition: "all 0.3s ease"
-                      }}
-                      onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                        const target = e.currentTarget;
-                        target.style.background = "#F9F9F9";
-                        target.style.borderColor = "#CCCCCC";
-                      }}
-                      onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                        const target = e.currentTarget;
-                        target.style.background = "transparent";
-                        target.style.borderColor = "#E5E5E5";
-                      }}
+                      href={svc.slug}
+                      className="learn-more-pill"
                     >
                       Learn More
-                      <div style={{
-                        background: "#EBEBEB",
-                        borderRadius: "50%",
-                        width: "28px",
-                        height: "28px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center"
-                      }}>
-                        <ArrowRight size={16} color="#444444" />
+                      <div className="arrow-circle">
+                        <ArrowRight size={16} strokeWidth={3} />
                       </div>
                     </Link>
                   </div>
@@ -432,7 +403,79 @@ export default function ServicesPage() {
 
         <style dangerouslySetInnerHTML={{
           __html: `
+          @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .feature-tag-wrapper {
+            position: relative;
+            padding: 2px;
+            border-radius: 100px;
+            background: linear-gradient(90deg, #FF5E00, #517BFF, #FF5E00); /* Use brand orange instead of #FF8465 */
+            background-size: 200% 200%;
+            animation: gradientBorder 3s linear infinite;
+            display: inline-flex;
+            box-shadow: 0 4px 15px rgba(255,94,0,0.15); /* Soft premium glow */
+            transition: transform 0.3s ease;
+          }
+          .feature-tag-wrapper:hover {
+            //  transform: translateY(-2px) scale(1.02);
+          }
+          .feature-tag-content {
+            background: #ffffff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 100px;
+            color: #18191D;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+          }
+
+          .learn-more-pill {
+            background: #fff;
+            color: #000;
+            padding: 0.85rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            border: 1px solid #18191D;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            width: fit-content;
+          }
+          .learn-more-pill .arrow-circle {
+            background: #000;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-45deg); /* Arrow points up-right initially */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.3s ease;
+          }
+          .learn-more-pill:hover {
+            background: transparent;
+            color: #18191D;
+          }
+          .learn-more-pill:hover .arrow-circle {
+            transform: rotate(0deg) scale(1.1); /* Arrow points flat right and pops */
+            background: #18191D; /* Arrow container turns black */
+          }
+
           @media (max-width: 992px) {
+            .services-hero-section {
+              padding: 0 5% !important;
+            }
+            .services-hero-title {
+              font-size: clamp(3rem, 12vw, 5rem) !important;
+            }
             .service-card-white {
               flex-direction: column !important;
               padding: 2rem 1.5rem !important;

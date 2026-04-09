@@ -12,7 +12,7 @@ export default function Footer() {
       padding: "2rem 1.5rem 1rem 1.5rem",
       fontFamily: "'Manrope', sans-serif"
     }}>
-      <div style={{
+      <div className="footer-inner-container" style={{
         backgroundColor: "#F5F5F7",
         borderRadius: "40px",
         padding: "5rem 4rem 0 4rem",
@@ -75,7 +75,7 @@ export default function Footer() {
           {/* Right Column */}
           <div style={{ display: "flex", flexDirection: "column", gap: "3rem", maxWidth: "450px" }}>
             {/* Contact & Call Row */}
-            <div style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
+            <div className="footer-links-row" style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
               {/* Contact Us */}
               <div>
                 <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#FF5E00", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
@@ -198,6 +198,20 @@ export default function Footer() {
         <span style={{ opacity: 0.5 }}>•</span>
         <Link href="#" style={{ textDecoration: "none", color: "inherit" }}>Privacy Policy</Link>
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @media (max-width: 768px) {
+          .footer-inner-container {
+            padding: 3rem 1.5rem 0 1.5rem !important;
+            border-radius: 24px !important;
+          }
+          .footer-links-row {
+            gap: 2rem !important;
+            flex-direction: column !important;
+          }
+        }
+      `}} />
     </footer>
   );
 }

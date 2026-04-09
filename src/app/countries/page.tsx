@@ -162,6 +162,7 @@ function CountrySection({ country, index }: { country: typeof countries[0]; inde
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8 }}
+      className="country-section"
       style={{
         position: "relative",
         minHeight: "100vh",
@@ -227,7 +228,7 @@ function CountrySection({ country, index }: { country: typeof countries[0]; inde
       </motion.div>
 
       {/* Content Side */}
-      <div style={{
+      <div className="country-content-side" style={{
         flex: 1,
         display: "flex",
         flexDirection: "column",
@@ -304,6 +305,7 @@ function CountrySection({ country, index }: { country: typeof countries[0]; inde
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.55 }}
+          className="country-stats-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(2, 1fr)",
@@ -732,7 +734,7 @@ function UnderstandSection() {
         </motion.p>
 
         {/* Stats Grid */}
-        <div style={{
+        <div className="understand-stats-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: "2px",
@@ -776,7 +778,7 @@ function UnderstandSection() {
         </div>
 
         {/* Two col content row */}
-        <div style={{
+        <div className="understand-content-grid" style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "3rem",
@@ -1193,6 +1195,33 @@ export default function CountriesPage() {
       <CTASection />
 
       <Footer />
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @media (max-width: 900px) {
+          .country-section {
+            flex-direction: column !important;
+          }
+          .country-content-side {
+            padding: 4rem 1.5rem !important;
+          }
+          .understand-content-grid {
+            grid-template-columns: 1fr !important;
+          }
+           .understand-stats-grid {
+             grid-template-columns: repeat(2, 1fr) !important;
+           }
+        }
+
+        @media (max-width: 600px) {
+          .country-stats-grid {
+             grid-template-columns: 1fr !important;
+          }
+          .understand-stats-grid {
+             grid-template-columns: 1fr !important;
+          }
+        }
+      `}} />
     </main>
   );
 }

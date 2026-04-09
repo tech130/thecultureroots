@@ -37,14 +37,13 @@ export default function Navbar() {
           display: "flex",
           justifyContent: "flex-end", // Always keep content to the right when logo is gone
           alignItems: "center",
-          transition: "all 0.4s cubic-bezier(0.19, 1, 0.22, 1)",
-          background: scrolled ? "rgba(24, 25, 29, 0.9)" : "transparent",
-          backdropFilter: scrolled ? "blur(16px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.08)" : "none",
+          transition: "padding 0.4s cubic-bezier(0.19, 1, 0.22, 1)",
+          background: "transparent",
+          pointerEvents: "none", // Prevent transparent navbar from blocking clicks underneath
+          mixBlendMode: "difference", // Applied here so Framer Motion's stacking context doesn't isolate it!
         }}
       >
-        <div style={{ flex: 1, display: "flex", justifyContent: "flex-start" }}>
+        <div style={{ flex: 1, display: "flex", justifyContent: "flex-start", pointerEvents: "auto" }}>
           <AnimatePresence>
             {!scrolled && (
               <motion.div
@@ -78,7 +77,8 @@ export default function Navbar() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "0.5rem"
+            padding: "0.5rem",
+            pointerEvents: "auto",
           }}
           aria-label="Open Menu"
         >
@@ -118,14 +118,14 @@ export default function Navbar() {
                 top: 0,
                 right: 0,
                 bottom: 0,
-                width: "480px",
+                width: "460px",
                 maxWidth: "100vw",
-                background: "rgba(30, 30, 30, 0.95)", // dark transparent background
+                background: "rgba(30, 30, 30, 0.45)", // dark transparent background
                 backdropFilter: "blur(20px)",
                 display: "flex",
                 flexDirection: "column",
                 borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
-                padding: "2.5rem 3rem"
+                padding: "1.5rem 2rem"
               }}
             >
               {/* Drawer Top Header (Close Button) */}
