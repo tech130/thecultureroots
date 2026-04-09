@@ -422,7 +422,7 @@ function CountrySection({ country, index }: { country: typeof countries[0]; inde
 ───────────────────────────────────────────────────── */
 function CountryIndex({ active, onSelect }: { active: number; onSelect: (i: number) => void }) {
   return (
-    <div style={{
+    <div className="market-sidebar-nav" style={{
       position: "fixed",
       right: "2rem",
       top: "50%",
@@ -521,7 +521,7 @@ function HeroSection() {
       }} />
 
       {/* Content */}
-      <div style={{
+      <div className="country-hero-content" style={{
         position: "relative",
         zIndex: 10,
         width: "100%",
@@ -1198,7 +1198,10 @@ export default function CountriesPage() {
 
       <style dangerouslySetInnerHTML={{
         __html: `
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
+          .market-sidebar-nav {
+            display: none !important;
+          }
           .country-section {
             flex-direction: column !important;
           }
@@ -1219,6 +1222,11 @@ export default function CountriesPage() {
           }
           .understand-stats-grid {
              grid-template-columns: 1fr !important;
+          }
+          .country-hero-content {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
           }
         }
       `}} />

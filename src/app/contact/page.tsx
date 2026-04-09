@@ -185,13 +185,13 @@ export default function ContactUs() {
                     transition={{
                       duration: 2.5,
                       repeat: Infinity,
-                      repeatType: "reverse", 
+                      repeatType: "reverse",
                       ease: [0.45, 0.05, 0.55, 0.95],
                       times: [0, 0.7, 1] // Glow appears late in the move to the right
                     }}
                     style={{
                       position: "absolute",
-                      top: "-15%", 
+                      top: "-15%",
                       transform: "translateY(-50%)",
                       width: "clamp(48px, 6vw, 84px)",
                       height: "clamp(48px, 6vw, 84px)",
@@ -503,7 +503,7 @@ export default function ContactUs() {
               opacity: 0.8,
             }}
           >
-            hey@cultureroots.com | +91 98765 43210
+            hey@thecultureroots.com | +91 95000 11980
           </div>
         </motion.div>
       </section>

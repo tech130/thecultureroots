@@ -245,6 +245,7 @@ function CultureSection() {
 
   return (
     <section
+      className="market-culture-section"
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -290,10 +291,12 @@ function CultureSection() {
           }}
         >
           The United States is home to the largest and most culturally complex consumer market on the planet. With multicultural population growth running 60% faster than overall population growth and minorities now driving nearly all national demographic gains, brands that ignore cultural diversity are losing ground fast.
+        </p>
       </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
       <div
+        className="market-carousel-container"
         style={{
           position: "relative",
           overflow: "hidden",
@@ -447,6 +450,7 @@ function UnderstandSection() {
       </div>
 
       <div
+        className="market-understand-grid"
         style={{
           maxWidth: "1440px",
           margin: "0 auto",
@@ -530,9 +534,9 @@ function UnderstandSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingRight: "2rem" }}
         >
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
+          {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.9rem", color: "#666", letterSpacing: "0.05em" }}>How We Understand Them</p>
-          </div>
+          </div> */}
 
           {understandFeatures.map((feat, i) => {
             const isActive = activeFeature === i;
@@ -723,6 +727,7 @@ function AudiencesSection() {
         </motion.h2>
 
         <motion.div
+          className="market-audience-grid"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -944,6 +949,32 @@ export default function UnitedStatesPage() {
       <AudiencesSection />
       <OtherCountriesSection />
       <Footer />
+
+      <style jsx global>{`
+        @media (max-width: 1024px) {
+          .market-culture-section {
+            grid-template-columns: 1fr !important;
+          }
+          .market-carousel-container {
+             padding-top: 2rem !important;
+          }
+          .market-understand-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .market-audience-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .market-culture-section > div {
+            padding: 1rem 5% 2rem 5% !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

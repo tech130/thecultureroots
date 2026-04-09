@@ -245,6 +245,7 @@ function CultureSection() {
 
   return (
     <section
+      className="market-culture-section"
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -298,6 +299,7 @@ function CultureSection() {
 
       {/* ── RIGHT: City Carousel ── */}
       <div
+        className="market-carousel-container"
         style={{
           position: "relative",
           overflow: "hidden",
@@ -451,6 +453,7 @@ function UnderstandSection() {
       </div>
 
       <div
+        className="market-understand-grid"
         style={{
           maxWidth: "1440px",
           margin: "0 auto",
@@ -728,6 +731,7 @@ function AudiencesSection() {
         </motion.h2>
 
         <motion.div
+          className="market-audience-grid"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -949,6 +953,32 @@ export default function CanadaPage() {
       <AudiencesSection />
       <OtherCountriesSection />
       <Footer />
+
+      <style jsx global>{`
+        @media (max-width: 1024px) {
+          .market-culture-section {
+            grid-template-columns: 1fr !important;
+          }
+          .market-carousel-container {
+             padding-top: 2rem !important;
+          }
+          .market-understand-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .market-audience-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .market-culture-section > div {
+            padding: 1rem 5% 2rem 5% !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

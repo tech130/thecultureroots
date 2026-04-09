@@ -245,6 +245,7 @@ function CultureSection() {
 
   return (
     <section
+      className="market-culture-section"
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -290,10 +291,13 @@ function CultureSection() {
             maxWidth: "560px",
           }}
         >
-          New Zealand punches well above its weight when it comes to cultural diversity. Just under 30% of New Zealanders were born overseas, and the 2023 Census recorded over 200 different birthplaces — meaning practically every part of the world is represented here. For brands willing to show up with cultural intelligence, New Zealand offers a compact but highly engaged and brand-loyal multicultural audience.    </motion.div>
+          New Zealand punches well above its weight when it comes to cultural diversity. Just under 30% of New Zealanders were born overseas, and the 2023 Census recorded over 200 different birthplaces — meaning practically every part of the world is represented here. For brands willing to show up with cultural intelligence, New Zealand offers a compact but highly engaged and brand-loyal multicultural audience.
+        </p>
+      </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
       <div
+        className="market-carousel-container"
         style={{
           position: "relative",
           overflow: "hidden",
@@ -447,6 +451,7 @@ function UnderstandSection() {
       </div>
 
       <div
+        className="market-understand-grid"
         style={{
           maxWidth: "1440px",
           margin: "0 auto",
@@ -530,9 +535,9 @@ function UnderstandSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingRight: "2rem" }}
         >
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
+          {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.9rem", color: "#666", letterSpacing: "0.05em" }}>How We Understand Them</p>
-          </div>
+          </div> */}
 
           {understandFeatures.map((feat, i) => {
             const isActive = activeFeature === i;
@@ -723,6 +728,7 @@ function AudiencesSection() {
         </motion.h2>
 
         <motion.div
+          className="market-audience-grid"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -944,6 +950,32 @@ export default function NewZealandPage() {
       <AudiencesSection />
       <OtherCountriesSection />
       <Footer />
+
+      <style jsx global>{`
+        @media (max-width: 1024px) {
+          .market-culture-section {
+            grid-template-columns: 1fr !important;
+          }
+          .market-carousel-container {
+             padding-top: 2rem !important;
+          }
+          .market-understand-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .market-audience-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .market-culture-section > div {
+            padding: 1rem 5% 2rem 5% !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

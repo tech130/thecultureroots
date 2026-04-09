@@ -6,7 +6,6 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,29 +13,27 @@ export default function Navbar() {
   const [countriesExpanded, setCountriesExpanded] = useState(false);
   const pathname = usePathname();
 
-  // Force scroll to top when pathname changes
-  // Force scroll to top when pathname changes, brutally overriding Next.js
+  // Disable Next.js built-in scroll restoration once on mount
   useEffect(() => {
-    const handleNavigationScroll = () => {
-      document.documentElement.style.scrollBehavior = 'auto'; // Temporarily disable smooth scroll
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    };
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+  }, []);
 
-    handleNavigationScroll();
+  // Scroll to top on every route change
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
 
-    // Aggressive fallback to override Next.js asynchronous router state restoring scroll
-    const t1 = setTimeout(handleNavigationScroll, 50);
-    const t2 = setTimeout(handleNavigationScroll, 150);
+    const raf = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.style.scrollBehavior = "";
+    });
 
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      document.documentElement.style.scrollBehavior = 'smooth'; // Restore css smooth
-    };
+    return () => cancelAnimationFrame(raf);
   }, [pathname]);
 
+  // Track scroll position for navbar shrink effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -60,12 +57,12 @@ export default function Navbar() {
           zIndex: 50,
           padding: scrolled ? "1rem 2rem" : "1.5rem 3rem",
           display: "flex",
-          justifyContent: "flex-end", // Always keep content to the right when logo is gone
+          justifyContent: "flex-end",
           alignItems: "center",
           transition: "padding 0.4s cubic-bezier(0.19, 1, 0.22, 1)",
           background: "transparent",
-          pointerEvents: "none", // Prevent transparent navbar from blocking clicks underneath
-          mixBlendMode: "difference", // Applied here so Framer Motion's stacking context doesn't isolate it!
+          pointerEvents: "none",
+          mixBlendMode: "difference",
         }}
       >
         <div style={{ flex: 1, display: "flex", justifyContent: "flex-start", pointerEvents: "auto" }}>
@@ -128,7 +125,7 @@ export default function Navbar() {
                 top: 0, left: 0, right: 0, bottom: 0,
                 background: "rgba(0, 0, 0, 0.4)",
                 backdropFilter: "blur(6px)",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
             />
 
@@ -137,7 +134,7 @@ export default function Navbar() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }} // smooth apple-like ease
+              transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
               style={{
                 position: "absolute",
                 top: 0,
@@ -145,12 +142,12 @@ export default function Navbar() {
                 bottom: 0,
                 width: "460px",
                 maxWidth: "100vw",
-                background: "rgba(30, 30, 30, 0.45)", // dark transparent background
+                background: "rgba(30, 30, 30, 0.45)",
                 backdropFilter: "blur(20px)",
                 display: "flex",
                 flexDirection: "column",
                 borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
-                padding: "1.5rem 2rem"
+                padding: "1.5rem 2rem",
               }}
             >
               {/* Drawer Top Header (Close Button) */}
@@ -163,24 +160,26 @@ export default function Navbar() {
                     color: "white",
                     cursor: "pointer",
                     padding: "0.5rem",
-                    transition: "transform 0.3s ease"
+                    transition: "transform 0.3s ease",
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = "rotate(90deg)"}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = "rotate(0deg)"}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = "rotate(90deg)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = "rotate(0deg)")}
                 >
                   <X size={36} strokeWidth={1} />
                 </button>
               </div>
 
               {/* Menu Links List */}
-              <div style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: "2.5rem",
-                marginTop: "-2rem" // Visual optical balance to vertically center properly including the upper X
-              }}>
+              <div
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: "2.5rem",
+                  marginTop: "-2rem",
+                }}
+              >
                 {["Services", "Countries", "Case Studies", "Contact Us"].map((item, i) => (
                   <motion.div
                     key={item}
@@ -205,7 +204,7 @@ export default function Navbar() {
                                 item === "Contact Us" ? "/contact" :
                                   `#${item.toLowerCase().replace(" ", "-")}`
                         }
-                        onClick={(e) => {
+                        onClick={() => {
                           if (item !== "Countries") {
                             setMenuOpen(false);
                           }
@@ -215,7 +214,7 @@ export default function Navbar() {
                           textDecoration: "none",
                           fontSize: "2.25rem",
                           fontWeight: 500,
-                          letterSpacing: "0.02em"
+                          letterSpacing: "0.02em",
                         }}
                       >
                         {item}
@@ -225,7 +224,7 @@ export default function Navbar() {
                       <motion.div
                         variants={{
                           rest: { scaleX: 0, opacity: 0 },
-                          hover: { scaleX: 1, opacity: 1 }
+                          hover: { scaleX: 1, opacity: 1 },
                         }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
                         style={{
@@ -234,13 +233,13 @@ export default function Navbar() {
                           left: 0,
                           right: 0,
                           height: "3px",
-                          background: "#FF5E00", // Accented beautiful orange
-                          transformOrigin: "left"
+                          background: "#FF5E00",
+                          transformOrigin: "left",
                         }}
                       />
                     </motion.div>
 
-                    {/* Markets Dropdown */}
+                    {/* Countries Dropdown */}
                     {item === "Countries" && (
                       <AnimatePresence>
                         {countriesExpanded && (
@@ -258,7 +257,7 @@ export default function Navbar() {
                               paddingLeft: "1.5rem",
                               borderLeft: "2px solid rgba(255,255,255,0.1)",
                               marginLeft: "1rem",
-                              marginTop: "0.5rem"
+                              marginTop: "0.5rem",
                             }}
                           >
                             {[
@@ -277,7 +276,7 @@ export default function Navbar() {
                                   textDecoration: "none",
                                   fontSize: "1.25rem",
                                   fontWeight: 400,
-                                  transition: "color 0.2s ease"
+                                  transition: "color 0.2s ease",
                                 }}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = "#FF5E00")}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
