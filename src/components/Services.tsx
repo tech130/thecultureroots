@@ -11,10 +11,9 @@ const services = [
   { num: "02", title: "Translation & Localization", desc: "Beyond words. We adapt your content to sound native, feel local, and land with precision across languages and cultural contexts.", img: "/images/services/Translation-and-Localization.png", href: "/services/translation-localization" },
   { num: "03", title: "Creative Development", desc: "Campaigns, content, and creatives designed with cultural intelligence — visuals and messaging that your audience actually sees themselves in.", img: "/images/services/Creative-Development.jpg", href: "/services/creative-development" },
   { num: "04", title: "Digital Advertising", desc: "Performance-driven multicultural ad campaigns across platforms — targeted, optimised, and built to convert across every demographic.", img: "/images/services/Digital-Advertising.jpg", href: "/services/digital-advertising" },
-  { num: "05", title: "Influencer Collaboration", desc: "Connect with authentic voices across 46+ ethnicities — creators who hold real trust within the communities your brand wants to reach.", img: "/images/services/Community-influencer-Collaboration.png", href: "/services/influencer-collaboration" },
+  { num: "05", title: "Influencer Collaboration", desc: "Connect with authentic voices across 46+ ethnicities — creators who hold real trust within the communities your brand wants to reach.", img: "/images/services/Community-Influencer-Collaboration.png", href: "/services/influencer-collaboration" },
   { num: "06", title: "Multicultural PR", desc: "Shape your brand's narrative across diverse media ecosystems — from ethnic press to mainstream outlets — with stories that earn attention.", img: "/images/services/Multicultural-PR.png", href: "/services/multicultural-pr" },
 ];
-
 export default function Services() {
   const [expandedIdx, setExpandedIdx] = useState<number>(0);
 
@@ -130,7 +129,7 @@ export default function Services() {
                         }}>
                           {svc.desc}
                         </p>
-                        <Link 
+                        <Link
                           href={svc.href}
                           style={{
                             display: "inline-flex",
