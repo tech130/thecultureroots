@@ -291,7 +291,10 @@ function CultureSection() {
             maxWidth: "560px",
           }}
         >
+
           With 31.5% of Australians born overseas as of June 2024, Australia has reached its highest proportion of overseas-born residents since 1892. - The population today consists of more than 270 ethnic groups spanning every continent. For brands, Australia is not just a market — it is a mosaic of communities actively underserved by mainstream marketing, and wide open for brands that show up with cultural intelligence.
+
+        </p>
       </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
