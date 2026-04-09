@@ -22,8 +22,7 @@ const understandFeatures = [
     num: "01",
     title: "On-The-Ground Research",
     subtitle: "Native cultural consultants in every market",
-    desc: "We track cultural shifts, community sentiment and buying behaviour across New Zealand's most diverse cities — Auckland, Wellington, Christchurch and Hamilton — through real people and community networks, not just data points.
-",
+    desc: "We track cultural shifts, community sentiment and buying behaviour across New Zealand's most diverse cities — Auckland, Wellington, Christchurch and Hamilton — through real people and community networks, not just data points.",
     icon: User
   },
   {
