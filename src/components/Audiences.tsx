@@ -1,8 +1,6 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Image from "next/image";
-
 const baseAudiences = [
   { label: "South Asian", img: "/images/audiences/South-Asian.jpg" },
   { label: "Chinese", img: "/images/audiences/Chinese.jpg" },
@@ -20,12 +18,10 @@ const baseAudiences = [
   { label: "Japanese", img: "/images/audiences/Japanese.jpg" },
   { label: "Taiwanese", img: "/images/audiences/Taiwanese.jpg" },
 ];
-
 // We duplicate the cards enough to form a complete 360 degree circle
 const totalCards = 30; // 30 cards to space them out (loops the 15 items twice)
 const angleStep = 360 / totalCards; // 12 degrees between each card
 const cardsData = Array.from({ length: totalCards }).map((_, i) => baseAudiences[i % baseAudiences.length]);
-
 export default function Audiences() {
   return (
     <section id="audiences" style={{
@@ -41,9 +37,8 @@ export default function Audiences() {
     }}>
       {/* Top Title */}
       <div style={{ paddingTop: "5rem", zIndex: 10 }}>
-        <h2 style={{ fontSize: "1.8rem", fontWeight: 700, color: "white" }}>Audiences</h2>
+        <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "white" }}>Audiences</h2>
       </div>
-
       {/* Giant Background Outline Text */}
       <div style={{
         position: "absolute",
@@ -57,7 +52,7 @@ export default function Audiences() {
       }}>
         <h1 style={{
           fontFamily: "'Manrope', sans-serif",
-          fontSize: "clamp(6rem, 24vw, 21rem)",
+          fontSize: "clamp(6rem, 24vw, 20rem)",
           fontWeight: 800,
           color: "transparent",
           WebkitTextStroke: "1px rgba(255,255,255)",
@@ -69,7 +64,6 @@ export default function Audiences() {
           Audiences
         </h1>
       </div>
-
       {/* The Rotating Fan Wheel */}
       <div style={{
         position: "absolute",
@@ -110,7 +104,6 @@ export default function Audiences() {
               }}
             >
               <Image src={card.img} alt={card.label} fill style={{ objectFit: "cover" }} />
-
               {/* Bottom Label and Gradient */}
               <div style={{
                 position: "absolute",
@@ -129,7 +122,6 @@ export default function Audiences() {
           ))}
         </motion.div>
       </div>
-
       {/* Bottom Text */}
       <div style={{
         position: "absolute",

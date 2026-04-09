@@ -53,7 +53,7 @@ export default function HeroBanner() {
           style={{ maxWidth: "800px" }}
         >
           <motion.h1 style={{
-            fontSize: "clamp(3rem, 8vw, 6rem)",
+            fontSize: "clamp(2.5rem, 8vw, 5rem)",
             fontWeight: 800,
             lineHeight: 1.1,
             letterSpacing: "-0.03em",
@@ -64,7 +64,7 @@ export default function HeroBanner() {
           </motion.h1>
 
           <p style={{
-            fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
+            fontSize: "clamp(1rem, 2vw, 1.2rem)",
             fontWeight: 500,
             opacity: 0.9,
             marginBottom: "3rem",

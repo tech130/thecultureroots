@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const markets: any[] = [
-  { id: 1, title: "CANADA", num: "01", img: "/images/markets/Canada-1.jpg" },
+  { id: 1, title: "CANADA", num: "01", img: "/images/markets/Canada-1.jpg", href: "/countries/canada" },
   {
     id: 2,
     title: (
@@ -17,7 +18,8 @@ const markets: any[] = [
       </span>
     ),
     num: "02",
-    img: "/images/markets/United-States.jpg"
+    img: "/images/markets/United-States.jpg",
+    href: "/countries/united-states"
   },
   {
     id: 3,
@@ -30,9 +32,10 @@ const markets: any[] = [
       </span>
     ),
     num: "03",
-    img: "/images/markets/United-Kingdom.jpg"
+    img: "/images/markets/United-Kingdom.jpg",
+    href: "/countries/united-kingdom"
   },
-  { id: 4, title: "AUSTRALIA", num: "04", img: "/images/markets/Australia.jpg" },
+  { id: 4, title: "AUSTRALIA", num: "04", img: "/images/markets/Australia.jpg", href: "/countries/australia" },
   {
     id: 5,
     title: (
@@ -44,7 +47,8 @@ const markets: any[] = [
       </span>
     ),
     num: "05",
-    img: "/images/markets/New-Zealand.jpg"
+    img: "/images/markets/New-Zealand.jpg",
+    href: "/countries/new-zealand"
   }
 ];
 
@@ -104,14 +108,14 @@ export default function Markets() {
       }} />
 
       {/* Static "Our Markets" Left Text */}
-      <h2 style={{
+      <h2 className="markets-side-text" style={{
         position: "absolute",
         left: "2rem",
         top: "50%",
         transform: "translateY(-50%) rotate(180deg)",
         writingMode: "vertical-rl",
         color: "white",
-        fontSize: "3rem",
+        fontSize: "2.2rem",
         fontWeight: 800,
         letterSpacing: "0.1em",
         zIndex: 5,
@@ -128,6 +132,7 @@ export default function Markets() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.8 }}
+          className="markets-number-wrapper"
           style={{
             position: "absolute",
             top: "8%",
@@ -135,7 +140,7 @@ export default function Markets() {
             zIndex: 5
           }}
         >
-          <div style={{
+          <div className="markets-number" style={{
             fontSize: "clamp(6rem, 18vw, 12rem)",
             fontWeight: 500,
             lineHeight: 1,
@@ -173,7 +178,7 @@ export default function Markets() {
             }}
           >
             {/* Left Side (Spans full width but is covered on right): Dark Translucent Fill */}
-            <h3 style={{
+            <h3 className="markets-main-title" style={{
               position: "absolute",
               width: "100%",
               textAlign: "center",
@@ -188,7 +193,7 @@ export default function Markets() {
             </h3>
 
             {/* Right Side Overlay: Solid White fill, rigidly cropped to start at exactly 50% screen width */}
-            <h3 style={{
+            <h3 className="markets-main-title" style={{
               position: "absolute",
               width: "100%",
               textAlign: "center",
@@ -204,7 +209,7 @@ export default function Markets() {
             </h3>
 
             {/* Invisible structural block to give parent absolute positioning context height */}
-            <h3 style={{
+            <h3 className="markets-main-title invisible-title" style={{
               visibility: "hidden",
               width: "100%",
               textAlign: "center",
@@ -221,13 +226,13 @@ export default function Markets() {
       </div>
 
       {/* Bottom Left "Learn More" */}
-      <div style={{
+      <div className="markets-explore-wrapper" style={{
         position: "absolute",
         bottom: "10%",
         left: "14%",
         zIndex: 5
       }}>
-        <div style={{
+        <Link href={slide.href} style={{
           color: "rgba(255,255,255,0.8)",
           fontSize: "1.1rem",
           fontWeight: 400,
@@ -236,17 +241,18 @@ export default function Markets() {
           gap: "0.5rem",
           cursor: "pointer",
           pointerEvents: "auto",
-          transition: "opacity 0.3s ease"
+          transition: "opacity 0.3s ease",
+          textDecoration: "none"
         }}
           onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
           onMouseLeave={(e) => e.currentTarget.style.opacity = "0.8"}
         >
-          Explore USA → <span>&rarr;</span>
-        </div>
+          Explore<span>&rarr;</span>
+        </Link>
       </div>
 
       {/* Pagination Bottom Right */}
-      <div style={{
+      <div className="markets-pagination" style={{
         position: "absolute",
         bottom: "10%",
         right: "6%",
@@ -270,6 +276,65 @@ export default function Markets() {
           />
         ))}
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @media (max-width: 1024px) {
+          .markets-side-text {
+            font-size: 1.5rem !important;
+            left: 1rem !important;
+          }
+          .markets-number-wrapper {
+            top: 10% !important;
+            left: 10% !important;
+          }
+          .markets-number {
+            font-size: clamp(5rem, 15vw, 8rem) !important;
+          }
+          .markets-main-title {
+            font-size: clamp(3rem, 12vw, 8rem) !important;
+          }
+          .invisible-title {
+            font-size: clamp(3rem, 14vw, 8rem) !important;
+          }
+          .markets-explore-wrapper {
+            bottom: 8% !important;
+            left: 10% !important;
+          }
+          .markets-pagination {
+            bottom: 8% !important;
+            right: 4% !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .markets-side-text {
+            display: none !important;
+          }
+          .markets-number-wrapper {
+            top: 12% !important;
+            left: 6% !important;
+          }
+          .markets-number {
+            font-size: 4.5rem !important;
+          }
+          .markets-main-title {
+            font-size: clamp(2.5rem, 11vw, 5rem) !important;
+          }
+          .invisible-title {
+            font-size: clamp(2.5rem, 12vw, 5rem) !important;
+          }
+          .markets-explore-wrapper {
+            bottom: 15% !important;
+            left: 6% !important;
+          }
+          .markets-pagination {
+            bottom: 15% !important;
+            right: 6% !important;
+            gap: 0.5rem !important;
+          }
+        }
+      `}} />
     </section>
   );
 }

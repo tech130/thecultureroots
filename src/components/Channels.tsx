@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const channels = [
-  { id: 1, title: "Digital Out Of Home", img: "/images/channels/Digital-Out-Of-Home.jpg", colSpan: 2, rowSpan: 2 },
-  { id: 2, title: "Display Ads", img: "/images/channels/Display-Ads.webp", colSpan: 2, rowSpan: 1 },
-  { id: 3, title: "Interstitial Ads", img: "/images/channels/interstitial-ads.webp", colSpan: 2, rowSpan: 1 },
-  { id: 4, title: "Audio & Podcast Ads", img: "/images/channels/audio-podcast.png", colSpan: 2, rowSpan: 1 },
-  { id: 5, title: "Native Ads", img: "/images/channels/native-ads.png", colSpan: 3, rowSpan: 1 },
-  { id: 6, title: "Connected Tv  & OTT", img: "/images/channels/Connected-TV.jpg", colSpan: 3, rowSpan: 1 },
+  { id: 1, title: "Display Ads", img: "/images/channels/Display-Ads.webp", colSpan: 2, rowSpan: 1 },
+  { id: 2, title: "Interstitial Ads", img: "/images/channels/interstitial-ads.webp", colSpan: 2, rowSpan: 1 },
+  { id: 3, title: "Audio & Podcast Ads", img: "/images/channels/audio-podcast.png", colSpan: 2, rowSpan: 1 },
+  { id: 4, title: "Native Ads", img: "/images/channels/native-ads.png", colSpan: 3, rowSpan: 1 },
+  { id: 5, title: "Connected Tv  & OTT", img: "/images/channels/Connected-TV.jpg", colSpan: 3, rowSpan: 1 },
+  { id: 6, title: "Digital Out Of Home", img: "/images/channels/Digital-Out-Of-Home.jpg", colSpan: 2, rowSpan: 2 },
 ];
 
 export default function Channels() {
@@ -31,7 +31,7 @@ export default function Channels() {
       <div className="container" style={{ maxWidth: "1300px", width: "100%" }}>
         <h2 style={{
           textAlign: "center",
-          fontSize: "2.5rem",
+          fontSize: "2.2rem",
           fontWeight: 700,
           marginBottom: "3rem",
           color: "white"
@@ -95,6 +95,7 @@ export default function Channels() {
           grid-template-rows: 300px 240px;
           gap: 1.25rem;
           width: 100%;
+          grid-auto-flow: dense;
         }
         
         @media (max-width: 1024px) {
@@ -107,7 +108,7 @@ export default function Channels() {
             grid-row: span 1 !important;
             height: 280px;
           }
-          .channel-card:nth-child(1) {
+          .channel-card:last-child {
              grid-column: span 4 !important;
              height: 400px;
           }

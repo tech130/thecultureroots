@@ -33,27 +33,40 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: "1.5rem 3rem",
+          padding: scrolled ? "1rem 2rem" : "1.5rem 3rem",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-end", // Always keep content to the right when logo is gone
           alignItems: "center",
-          transition: "all 0.3s ease-in-out",
-          background: scrolled ? "rgba(0, 0, 0, 0.8)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
+          transition: "all 0.4s cubic-bezier(0.19, 1, 0.22, 1)",
+          background: scrolled ? "rgba(24, 25, 29, 0.9)" : "transparent",
+          backdropFilter: scrolled ? "blur(16px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.08)" : "none",
         }}
       >
-        <Link href="/" style={{ display: "flex", alignItems: "center" }}>
-          <Image
-            src="/images/logos/logo.png"
-            alt="CultureRoots Logo"
-            width={180}
-            height={40}
-            style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
-            priority
-          />
-        </Link>
+        <div style={{ flex: 1, display: "flex", justifyContent: "flex-start" }}>
+          <AnimatePresence>
+            {!scrolled && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+                  <Image
+                    src="/images/logos/logo.png"
+                    alt="CultureRoots Logo"
+                    width={180}
+                    height={40}
+                    style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
+                    priority
+                  />
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         <button
           onClick={() => setMenuOpen(true)}

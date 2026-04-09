@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const caseStudies = [
   {
@@ -88,7 +89,7 @@ export default function CaseStudies() {
         <h2
           style={{
             textAlign: "center",
-            fontSize: "2.3rem",
+            fontSize: "2.2rem",
             fontWeight: 700,
             marginBottom: "4rem",
             color: "#111",
@@ -409,7 +410,8 @@ export default function CaseStudies() {
 
         {/* CTA */}
         <div style={{ textAlign: "center", marginTop: "4rem" }}>
-          <button
+          <Link
+            href="/case-studies"
             style={{
               background: "white",
               color: "black",
@@ -424,9 +426,10 @@ export default function CaseStudies() {
               cursor: "pointer",
               transition: "all 0.3s ease",
               boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+              textDecoration: "none"
             }}
           >
-            Read More Case Studies
+            View More Case Studies
             <div
               style={{
                 width: "36px",
@@ -453,7 +456,7 @@ export default function CaseStudies() {
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </div>
-          </button>
+          </Link>
         </div>
       </div>
 

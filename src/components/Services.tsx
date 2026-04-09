@@ -7,12 +7,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const services = [
-  { num: "01", title: "Branding &\nStrategy", desc: "Build a brand identity that resonates across cultures — from positioning and messaging to full visual strategy tailored for diverse markets.", img: "/images/services/Branding-and-Strategy.png" },
-  { num: "02", title: "Translation & Localization", desc: "Beyond words. We adapt your content to sound native, feel local, and land with precision across languages and cultural contexts.", img: "/images/services/Translation-and-Localization.png" },
-  { num: "03", title: "Creative Development", desc: "Campaigns, content, and creatives designed with cultural intelligence — visuals and messaging that your audience actually sees themselves in.", img: "/images/services/Creative-Development.jpg" },
-  { num: "04", title: "Digital Advertising", desc: "Performance-driven multicultural ad campaigns across platforms — targeted, optimised, and built to convert across every demographic.", img: "/images/services/Digital-Advertising.jpg" },
-  { num: "05", title: "Influencer Collaboration", desc: "Connect with authentic voices across 46+ ethnicities — creators who hold real trust within the communities your brand wants to reach.", img: "/images/services/Community-influencer-Collaboration.png" },
-  { num: "06", title: "Multicultural PR", desc: "Shape your brand's narrative across diverse media ecosystems — from ethnic press to mainstream outlets — with stories that earn attention.", img: "/images/services/Multicultural-PR.png" },
+  { num: "01", title: "Branding &\nStrategy", desc: "Build a brand identity that resonates across cultures — from positioning and messaging to full visual strategy tailored for diverse markets.", img: "/images/services/Branding-and-Strategy.png", href: "/services/branding-strategy" },
+  { num: "02", title: "Translation & Localization", desc: "Beyond words. We adapt your content to sound native, feel local, and land with precision across languages and cultural contexts.", img: "/images/services/Translation-and-Localization.png", href: "/services/translation-localization" },
+  { num: "03", title: "Creative Development", desc: "Campaigns, content, and creatives designed with cultural intelligence — visuals and messaging that your audience actually sees themselves in.", img: "/images/services/Creative-Development.jpg", href: "/services/creative-development" },
+  { num: "04", title: "Digital Advertising", desc: "Performance-driven multicultural ad campaigns across platforms — targeted, optimised, and built to convert across every demographic.", img: "/images/services/Digital-Advertising.jpg", href: "/services/digital-advertising" },
+  { num: "05", title: "Influencer Collaboration", desc: "Connect with authentic voices across 46+ ethnicities — creators who hold real trust within the communities your brand wants to reach.", img: "/images/services/Community-influencer-Collaboration.png", href: "/services/influencer-collaboration" },
+  { num: "06", title: "Multicultural PR", desc: "Shape your brand's narrative across diverse media ecosystems — from ethnic press to mainstream outlets — with stories that earn attention.", img: "/images/services/Multicultural-PR.png", href: "/services/multicultural-pr" },
 ];
 
 export default function Services() {
@@ -31,7 +31,7 @@ export default function Services() {
       <div className="container">
         <h2 style={{
           textAlign: "center",
-          fontSize: "2.5rem",
+          fontSize: "2.2rem",
           fontWeight: 700,
           marginBottom: "4rem",
           color: "white",
@@ -130,6 +130,26 @@ export default function Services() {
                         }}>
                           {svc.desc}
                         </p>
+                        <Link 
+                          href={svc.href}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                            marginTop: "1.5rem",
+                            color: "white",
+                            textDecoration: "none",
+                            fontWeight: 600,
+                            fontSize: "0.95rem",
+                            borderBottom: "1px solid rgba(255,255,255,0.4)",
+                            paddingBottom: "2px",
+                            transition: "border-color 0.3s ease"
+                          }}
+                          onMouseOver={(e) => e.currentTarget.style.borderBottomColor = "white"}
+                          onMouseOut={(e) => e.currentTarget.style.borderBottomColor = "rgba(255,255,255,0.4)"}
+                        >
+                          Explore Service <ArrowUpRight size={16} />
+                        </Link>
                       </motion.div>
                     ) : (
                       <h3 className="collapsed-title" style={{
@@ -160,55 +180,7 @@ export default function Services() {
           })}
         </div>
 
-        {/* View All Services Button */}
-        <div style={{
-          marginTop: "4rem",
-          display: "flex",
-          justifyContent: "center"
-        }}>
-          <Link
-            href="/services"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.75rem",
-              background: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              color: "white",
-              padding: "1rem 2rem",
-              borderRadius: "50px",
-              fontSize: "1rem",
-              fontWeight: 600,
-              textDecoration: "none",
-              transition: "all 0.3s ease"
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = "#FF5E00";
-              e.currentTarget.style.borderColor = "#FF5E00";
-              e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Explore All Services
-            <div style={{
-              background: "white",
-              color: "#111",
-              borderRadius: "50%",
-              width: "20px",
-              height: "20px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}>
-              <ArrowUpRight size={14} />
-            </div>
-          </Link>
-        </div>
+
       </div>
 
       <style dangerouslySetInnerHTML={{
