@@ -146,10 +146,8 @@ function HeroSection() {
             maxWidth: "650px",
           }}
         >
-          Canada&apos;s Cultures Are Its Strength. We Help Brands Tap Into Them.
-          From South Asian communities in Toronto to Arab families in Montreal —
-          we run culturally intelligent campaigns across Canada&apos;s most
-          vibrant audiences.
+          Do not let the size fool you. With nearly 30% of New Zealanders born overseas and over 150 languages spoken across the country, New Zealand punches well above its weight on cultural diversity.
+          The communities here are small, engaged and deeply loyal to brands that understand them.
         </p>
 
         <motion.div
@@ -281,7 +279,8 @@ function CultureSection() {
             marginBottom: "1rem",
           }}
         >
-          Aotearoa's<br />Multicultural Future
+          Small Nation. Remarkable Diversity.
+
         </h2>
         <p
           style={{
@@ -291,8 +290,7 @@ function CultureSection() {
             maxWidth: "560px",
           }}
         >
-          New Zealand's population is rapidly diversifying, led by Pacific Islander and Asian communities. The growing South Asian and Chinese populations are reshaping consumer culture — presenting enormous opportunity for culturally fluent brands.</p>
-      </motion.div>
+          New Zealand punches well above its weight when it comes to cultural diversity. Just under 30% of New Zealanders were born overseas, and the 2023 Census recorded over 200 different birthplaces — meaning practically every part of the world is represented here. For brands willing to show up with cultural intelligence, New Zealand offers a compact but highly engaged and brand-loyal multicultural audience.    </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
       <div

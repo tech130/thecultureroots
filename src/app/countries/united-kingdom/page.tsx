@@ -146,10 +146,8 @@ function HeroSection() {
             maxWidth: "650px",
           }}
         >
-          Canada&apos;s Cultures Are Its Strength. We Help Brands Tap Into Them.
-          From South Asian communities in Toronto to Arab families in Montreal —
-          we run culturally intelligent campaigns across Canada&apos;s most
-          vibrant audiences.
+          From the Windrush generation to today's multicultural Britain, diversity has always been at the heart of what makes the UK what it is.
+          With 16% of the population from minority ethnic backgrounds and London as one of the world's most diverse cities, cultural relevance here is not optional — it is essential.
         </p>
 
         <motion.div
@@ -281,7 +279,7 @@ function CultureSection() {
             marginBottom: "1rem",
           }}
         >
-          Diversity Woven<br />into Society
+          Where Cultures Have Always Shaped the Nation.
         </h2>
         <p
           style={{
@@ -291,7 +289,7 @@ function CultureSection() {
             maxWidth: "560px",
           }}
         >
-          The UK's multicultural landscape stretches from London's global communities to new diaspora hubs in Birmingham and Manchester. Nearly 15% of the population identify as ethnic minority — creating a dynamic, influential, and deeply connected audience.</p>
+          The United Kingdom is one of the most culturally layered societies in the world. In 2024, 16% of the UK population identified as being from a minority ethnic background and that share continues to grow. London alone has 46.2% of its residents identifying with Asian, Black, Mixed or other ethnic groups — making it one of the most diverse cities on the planet. For brands, this is not a niche opportunity. It is the mainstream.
       </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
@@ -417,9 +415,9 @@ function UnderstandSection() {
 
   const stats = [
     { value: "67M+", label: "Population" },
-    { value: "14%", label: "Foreign Born Residents" },
-    { value: "100+", label: "Ethnic Groups" },
-    { value: "10M+", label: "Multicultural Audiences" },
+    { value: "16%", label: "Minority Ethnic" },
+    { value: "2.4M+", label: "Black British" },
+    { value: "5.5M+", label: "Asian British" },
   ];
 
   return (
@@ -500,7 +498,7 @@ function UnderstandSection() {
               We Live In Them
             </h2>
             <p style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
-              Four layers of cultural intelligence — built over years of on-the-ground experience across every market we serve.
+              Our cultural intelligence across the UK goes beyond census data. It captures the community rhythms, media habits, language preferences and purchasing motivations that only come from being genuinely embedded in these audiences.
             </p>
           </div>
 

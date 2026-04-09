@@ -146,10 +146,8 @@ function HeroSection() {
             maxWidth: "650px",
           }}
         >
-          Canada&apos;s Cultures Are Its Strength. We Help Brands Tap Into Them.
-          From South Asian communities in Toronto to Arab families in Montreal —
-          we run culturally intelligent campaigns across Canada&apos;s most
-          vibrant audiences.
+          Canada does not just welcome diversity — it is built on it.
+          With over 200 ethnic origins and immigration driving the nation's growth, it is one of the most culturally rich consumer markets in the world.
         </p>
 
         <motion.div

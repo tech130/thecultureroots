@@ -5,12 +5,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [countriesExpanded, setCountriesExpanded] = useState(false);
+  const pathname = usePathname();
+
+  // Force scroll to top when pathname changes
+  // Force scroll to top when pathname changes, brutally overriding Next.js
+  useEffect(() => {
+    const handleNavigationScroll = () => {
+      document.documentElement.style.scrollBehavior = 'auto'; // Temporarily disable smooth scroll
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    handleNavigationScroll();
+
+    // Aggressive fallback to override Next.js asynchronous router state restoring scroll
+    const t1 = setTimeout(handleNavigationScroll, 50);
+    const t2 = setTimeout(handleNavigationScroll, 150);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      document.documentElement.style.scrollBehavior = 'smooth'; // Restore css smooth
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {

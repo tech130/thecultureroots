@@ -146,10 +146,8 @@ function HeroSection() {
             maxWidth: "650px",
           }}
         >
-          Canada&apos;s Cultures Are Its Strength. We Help Brands Tap Into Them.
-          From South Asian communities in Toronto to Arab families in Montreal —
-          we run culturally intelligent campaigns across Canada&apos;s most
-          vibrant audiences.
+          With nearly one in three Australians born overseas and over 270 ethnic groups calling the country home, Australia's consumer market is as diverse as any on the planet.
+          For brands willing to show up with cultural intelligence, it is a market wide open for the taking.
         </p>
 
         <motion.div
@@ -281,7 +279,8 @@ function CultureSection() {
             marginBottom: "1rem",
           }}
         >
-          A Continent<br />of Cultures
+          One of the World's Most Diverse Nations Per Capita.
+
         </h2>
         <p
           style={{
@@ -291,7 +290,7 @@ function CultureSection() {
             maxWidth: "560px",
           }}
         >
-          One in three Australians was born overseas. Cities like Sydney and Melbourne rival any global metropolis for cultural diversity. From Southeast Asian communities to growing South Asian populations, Australia's multicultural market is booming.</p>
+          With 31.5% of Australians born overseas as of June 2024, Australia has reached its highest proportion of overseas-born residents since 1892. - The population today consists of more than 270 ethnic groups spanning every continent. For brands, Australia is not just a market — it is a mosaic of communities actively underserved by mainstream marketing, and wide open for brands that show up with cultural intelligence.
       </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
@@ -416,10 +415,10 @@ function UnderstandSection() {
   const [activeFeature, setActiveFeature] = useState(0);
 
   const stats = [
-    { value: "26M+", label: "Population" },
-    { value: "30%", label: "Foreign Born Residents" },
-    { value: "300+", label: "Ethnic Groups" },
-    { value: "7M+", label: "Multicultural Audiences" },
+    { value: "28M+", label: "Population" },
+    { value: "31.5%", label: "Overseas Born" },
+    { value: "270+", label: "Ethnic Groups" },
+    { value: "4.3M+", label: "Asian Australians" },
   ];
 
   return (
@@ -500,7 +499,7 @@ function UnderstandSection() {
               We Live In Them
             </h2>
             <p style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
-              Four layers of cultural intelligence — built over years of on-the-ground experience across every market we serve.
+              Our cultural intelligence across Australia goes beyond ancestry data. It captures community rhythms, language preferences, purchasing behaviour and the cultural moments that move diverse audiences to act.
             </p>
           </div>
 

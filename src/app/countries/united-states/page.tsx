@@ -146,10 +146,8 @@ function HeroSection() {
             maxWidth: "650px",
           }}
         >
-          Canada&apos;s Cultures Are Its Strength. We Help Brands Tap Into Them.
-          From South Asian communities in Toronto to Arab families in Montreal —
-          we run culturally intelligent campaigns across Canada&apos;s most
-          vibrant audiences.
+          No market on earth brings together more cultures, languages and communities under one roof.
+          For brands ready to grow, the United States is not just an opportunity — it is the opportunity
         </p>
 
         <motion.div
@@ -269,7 +267,7 @@ function CultureSection() {
         }}
       >
         <p style={{ fontSize: "2rem", color: "#000", fontWeight: 300 }}>
-          United States
+          United States of America
         </p>
         <h2
           style={{
@@ -281,7 +279,7 @@ function CultureSection() {
             marginBottom: "1rem",
           }}
         >
-          The World's Largest<br />Multicultural Economy
+          The World's Most<br />Diverse Consumer Market
         </h2>
         <p
           style={{
@@ -291,7 +289,7 @@ function CultureSection() {
             maxWidth: "560px",
           }}
         >
-          The United States is a nation of immigrants with a $4.7 trillion multicultural market. Hispanic, Asian, and Black American consumers are the fastest-growing demographic segments — brands that ignore them leave massive revenue on the table.</p>
+          The United States is home to the largest and most culturally complex consumer market on the planet. With multicultural population growth running 60% faster than overall population growth and minorities now driving nearly all national demographic gains, brands that ignore cultural diversity are losing ground fast.
       </motion.div>
 
       {/* ── RIGHT: City Carousel ── */}
@@ -416,10 +414,10 @@ function UnderstandSection() {
   const [activeFeature, setActiveFeature] = useState(0);
 
   const stats = [
-    { value: "330M+", label: "Population" },
+    { value: "340M+", label: "Population" },
     { value: "14%", label: "Foreign Born Residents" },
-    { value: "150+", label: "Ethnic Groups" },
-    { value: "130M+", label: "Multicultural Audiences" },
+    { value: "65M+", label: "Hispanic Americans" },
+    { value: "47M+", label: "Black Americans" },
   ];
 
   return (
@@ -500,7 +498,7 @@ function UnderstandSection() {
               We Live In Them
             </h2>
             <p style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
-              Four layers of cultural intelligence — built over years of on-the-ground experience across every market we serve.
+              Our cultural intelligence across the US goes beyond demographics. It captures language, sentiment, consumer behaviour and what truly moves diverse communities to act.
             </p>
           </div>
 
