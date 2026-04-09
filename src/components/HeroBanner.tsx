@@ -8,7 +8,7 @@ export default function HeroBanner() {
   return (
     <section style={{
       position: "relative",
-      height: "90vh",
+      height: "100vh",
       width: "100%",
       display: "flex",
       alignItems: "center",
