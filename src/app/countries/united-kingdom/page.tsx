@@ -22,28 +22,28 @@ const understandFeatures = [
     num: "01",
     title: "On-The-Ground Research",
     subtitle: "Native cultural consultants in every market",
-    desc: "We have native cultural consultants in every market we serve — not remote researchers, but people who grew up inside these communities, turning lived experience into brand intelligence.",
+    desc: "We track cultural shifts, community sentiment and buying behaviour across the UK's most diverse cities — London, Birmingham, Manchester, Leicester and Bradford — through real people, not just data points.",
     icon: User
   },
   {
     num: "02",
     title: "Language & Dialect Intelligence",
     subtitle: "Beyond translation - tone, slang, unspoken rules",
-    desc: "We dive deep into local dialects to ensure your brand's voice resonates authentically with your target demographics.",
+    desc: "Over 300 languages are spoken in London alone. Wikipedia We map the linguistic nuances, tonal codes and dialect differences that determine whether your brand sounds native or sounds imported.",
     icon: Languages
   },
   {
     num: "03",
     title: "Cultural Calendar & Moments",
     subtitle: "Ramadan, Diwali, Eid, Lunar New Year & more",
-    desc: "Strategic planning around key cultural events to maximize your brand's relevance and impact throughout the year.",
+    desc: "From Eid in Birmingham to Diwali in Leicester to Notting Hill Carnival in London, we identify the cultural moments that carry the most weight for each community and build campaigns that show up at the right time.",
     icon: Calendar
   },
   {
     num: "04",
     title: "Audience Behaviour Data",
     subtitle: "Cultural intuition backed by hard data",
-    desc: "Combining qualitative cultural insights with quantitative behavioral data to drive measurable campaign success.",
+    desc: "We combine platform data, community insights and purchase patterns across the UK's multicultural segments to build audience profiles that reflect how diverse Britain actually lives, shops and makes decisions.",
     icon: LineChart
   },
 ];

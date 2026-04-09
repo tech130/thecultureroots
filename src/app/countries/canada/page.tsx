@@ -22,28 +22,28 @@ const understandFeatures = [
     num: "01",
     title: "On-The-Ground Research",
     subtitle: "Native cultural consultants in every market",
-    desc: "We have native cultural consultants in every market we serve — not remote researchers, but people who grew up inside these communities, turning lived experience into brand intelligence.",
+    desc: "We track cultural shifts, community sentiment and buying behaviour across Canada's most diverse cities — Toronto, Vancouver, Calgary and beyond — through real people, not just data points.",
     icon: User
   },
   {
     num: "02",
     title: "Language & Dialect Intelligence",
     subtitle: "Beyond translation - tone, slang, unspoken rules",
-    desc: "We dive deep into local dialects to ensure your brand's voice resonates authentically with your target demographics.",
+    desc: "Canada speaks in hundreds of languages. We map the dialects, tones and cultural nuances that determine whether your brand message lands or gets lost.",
     icon: Languages
   },
   {
     num: "03",
     title: "Cultural Calendar & Moments",
     subtitle: "Ramadan, Diwali, Eid, Lunar New Year & more",
-    desc: "Strategic planning around key cultural events to maximize your brand's relevance and impact throughout the year.",
+    desc: "From Diwali in Brampton to Lunar New Year in Richmond, we identify the cultural moments that matter most to each community — and build campaigns around them.",
     icon: Calendar
   },
   {
     num: "04",
     title: "Audience Behaviour Data",
     subtitle: "Cultural intuition backed by hard data",
-    desc: "Combining qualitative cultural insights with quantitative behavioral data to drive measurable campaign success.",
+    desc: "We combine platform data, community insights and purchase patterns across Canada's multicultural segments to build audience profiles that actually reflect reality.",
     icon: LineChart
   },
 ];
@@ -420,10 +420,10 @@ function UnderstandSection() {
   const [activeFeature, setActiveFeature] = useState(0);
 
   const stats = [
-    { value: "38M+", label: "Population" },
+    { value: "41M+", label: "Population" },
     { value: "23%", label: "Foreign Born Residents" },
-    { value: "200+", label: "Ethnic Groups" },
-    { value: "7M+", label: "South Asians & Arabs" },
+    { value: "200+", label: "Ethnic Origins" },
+    { value: "2.6M+", label: "South Asians" },
   ];
 
   return (
@@ -504,7 +504,8 @@ function UnderstandSection() {
               We Live In Them
             </h2>
             <p style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
-              Four layers of cultural intelligence — built over years of on-the-ground experience across every market we serve.
+              Our on-ground cultural intelligence across Canada goes beyond demographics — it captures language, sentiment, behaviour and belonging.
+
             </p>
           </div>
 
@@ -536,9 +537,9 @@ function UnderstandSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingRight: "2rem" }}
         >
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
+          {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.9rem", color: "#666", letterSpacing: "0.05em" }}>How We Understand Them</p>
-          </div>
+          </div> */}
 
           {understandFeatures.map((feat, i) => {
             const isActive = activeFeature === i;

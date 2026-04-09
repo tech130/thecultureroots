@@ -22,28 +22,29 @@ const understandFeatures = [
     num: "01",
     title: "On-The-Ground Research",
     subtitle: "Native cultural consultants in every market",
-    desc: "We have native cultural consultants in every market we serve — not remote researchers, but people who grew up inside these communities, turning lived experience into brand intelligence.",
+    desc: "We track cultural shifts, community sentiment and buying behaviour across New Zealand's most diverse cities — Auckland, Wellington, Christchurch and Hamilton — through real people and community networks, not just data points.
+",
     icon: User
   },
   {
     num: "02",
     title: "Language & Dialect Intelligence",
     subtitle: "Beyond translation - tone, slang, unspoken rules",
-    desc: "We dive deep into local dialects to ensure your brand's voice resonates authentically with your target demographics.",
+    desc: "Over 150 languages are spoken across New Zealand. We map the linguistic codes, tonal nuances and cultural signals that determine whether your brand message resonates or gets lost across diverse communities.",
     icon: Languages
   },
   {
     num: "03",
     title: "Cultural Calendar & Moments",
     subtitle: "Ramadan, Diwali, Eid, Lunar New Year & more",
-    desc: "Strategic planning around key cultural events to maximize your brand's relevance and impact throughout the year.",
+    desc: "From Diwali in Auckland to Lunar New Year across the North Island to Pasifika Festival celebrations, we identify the cultural moments that hold the most meaning for each community and build campaigns that show up authentically.",
     icon: Calendar
   },
   {
     num: "04",
     title: "Audience Behaviour Data",
     subtitle: "Cultural intuition backed by hard data",
-    desc: "Combining qualitative cultural insights with quantitative behavioral data to drive measurable campaign success.",
+    desc: "We combine platform data, community insights and purchase patterns across New Zealand's multicultural segments to build audience profiles that reflect how diverse New Zealanders actually live, engage and spend.",
     icon: LineChart
   },
 ];

@@ -22,28 +22,28 @@ const understandFeatures = [
     num: "01",
     title: "On-The-Ground Research",
     subtitle: "Native cultural consultants in every market",
-    desc: "We have native cultural consultants in every market we serve — not remote researchers, but people who grew up inside these communities, turning lived experience into brand intelligence.",
+    desc: "We track cultural shifts, community sentiment and buying behaviour across America's most diverse cities — New York, Los Angeles, Houston, Miami and Chicago — through real people, not just data points.",
     icon: User
   },
   {
     num: "02",
     title: "Language & Dialect Intelligence",
     subtitle: "Beyond translation - tone, slang, unspoken rules",
-    desc: "We dive deep into local dialects to ensure your brand's voice resonates authentically with your target demographics.",
+    desc: "The US is home to hundreds of languages and dialects. We map the linguistic nuances, tonal differences and cultural codes that determine whether your brand message connects or falls flat.",
     icon: Languages
   },
   {
     num: "03",
     title: "Cultural Calendar & Moments",
     subtitle: "Ramadan, Diwali, Eid, Lunar New Year & more",
-    desc: "Strategic planning around key cultural events to maximize your brand's relevance and impact throughout the year.",
+    desc: "From Lunar New Year in San Francisco to Diwali in New Jersey to Quinceañera season across Texas, we identify the cultural moments that matter most to each community and build campaigns around them.",
     icon: Calendar
   },
   {
     num: "04",
     title: "Audience Behaviour Data",
     subtitle: "Cultural intuition backed by hard data",
-    desc: "Combining qualitative cultural insights with quantitative behavioral data to drive measurable campaign success.",
+    desc: "We combine platform data, community insights and purchase patterns across America's multicultural segments to build audience profiles that reflect how people actually live, shop and decide.",
     icon: LineChart
   },
 ];
