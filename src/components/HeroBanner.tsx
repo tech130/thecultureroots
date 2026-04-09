@@ -25,7 +25,7 @@ export default function HeroBanner() {
         zIndex: -1
       }}>
         <GridDistortion
-          imageSrc="/images/hero-section/hero-banner.png"
+          imageSrc="/images/hero-section/Hero-banner.png"
           grid={35}
           mouse={0.1}
           strength={0.15}
