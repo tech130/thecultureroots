@@ -56,23 +56,23 @@ const caseStudies = [
     bgColor: "#F7EEFC",
     cardInnerBg: "#EFD8FC",
   },
-  {
-    id: 4,
-    title: "Solano Beverages",
-    category: "FMCG",
-    year: "2024",
-    desc: "Ramadan & Eid seasonal campaign across the Middle East and North Africa — Arabic-first social and OOH advertising",
-    stats: [
-      { label: "REACH", pre: "+", val: "340", post: "%", highlightPre: true, highlightPost: false },
-      { label: "ENGAGEMENT", pre: "", val: "12", post: "x", highlightPre: false, highlightPost: true },
-      { label: "MARKETS", pre: "", val: "07", post: "", highlightPre: false, highlightPost: false },
-    ],
-    markets: ["India", "Thailand", "Indonesia", "Malaysia", "Singapore", "Vietnam"],
-    img: "/images/case-studies/image-3.png",
-    color: "#FF5E00",
-    bgColor: "#FFF2EA",
-    cardInnerBg: "#FFE6D9",
-  },
+  // {
+  //   id: 4,
+  //   title: "Solano Beverages",
+  //   category: "FMCG",
+  //   year: "2024",
+  //   desc: "Ramadan & Eid seasonal campaign across the Middle East and North Africa — Arabic-first social and OOH advertising",
+  //   stats: [
+  //     { label: "REACH", pre: "+", val: "340", post: "%", highlightPre: true, highlightPost: false },
+  //     { label: "ENGAGEMENT", pre: "", val: "12", post: "x", highlightPre: false, highlightPost: true },
+  //     { label: "MARKETS", pre: "", val: "07", post: "", highlightPre: false, highlightPost: false },
+  //   ],
+  //   markets: ["India", "Thailand", "Indonesia", "Malaysia", "Singapore", "Vietnam"],
+  //   img: "/images/case-studies/image-3.png",
+  //   color: "#FF5E00",
+  //   bgColor: "#FFF2EA",
+  //   cardInnerBg: "#FFE6D9",
+  // },
 ];
 
 export default function CaseStudies() {
@@ -487,7 +487,7 @@ export default function CaseStudies() {
 
           .case-studies-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: .5rem;
           }
           @media (max-width: 1200px) {

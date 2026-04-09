@@ -61,7 +61,7 @@ const allCaseStudies = [
     cardInnerBg: "#EFD8FC",
   },
   // Duplicate for demonstration of "Load More"
-  ...Array.from({ length: 12 }).map((_, i) => ({
+  ...Array.from({ length: 0 }).map((_, i) => ({
     id: i + 4,
     title: i % 2 === 0 ? "Solano Beverages" : "Lumara Cosmetics",
     category: i % 2 === 0 ? "FMCG" : "Beauty",
@@ -89,7 +89,7 @@ export default function CaseStudiesPage() {
 
   return (
     <main style={{ backgroundColor: "#18191D", minHeight: "100vh", color: "#FFFFFF" }}>
-      <TargetCursor 
+      <TargetCursor
         targetSelector=".case-card"
         spinDuration={2}
         hideDefaultCursor

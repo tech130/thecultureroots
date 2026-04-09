@@ -8,7 +8,7 @@ export default function HeroBanner() {
   return (
     <section style={{
       position: "relative",
-      height: "100vh",
+      height: "95vh",
       width: "100%",
       display: "flex",
       alignItems: "center",
@@ -26,8 +26,8 @@ export default function HeroBanner() {
       }}>
         <GridDistortion
           imageSrc="/images/hero-section/Hero-banner.png"
-          grid={35}
-          mouse={0.1}
+          grid={45}
+          mouse={0.19}
           strength={0.15}
           relaxation={0.9}
         />
@@ -35,7 +35,7 @@ export default function HeroBanner() {
         <div style={{
           position: "absolute",
           top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(0,0,0,0.2)"
+          background: "rgba(0,0,0,0.4)"
         }} />
       </div>
 
@@ -53,8 +53,8 @@ export default function HeroBanner() {
           style={{ maxWidth: "800px" }}
         >
           <motion.h1 style={{
-            fontSize: "clamp(2.5rem, 8vw, 5rem)",
-            fontWeight: 800,
+            fontSize: "clamp(2.5rem, 8vw, 4.8rem)",
+            fontWeight: 600,
             lineHeight: 1.1,
             letterSpacing: "-0.03em",
             marginBottom: "1.5rem"
