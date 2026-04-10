@@ -191,24 +191,31 @@ export default function Navbar() {
                   marginTop: "-2rem",
                 }}
               >
-                {["Services", "Countries", "Case Studies", "Contact Us"].map((item, i) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, x: 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.08, duration: 0.5, ease: "easeOut" }}
-                    style={{ display: "flex", flexDirection: "column", width: "fit-content" }}
-                    onMouseEnter={() => item === "Countries" && setCountriesExpanded(true)}
-                    onMouseLeave={() => item === "Countries" && setCountriesExpanded(false)}
-                  >
+                {["Services", "Countries", "Case Studies", "Contact Us"].map((item, i) => {
+                  const isMainActive = 
+                    (item === "Services" && pathname.startsWith("/services")) || 
+                    (item === "Countries" && pathname.startsWith("/countries")) ||
+                    (item === "Case Studies" && pathname.startsWith("/case-studies")) ||
+                    (item === "Contact Us" && pathname === "/contact");
+
+                  return (
                     <motion.div
-                      initial="rest"
-                      whileHover="hover"
-                      animate="rest"
-                      style={{ position: "relative", cursor: "pointer", display: "inline-block" }}
+                      key={item}
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.08, duration: 0.5, ease: "easeOut" }}
+                      style={{ display: "flex", flexDirection: "column", width: "fit-content" }}
+                      onMouseEnter={() => item === "Countries" && setCountriesExpanded(true)}
+                      onMouseLeave={() => item === "Countries" && setCountriesExpanded(false)}
                     >
-                      <Link
-                        className="nav-menu-item"
+                      <motion.div
+                        initial="rest"
+                        whileHover="hover"
+                        animate={isMainActive ? "hover" : "rest"}
+                        style={{ position: "relative", cursor: "pointer", display: "inline-block" }}
+                      >
+                        <Link
+                          className="nav-menu-item"
                         href={
                           item === "Services" ? "/services" :
                             item === "Countries" ? "" :
@@ -280,34 +287,39 @@ export default function Navbar() {
                               { name: "United Kingdom", slug: "united-kingdom" },
                               { name: "Australia", slug: "australia" },
                               { name: "New Zealand", slug: "new-zealand" },
-                            ].map((market) => (
-                              <Link
-                                className="nav-country-item"
-                                key={market.slug}
-                                href={`/countries/${market.slug}`}
-                                onClick={() => setMenuOpen(false)}
-                                style={{
-                                  color: "rgba(255,255,255,0.7)",
-                                  textDecoration: "none",
-                                  fontSize: "1.25rem",
-                                  fontWeight: 400,
-                                  transition: "color 0.2s ease",
-                                }}
-                                onMouseEnter={(e) => (e.currentTarget.style.color = "#FF5E00")}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
-                              >
-                                {market.name}
-                              </Link>
-                            ))}
+                            ].map((market) => {
+                              const isCountryActive = pathname === `/countries/${market.slug}`;
+                              return (
+                                <Link
+                                  className="nav-country-item"
+                                  key={market.slug}
+                                  href={`/countries/${market.slug}`}
+                                  onClick={() => setMenuOpen(false)}
+                                  style={{
+                                    color: isCountryActive ? "#FF5E00" : "rgba(255,255,255,0.7)",
+                                    textDecoration: "none",
+                                    fontSize: "1.25rem",
+                                    fontWeight: 400,
+                                    transition: "color 0.2s ease",
+                                  }}
+                                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FF5E00")}
+                                  onMouseLeave={(e) => (e.currentTarget.style.color = isCountryActive ? "#FF5E00" : "rgba(255,255,255,0.7)")}
+                                >
+                                  {market.name}
+                                </Link>
+                              );
+                            })}
                           </motion.div>
                         )}
                       </AnimatePresence>
                     )}
                   </motion.div>
-                ))}
+                );
+                })}
               </div>
             </motion.div>
           </div>
+
         )}
       </AnimatePresence>
 
