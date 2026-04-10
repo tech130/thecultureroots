@@ -196,7 +196,6 @@ function HeroSection() {
                 backgroundColor: "rgba(255,255,255,0.12)",
                 border: "1px solid rgba(255,255,255,0.3)",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
                 fontSize: "0.85rem",
               }}
@@ -575,7 +574,7 @@ function UnderstandSection() {
               }}
             >
               Start a Canada Campaign
-              <motion.div 
+              <motion.div
                 variants={{ hover: { x: 5 } }}
                 style={{ backgroundColor: "#fff", borderRadius: "50%", width: "28px", height: "28px", display: "flex", alignItems: "center", justifyContent: "center" }}
               >

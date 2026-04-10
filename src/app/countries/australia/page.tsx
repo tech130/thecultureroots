@@ -197,7 +197,6 @@ function HeroSection() {
                 backgroundColor: "rgba(255,255,255,0.12)",
                 border: "1px solid rgba(255,255,255,0.3)",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
                 fontSize: "0.85rem",
               }}
@@ -365,12 +364,12 @@ function CultureSection() {
           ))}
         </motion.div>
 
-        <div style={{ 
-          display: "flex", 
-          gap: "8px", 
-          paddingLeft: isMobile ? "0" : "2rem", 
+        <div style={{
+          display: "flex",
+          gap: "8px",
+          paddingLeft: isMobile ? "0" : "2rem",
           justifyContent: isMobile ? "center" : "flex-start",
-          marginTop: "1.5rem" 
+          marginTop: "1.5rem"
         }}>
           {cities.map((_, i) => (
             <button
@@ -619,7 +618,7 @@ function UnderstandSection() {
               }}
             >
               Start an AU Campaign
-              <motion.div 
+              <motion.div
                 variants={{ hover: { x: 5 } }}
                 style={{
                   backgroundColor: "#fff",
