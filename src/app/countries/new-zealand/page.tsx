@@ -136,7 +136,7 @@ function HeroSection() {
             marginBottom: "1.25rem",
           }}
         >
-          Aotearoa's<br />Multicultural Future
+          New Zealand's<br />Multicultural Future
         </h1>
 
         <p

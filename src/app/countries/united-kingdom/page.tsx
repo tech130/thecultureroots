@@ -136,7 +136,7 @@ function HeroSection() {
             marginBottom: "1.25rem",
           }}
         >
-          Diversity Woven<br />into Society
+          United Kingdom's<br />Multicultural Future
         </h1>
 
         <p

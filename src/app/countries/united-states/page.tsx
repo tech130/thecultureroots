@@ -136,7 +136,7 @@ function HeroSection() {
             marginBottom: "1.25rem",
           }}
         >
-          The World's Largest<br />Multicultural Economy
+          United States's<br />Multicultural Future
         </h1>
 
         <p

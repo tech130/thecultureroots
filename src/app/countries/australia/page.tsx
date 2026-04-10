@@ -136,7 +136,7 @@ function HeroSection() {
             marginBottom: "1.25rem",
           }}
         >
-          A Continent<br />of Cultures
+          Australia's<br />Multicultural Future
         </h1>
 
         <p
