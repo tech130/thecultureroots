@@ -241,6 +241,11 @@ export default function ContactUs() {
             {/* CTA button */}
             <motion.button
               whileHover="hover"
+              onClick={() => window.open(
+                "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd",
+                "_blank",
+                "noopener,noreferrer"
+              )}
               className="contact-schedule-btn"
               style={{
                 display: "inline-flex",
