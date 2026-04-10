@@ -25,6 +25,7 @@ const brittneySignature = localFont({
 export const metadata: Metadata = {
   title: "CultureRoots",
   description: "Culture Flows. Brands Follow. A Multicultural Media & Services Agency.",
+  keywords: "multicultural agency, global media, culture roots, localization services, influencer marketing, global branding",
   icons: {
     icon: '/images/logos/logo.png',
   },
