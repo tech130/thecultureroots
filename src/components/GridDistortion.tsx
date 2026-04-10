@@ -175,6 +175,18 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
       Object.assign(mouseState, { x, y, prevX: x, prevY: y });
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = container.getBoundingClientRect();
+        const x = (touch.clientX - rect.left) / rect.width;
+        const y = 1 - (touch.clientY - rect.top) / rect.height;
+        mouseState.vX = x - mouseState.prevX;
+        mouseState.vY = y - mouseState.prevY;
+        Object.assign(mouseState, { x, y, prevX: x, prevY: y });
+      }
+    };
+
     const handleMouseLeave = () => {
       if (dataTexture) {
         dataTexture.needsUpdate = true;
@@ -191,6 +203,8 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
 
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    container.addEventListener('touchend', handleMouseLeave);
 
     handleResize();
 
@@ -213,7 +227,7 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
 
       const gridMouseX = size * mouseState.x;
       const gridMouseY = size * mouseState.y;
-      const maxDist = size * mouse;
+      const maxDist = size * (window.innerWidth < 768 ? mouse * 1.5 : mouse); // Slightly larger radius on touch
 
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
@@ -246,6 +260,8 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
 
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleMouseLeave);
 
       if (renderer) {
         renderer.dispose();

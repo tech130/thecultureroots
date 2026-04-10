@@ -587,18 +587,18 @@ export default function BrandingStrategyPage() {
         }
 
         @media (max-width: 1024px) {
-          .inner-hero-section {
-            flex-direction: column !important;
-            justify-content: center !important;
-            text-align: center;
-            padding-top: 5rem !important;
-          }
+          // .inner-hero-section {
+          //   flex-direction: column !important;
+          //   justify-content: center !important;
+          //   text-align: center;
+          //   padding-top: 5rem !important;
+          // }
           .inner-hero-section > div {
             align-items: center;
           }
-          .inner-hero-section h1 {
-            align-items: center !important;
-          }
+          // .inner-hero-section h1 {
+          //   align-items: center !important;
+          // }
           .other-services-carousel {
             justify-content: flex-start !important;
             overflow-x: auto;
@@ -625,6 +625,7 @@ export default function BrandingStrategyPage() {
           #magnifier-frame, #revealed-layer {
             display: none !important;
           }
+      
         }
 
         body {
@@ -650,6 +651,13 @@ export default function BrandingStrategyPage() {
             gap: 4rem !important;
           }
         }
+
+        @media (max-width: 768px) {
+    .case-studies-grid {
+        gap: 1.5rem;
+        /* padding: 0 1rem; */
+    }
+}
       `}</style>
     </main >
   );

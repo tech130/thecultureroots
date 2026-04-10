@@ -247,7 +247,7 @@ export default function ServicesPage() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
             style={{
-              fontSize: "clamp(2rem, 10vw, 5rem)",
+              fontSize: "clamp(1rem, 8vw, 5rem)",
               fontWeight: 200,
               textAlign: "center",
               marginBottom: "6rem",
@@ -478,7 +478,7 @@ export default function ServicesPage() {
             }
             .service-card-white {
               flex-direction: column !important;
-              padding: 2rem 1.5rem !important;
+              // padding: 2rem 1.5rem !important;-
               border-radius: 32px !important;
               min-height: auto !important;
               gap: 0 !important;

@@ -39,7 +39,7 @@ export default function HeroBanner() {
         }} />
       </div>
 
-      <div className="container" style={{
+      <div className="container hero-content-container" style={{
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
@@ -52,25 +52,30 @@ export default function HeroBanner() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           style={{ maxWidth: "800px" }}
         >
-          <motion.h1 style={{
-            fontSize: "clamp(2.5rem, 8vw, 4.8rem)",
-            fontWeight: 600,
-            lineHeight: 1.1,
-            letterSpacing: "-0.03em",
-            marginBottom: "1.5rem"
-          }}>
+          <motion.h1 
+            className="hero-title"
+            style={{
+              fontSize: "clamp(2.5rem, 8vw, 4.8rem)",
+              fontWeight: 600,
+              lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              marginBottom: "1.5rem",
+              color: "white"
+            }}
+          >
             Where Cultures Convert. Brands Win.
-            {/* <span style={{ color: "var(--accent-orange)" }}>Brands Follow.</span> */}
           </motion.h1>
 
-          <p style={{
+          <p className="hero-description" style={{
             fontSize: "clamp(1rem, 2vw, 1.2rem)",
             fontWeight: 500,
             opacity: 0.9,
             marginBottom: "3rem",
-            maxWidth: "600px"
+            maxWidth: "600px",
+            color: "white"
           }}>
-            The multicultural marketing agency built for brands ready to lead in the world's most diverse markets.          </p>
+            The multicultural marketing agency built for brands ready to lead in the world's most diverse markets.
+          </p>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -94,6 +99,25 @@ export default function HeroBanner() {
           </motion.button>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .hero-content-container {
+            padding-bottom: 5vh !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+          }
+          .hero-title {
+            font-size: 2.8rem !important;
+            line-height: 1.15 !important;
+            margin-bottom: 1rem !important;
+          }
+          .hero-description {
+            font-size: 1.05rem !important;
+            margin-bottom: 2rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

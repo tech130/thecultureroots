@@ -56,40 +56,25 @@ const caseStudies = [
     bgColor: "#F7EEFC",
     cardInnerBg: "#EFD8FC",
   },
-  // {
-  //   id: 4,
-  //   title: "Solano Beverages",
-  //   category: "FMCG",
-  //   year: "2024",
-  //   desc: "Ramadan & Eid seasonal campaign across the Middle East and North Africa — Arabic-first social and OOH advertising",
-  //   stats: [
-  //     { label: "REACH", pre: "+", val: "340", post: "%", highlightPre: true, highlightPost: false },
-  //     { label: "ENGAGEMENT", pre: "", val: "12", post: "x", highlightPre: false, highlightPost: true },
-  //     { label: "MARKETS", pre: "", val: "07", post: "", highlightPre: false, highlightPost: false },
-  //   ],
-  //   markets: ["India", "Thailand", "Indonesia", "Malaysia", "Singapore", "Vietnam"],
-  //   img: "/images/case-studies/image-3.png",
-  //   color: "#FF5E00",
-  //   bgColor: "#FFF2EA",
-  //   cardInnerBg: "#FFE6D9",
-  // },
 ];
 
 export default function CaseStudies() {
   return (
     <section
       id="case-studies"
+      className="case-studies-section"
       style={{
-        paddingTop: "1.5rem",
+        paddingTop: "6rem",
         paddingBottom: "8rem",
         backgroundColor: "#F3F3F3",
       }}
     >
       <div className="container" style={{ maxWidth: "1400px", width: "100%" }}>
         <h2
+          className="case-studies-header"
           style={{
             textAlign: "center",
-            fontSize: "2.2rem",
+            fontSize: "clamp(2rem, 4vw, 2.2rem)",
             fontWeight: 700,
             marginBottom: "4rem",
             color: "#111",
@@ -116,7 +101,7 @@ export default function CaseStudies() {
                 boxShadow: "0 15px 40px rgba(0,0,0,0.04)",
                 cursor: "pointer",
                 transition: "transform 0.3s ease",
-                minHeight: "550px",
+                minHeight: "var(--card-min-height, 550px)",
                 ["--accent" as any]: study.color,
                 ["--bg-light" as any]: study.bgColor,
                 ["--inner-bg" as any]: study.cardInnerBg,
@@ -156,7 +141,7 @@ export default function CaseStudies() {
                 {/* Top spacer with folder tab */}
                 <div
                   style={{
-                    height: "250px",
+                    height: "var(--tab-height, 250px)",
                     position: "relative",
                     zIndex: 2,
                     flexShrink: 0,
@@ -254,7 +239,7 @@ export default function CaseStudies() {
                     <h3
                       className="dynamic-text"
                       style={{
-                        fontSize: "1rem",
+                        fontSize: "clamp(1rem, 2.5vw, 1.1rem)",
                         fontWeight: 800,
                         color: study.color,
                         marginBottom: "0.5rem",
@@ -265,9 +250,9 @@ export default function CaseStudies() {
                       {study.title}
                     </h3>
                     <p
-                      className="dynamic-desc"
+                      className="dynamic-desc-content"
                       style={{
-                        fontSize: "0.65rem",
+                        fontSize: "clamp(0.65rem, 1.5vw, 0.7rem)",
                         lineHeight: 1.6,
                         color: "#444",
                         fontWeight: 500,
@@ -293,7 +278,7 @@ export default function CaseStudies() {
 
                     {/* Stats Dashboard */}
                     <div
-                      className="dynamic-inner-bg"
+                      className="dynamic-inner-bg stats-dashboard"
                       style={{
                         backgroundColor: study.cardInnerBg,
                         borderRadius: "16px",
@@ -315,9 +300,9 @@ export default function CaseStudies() {
                           }}
                         >
                           <div
-                            className="dynamic-desc"
+                            className="stat-value"
                             style={{
-                              fontSize: "1.5rem",
+                              fontSize: "clamp(1.2rem, 3vw, 1.5rem)",
                               fontWeight: 800,
                               display: "flex",
                               alignItems: "center",
@@ -348,7 +333,7 @@ export default function CaseStudies() {
                             </span>
                           </div>
                           <div
-                            className="dynamic-desc"
+                            className="stat-label"
                             style={{
                               fontSize: "0.55rem",
                               fontWeight: 800,
@@ -381,11 +366,11 @@ export default function CaseStudies() {
                       >
                         MARKETS
                       </span>
-                      <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                      <div className="markets-tag-list" style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
                         {study.markets.map((m, i) => (
                           <span
                             key={i}
-                            className="dynamic-inner-bg dynamic-desc"
+                            className="dynamic-inner-bg market-tag"
                             style={{
                               backgroundColor: study.cardInnerBg,
                               color: "#333",
@@ -412,6 +397,7 @@ export default function CaseStudies() {
         <div style={{ textAlign: "center", marginTop: "4rem" }}>
           <Link
             href="/case-studies"
+            className="view-more-cta"
             style={{
               background: "white",
               color: "black",
@@ -495,11 +481,35 @@ export default function CaseStudies() {
               grid-template-columns: repeat(2, 1fr);
             }
           }
-          @media (max-width: 640px) {
-            .case-studies-grid {
-              grid-template-columns: 1fr;
+          @media (max-width: 768px) {
+            .case-studies-section {
+               padding-top: 3rem !important;
+               padding-bottom: 5rem !important;
             }
+            .case-studies-grid {
+              // grid-template-columns: 3fr;
+              gap: 1.5rem;
+              padding: 0 1rem;
+            }
+            .case-card {
+              --card-min-height: 480px;
+              --tab-height: 200px;
+            }
+            .stats-dashboard {
+              padding: 0.75rem 1rem !important;
+            }
+            .view-more-cta {
+              font-size: 0.8rem !important;
+              padding: 0.3rem 0.3rem 0.3rem 1.25rem !important;
+              gap: 1rem !important;
+            }
+         
           }
+            @media (max-width: 480px) {
+              .case-studies-grid {
+                grid-template-columns: 1fr;
+              }
+            }
         `,
         }}
       />

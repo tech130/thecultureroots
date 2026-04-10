@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
@@ -14,8 +15,10 @@ const services = [
   { num: "05", title: "Influencer Collaboration", desc: "Connect with authentic voices across 46+ ethnicities — creators who hold real trust within the communities your brand wants to reach.", img: "/images/services/Community-Influencer-Collaboration.png", href: "/services/influencer-collaboration" },
   { num: "06", title: "Multicultural PR", desc: "Shape your brand's narrative across diverse media ecosystems — from ethnic press to mainstream outlets — with stories that earn attention.", img: "/images/services/Multicultural-PR.png", href: "/services/multicultural-pr" },
 ];
+
 export default function Services() {
   const [expandedIdx, setExpandedIdx] = useState<number>(0);
+  const router = useRouter();
 
   return (
     <section id="services" style={{
@@ -49,7 +52,13 @@ export default function Services() {
             return (
               <motion.div
                 key={svc.num}
-                onClick={() => setExpandedIdx(idx)}
+                onClick={() => {
+                  if (isExpanded) {
+                    router.push(svc.href);
+                  } else {
+                    setExpandedIdx(idx);
+                  }
+                }}
                 onMouseEnter={() => setExpandedIdx(idx)}
                 animate={{
                   flex: isExpanded ? 4 : 1,
@@ -131,6 +140,7 @@ export default function Services() {
                         </p>
                         <Link
                           href={svc.href}
+                          onClick={(e) => e.stopPropagation()}
                           style={{
                             display: "inline-flex",
                             alignItems: "center",

@@ -308,30 +308,38 @@ export default function Markets() {
         }
 
         @media (max-width: 768px) {
+          #markets {
+            height: clamp(600px, 100vh, 100vh) !important;
+          }
           .markets-side-text {
             display: none !important;
           }
           .markets-number-wrapper {
             top: 12% !important;
-            left: 6% !important;
+            left: 5% !important;
           }
           .markets-number {
-            font-size: 4.5rem !important;
+            font-size: 4rem !important;
+            -webkit-text-stroke-width: 0.5px !important;
           }
           .markets-main-title {
-            font-size: clamp(2.5rem, 11vw, 5rem) !important;
+            font-size: clamp(2.2rem, 10vw, 4.5rem) !important;
           }
           .invisible-title {
-            font-size: clamp(2.5rem, 12vw, 5rem) !important;
+            font-size: clamp(2.2rem, 10vw, 4.5rem) !important;
           }
+          /* Adjust split ratio on narrow mobile if needed, but 50% usually works fine if font is small */
           .markets-explore-wrapper {
-            bottom: 15% !important;
-            left: 6% !important;
+            bottom: 12% !important;
+            left: 5% !important;
           }
           .markets-pagination {
-            bottom: 15% !important;
-            right: 6% !important;
-            gap: 0.5rem !important;
+            bottom: 12% !important;
+            right: 5% !important;
+            gap: 0.4rem !important;
+          }
+          .markets-pagination div {
+             height: 3px !important;
           }
         }
       `}} />

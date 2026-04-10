@@ -42,18 +42,18 @@ export default function Intro() {
   };
 
   return (
-    <section id="intro" style={{
-      paddingTop: "5rem",
+    <section id="intro" className="intro-section" style={{
+      paddingTop: "6rem",
       paddingBottom: "4rem",
-      backgroundColor: "#ffffff", // Matches the white background in the design
+      backgroundColor: "#ffffff",
       display: "flex",
       justifyContent: "flex-start",
       textAlign: "left"
     }}>
       <div className="container" style={{ position: "relative" }}>
 
-        {/* Schedule a call button top right */}
-        <div style={{ position: "absolute", top: "-1rem", right: "2rem" }}>
+        {/* Schedule a call button */}
+        <div className="intro-top-cta" style={{ position: "absolute", top: "-1rem", right: "2rem" }}>
           <button style={{
             background: "none", border: "none", color: "#666", display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "1rem", cursor: "pointer"
           }}>
@@ -68,7 +68,7 @@ export default function Intro() {
           viewport={{ once: true, margin: "-100px" }}
           style={{ maxWidth: "1200px" }}
         >
-          <h2 style={{
+          <h2 className="intro-title" style={{
             fontSize: "clamp(1.8rem, 4.3vw, 4.3rem)",
             fontWeight: 600,
             lineHeight: 1.4,
@@ -165,6 +165,7 @@ export default function Intro() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 1 }}
+            className="intro-bottom-cta"
             style={{ marginTop: "4rem" }}
           >
             <button style={{
@@ -186,6 +187,27 @@ export default function Intro() {
           </motion.div>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .intro-section {
+            padding-top: 4rem !important;
+            padding-bottom: 3rem !important;
+          }
+          .intro-top-cta {
+             position: static !important;
+             margin-bottom: 2rem !important;
+             padding-left: 0.5rem !important;
+          }
+          .intro-title {
+            font-size: 1.85rem !important;
+            line-height: 1.3 !important;
+          }
+          .intro-bottom-cta {
+            margin-top: 2.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

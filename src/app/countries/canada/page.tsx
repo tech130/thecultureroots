@@ -719,7 +719,7 @@ function AudiencesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           style={{
-            fontSize: "clamp(2rem, 3.5vw, 2.1rem)",
+            fontSize: "clamp(1.6rem, 3.5vw, 2.1rem)",
             fontWeight: 700,
             textAlign: "center",
             color: "#111",
@@ -738,6 +738,7 @@ function AudiencesSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(6, 1fr)",
+            gridAutoRows: "minmax(min-content, auto)",
             gap: "clamp(12px, 1.5vw, 24px)",
             width: "100%",
           }}
@@ -748,13 +749,15 @@ function AudiencesSection() {
               <motion.div
                 key={item.name}
                 variants={itemVariants}
+                className="audience-item"
                 style={{
-                  gridColumn: `span ${item.colSpan}`,
-                  gridRow: `span ${item.rowSpan}`,
+                  gridColumn: `span var(--col-span, ${item.colSpan})`,
+                  gridRow: `span var(--row-span, ${item.rowSpan})`,
                   position: "relative",
                   borderRadius: "9999px",
                   overflow: "hidden",
                   aspectRatio: isCircle ? "1 / 1" : "auto",
+                  minHeight: isCircle ? "auto" : "clamp(120px, 15vw, 180px)",
                   height: "100%",
                 }}
               >
@@ -966,16 +969,48 @@ export default function CanadaPage() {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
           }
+          .market-understand-grid > div:first-of-type {
+            height: 500px !important;
+          }
           .market-audience-grid {
             grid-template-columns: repeat(4, 1fr) !important;
           }
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+          }
+          /* Specific overrides to keep some interesting shapes on tablet */
+          .market-audience-grid .audience-item:nth-child(1) { --row-span: 2 !important; }
+          .market-audience-grid .audience-item:nth-child(5) { --col-span: 2 !important; }
         }
+
         @media (max-width: 768px) {
           .market-audience-grid {
             grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
           }
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+            min-height: 160px !important;
+          }
+          /* Keep the first one tall for visual interest */
+          .market-audience-grid .audience-item:nth-child(1) { --row-span: 2 !important; min-height: 340px !important; }
+          /* Arabic, Filipino, Malaysian (indices 5, 7, 11) - make them full width pills */
+          .market-audience-grid .audience-item:nth-child(5),
+          .market-audience-grid .audience-item:nth-child(7),
+          .market-audience-grid .audience-item:nth-child(11) {
+            --col-span: 2 !important;
+            min-height: 120px !important;
+          }
+
           .market-culture-section > div {
             padding: 1rem 5% 2rem 5% !important;
+          }
+
+          section {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
           }
         }
       `}</style>

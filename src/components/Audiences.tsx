@@ -33,8 +33,15 @@ export default function Audiences() {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "flex-start"
-    }}>
+      justifyContent: "flex-start",
+      /* Define design tokens for the wheel */
+      "--hub-pos": "1700px",
+      "--card-radius": "1500px",
+      "--card-radius-neg": "-1500px",
+      "--card-width": "260px",
+      "--card-height": "360px",
+      "--bottom-text-size": "1.5rem"
+    } as any}>
       {/* Top Title */}
       <div style={{ paddingTop: "5rem", zIndex: 10 }}>
         <h2 style={{ fontSize: "2.2rem", fontWeight: 700, color: "white" }}>Audiences</h2>
@@ -55,7 +62,7 @@ export default function Audiences() {
           fontSize: "clamp(6rem, 24vw, 20rem)",
           fontWeight: 800,
           color: "transparent",
-          WebkitTextStroke: "1px rgba(255,255,255)",
+          WebkitTextStroke: "1px rgba(255,255,255, 0.2)", // Reduced opacity for cleaner look
           margin: 0,
           marginTop: "-2rem",
           lineHeight: 1,
@@ -78,7 +85,7 @@ export default function Audiences() {
         <motion.div
           style={{
             position: "absolute",
-            top: "1700px", /* Hub pushed down to match new 1500px radius */
+            top: "var(--hub-pos)",
             left: "50%",
             width: 0,
             height: 0,
@@ -91,16 +98,16 @@ export default function Audiences() {
               key={idx}
               style={{
                 position: "absolute",
-                top: "-1500px", /* The increased radius distance pushing card up */
-                left: "-130px", /* Centering offset (half of 260px width) */
-                width: "260px",
-                height: "360px",
-                transformOrigin: "50% 1500px", /* Anchor rotation perfectly to the hub */
+                top: "var(--card-radius-neg)",
+                left: "calc(var(--card-width) / -2)",
+                width: "var(--card-width)",
+                height: "var(--card-height)",
+                transformOrigin: "50% var(--card-radius)",
                 transform: `rotate(${idx * angleStep}deg)`,
                 borderRadius: "20px",
                 overflow: "hidden",
                 boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
-                backgroundColor: "#222" // skeleton fallback
+                backgroundColor: "#222"
               }}
             >
               <Image src={card.img} alt={card.label} fill style={{ objectFit: "cover" }} />
@@ -127,17 +134,43 @@ export default function Audiences() {
         position: "absolute",
         bottom: "4rem",
         zIndex: 10,
-        textAlign: "center"
+        textAlign: "center",
+        width: "100%",
+        padding: "0 1.5rem"
       }}>
-        <p style={{
+        <p className="audience-bottom-text" style={{
           color: "rgba(255,255,255,0.9)",
-          fontSize: "1.5rem",
+          fontSize: "var(--bottom-text-size)",
           fontWeight: 400,
-          letterSpacing: "0.01em"
+          letterSpacing: "0.01em",
+          maxWidth: "800px",
+          margin: "0 auto"
         }}>
           46+ Ethnicities. 5 Markets. One Agency That Reaches Them All.
         </p>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 1024px) {
+           #audiences {
+            --hub-pos: 1400px !important;
+            --card-radius: 1200px !important;
+            --card-radius-neg: -1200px !important;
+            --card-width: 200px !important;
+            --card-height: 280px !important;
+          }
+        }
+        @media (max-width: 768px) {
+          #audiences {
+            --hub-pos: 1100px !important;
+            --card-radius: 950px !important;
+            --card-radius-neg: -950px !important;
+            --card-width: 160px !important;
+            --card-height: 220px !important;
+            --bottom-text-size: 1.1rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
