@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Dancing_Script } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+
 
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
 });
+
+const dancingScript = Dancing_Script({
+  variable: "--font-dancing-script",
+  subsets: ["latin"],
+  weight: ["700"],
+});
+
+const brittneySignature = localFont({
+  src: "../../public/fonts/brittney-signature/Brittney Signature.otf",
+  variable: "--font-brittney",
+  display: "swap",
+});
+
 
 export const metadata: Metadata = {
   title: "CultureRoots",
@@ -21,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${dancingScript.variable} ${brittneySignature.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

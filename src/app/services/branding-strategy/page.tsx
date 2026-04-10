@@ -5,8 +5,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, PhoneCall } from "lucide-react";
+import { ArrowDownRight, ArrowRight, PhoneCall } from "lucide-react";
 import CaseStudies from "@/components/CaseStudies";
+import { useState } from "react";
+import { useContactForm } from "@/hooks/useContactForm";
+import ThankYouPopup from "@/components/ThankYouPopup";
 
 
 
@@ -68,6 +71,12 @@ const TextCloud = ({ isMagnified = false }: { isMagnified?: boolean }) => (
 );
 
 export default function BrandingStrategyPage() {
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const { formData, handleChange, handleSubmit, isSubmitting } = useContactForm(() => {
+    setShowThankYou(true);
+  });
+
   return (
     <main style={{ backgroundColor: "#FFFFFF", color: "#18191D", minHeight: "100vh" }}>
       <Navbar />
@@ -132,8 +141,9 @@ export default function BrandingStrategyPage() {
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "1rem" }}>
             {/* Get Started Button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
               whileTap={{ scale: 0.95 }}
+              onClick={() => document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })}
               style={{
                 backgroundColor: "#FFFFFF",
                 color: "#18191D",
@@ -149,33 +159,44 @@ export default function BrandingStrategyPage() {
               }}
             >
               Get Started
-              <div style={{ backgroundColor: "#18191D", color: "#FFFFFF", width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <motion.div 
+                variants={{ hover: { x: 5 } }}
+                style={{ backgroundColor: "#18191D", color: "#FFFFFF", width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >
                 <ArrowRight size={16} />
-              </div>
+              </motion.div>
             </motion.button>
 
             {/* Contact Us Outline Button */}
-            <motion.button
-              whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-              style={{
-                backgroundColor: "transparent",
-                color: "#FFFFFF",
-                padding: "0.4rem 0.4rem 0.4rem 1.5rem",
-                borderRadius: "100px",
-                fontSize: "0.95rem",
-                fontWeight: 500,
-                border: "1px solid rgba(255,255,255,0.4)",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "1.5rem"
-              }}
+            <Link
+              href="/contact"
+              style={{ textDecoration: "none" }}
             >
-              Contact Us
-              <div style={{ backgroundColor: "#FFFFFF", color: "#18191D", width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <ArrowRight size={16} />
-              </div>
-            </motion.button>
+              <motion.div
+                whileHover="hover"
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#FFFFFF",
+                  padding: "0.4rem 0.4rem 0.4rem 1.5rem",
+                  borderRadius: "100px",
+                  fontSize: "0.95rem",
+                  fontWeight: 500,
+                  border: "1px solid rgba(255,255,255,0.4)",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1.5rem",
+                }}
+              >
+                Contact Us
+                <motion.div 
+                  variants={{ hover: { x: 5 } }}
+                  style={{ backgroundColor: "#FFFFFF", color: "#18191D", width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}
+                >
+                  <ArrowRight size={16} />
+                </motion.div>
+              </motion.div>
+            </Link>
           </div>
         </div>
 
@@ -226,9 +247,11 @@ export default function BrandingStrategyPage() {
       >
         {/* Top Right "Schedule a call" */}
         <div style={{ position: "absolute", top: "4rem", right: "10%", zIndex: 10 }}>
-          <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#333", fontSize: "1.1rem", textDecoration: "none", fontWeight: 500 }}>
-            &rarr; Schedule a call
-          </Link>
+          <div
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#333", fontSize: "1.1rem", textDecoration: "none", fontWeight: 500, background: "none", border: "none" }}
+          >
+            &rarr; Where ideas become reality
+          </div>
         </div>
 
         {/* Text Layers Container */}
@@ -361,16 +384,20 @@ export default function BrandingStrategyPage() {
               document.body.style.cursor = "none";
             }}
             onMouseMove={(e) => e.stopPropagation()}
-            whileHover={{ scale: 1.05 }}
+            onClick={() => document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })}
+            whileHover="hover"
             style={{ display: "inline-flex", alignItems: "center", borderRadius: "100px", overflow: "hidden", cursor: "pointer", marginTop: "6rem", position: "relative", zIndex: 50 }}
           >
             <div style={{ backgroundColor: "#18191D", color: "#FFF", padding: "1rem 2.8rem", fontWeight: 600, fontSize: "1rem" }}>
-              Contact Us
+              Reach Us
             </div>
             <div style={{ backgroundColor: "#18191D", padding: "1rem", color: "#FFF", borderLeft: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ backgroundColor: "#FFF", color: "#18191D", borderRadius: "50%", width: "24px", height: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <ArrowRight size={14} />
-              </div>
+              <motion.div 
+                variants={{ hover: { x: 3, y: 3 } }}
+                style={{ backgroundColor: "#FFF", color: "#18191D", borderRadius: "50%", width: "24px", height: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >
+                <ArrowDownRight size={14} />
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -382,7 +409,7 @@ export default function BrandingStrategyPage() {
 
 
       {/* ✉️ Contact Form Section */}
-      <section style={{ backgroundColor: "#111111", padding: "14rem 10% 8rem", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
+      <section id="contact-form" style={{ backgroundColor: "#111111", padding: "14rem 10% 8rem", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
 
         {/* Background Layer: HELLO + Cursive Overlay */}
         <div style={{
@@ -437,66 +464,84 @@ export default function BrandingStrategyPage() {
           </div>
 
           {/* Right Column: Form */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", paddingTop: "5rem" }}>
-            <p style={{ opacity: 0.8, fontSize: "clamp(0.85rem, 1vw, 1.1rem)", color: "#FFFFFF", maxWidth: "450px", lineHeight: 1.5, marginBottom: "1rem" }}>
-              Tell Us About Your Brand And The Communities You Want To Connect With. We&apos;ll Take It From There.
-            </p>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "2.5rem", paddingTop: "5rem" }}>
+              <p style={{ opacity: 0.8, fontSize: "clamp(0.85rem, 1vw, 1.1rem)", color: "#FFFFFF", maxWidth: "450px", lineHeight: 1.5, marginBottom: "1rem" }}>
+                Tell Us About Your Brand And The Communities You Want To Connect With. We&apos;ll Take It From There.
+              </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
-              {[
-                { label: "Full Name", placeholder: "" },
-                { label: "Mail Id", placeholder: "" },
-                { label: "Company (Optional)", placeholder: "" },
-                { label: "Message", placeholder: "" }
-              ].map((field, i) => (
-                <div key={i} style={{ borderBottom: "1.5px solid rgba(255,255,255,0.8)", position: "relative" }}>
-                  <label style={{ display: "block", fontSize: "1.1rem", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}>
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    aria-label={field.label}
-                    title={field.label}
-                    style={{ background: "transparent", border: "none", width: "100%", color: "#FFF", fontSize: "1.2rem", outline: "none", padding: "0.5rem 0", fontWeight: 300 }}
-                  />
-                </div>
-              ))}
-            </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
+                {[
+                  { label: "Full Name", name: "fullName" as const },
+                  { label: "Mail Id", name: "email" as const },
+                  { label: "Company (Optional)", name: "company" as const },
+                  { label: "Message", name: "message" as const }
+                ].map((field, i) => (
+                  <div key={i} style={{ borderBottom: "1.5px solid rgba(255,255,255,0.8)", position: "relative" }}>
+                    <label style={{ display: "block", fontSize: "1.1rem", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}>
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.name === "email" ? "email" : "text"}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      required={field.name !== "company"}
+                      aria-label={field.label}
+                      title={field.label}
+                      style={{ background: "transparent", border: "none", width: "100%", color: "#FFF", fontSize: "1.2rem", outline: "none", padding: "0.5rem 0", fontWeight: 300 }}
+                    />
+                  </div>
+                ))}
+              </div>
 
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-              <motion.button
-                whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-                style={{
-                  backgroundColor: "transparent",
-                  color: "#FFFFFF",
-                  border: "1px solid rgba(255,255,255,0.4)",
-                  padding: "0.5rem .5rem 0.5rem 1.5rem",
-                  borderRadius: "100px",
-                  fontSize: "1rem",
-                  fontWeight: 300,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1.5rem"
-                }}
-              >
-                Submit
-                <div style={{ backgroundColor: "#FFFFFF", color: "#000", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <ArrowRight size={18} />
-                </div>
-              </motion.button>
-            </div>
-          </div>
+              <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={isSubmitting ? {} : "hover"}
+                  style={{
+                    backgroundColor: "transparent",
+                    color: "#FFFFFF",
+                    border: "1px solid rgba(255,255,255,0.4)",
+                    padding: "0.5rem .5rem 0.5rem 1.5rem",
+                    borderRadius: "100px",
+                    fontSize: "1rem",
+                    fontWeight: 300,
+                    cursor: isSubmitting ? "not-allowed" : "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1.5rem",
+                    opacity: isSubmitting ? 0.7 : 1
+                  }}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                  <motion.div 
+                    variants={{ hover: { x: 5 } }}
+                    style={{ backgroundColor: "#FFFFFF", color: "#000", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center" }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.div>
+                </motion.button>
+              </div>
+            </form>
         </div>
 
         {/* Bottom Action Footer */}
         <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", position: "relative", zIndex: 10 }}>
-          <div style={{ fontSize: "1.25rem", color: "#FFFFFF", display: "flex", alignItems: "center", gap: "0.75rem", fontWeight: 400 }}>
-            Call Us on <ArrowRight size={20} />
-          </div>
+          <motion.div 
+            initial="initial"
+            whileHover="hover"
+            style={{ fontSize: "1.25rem", color: "#FFFFFF", display: "flex", alignItems: "center", gap: "0.75rem", fontWeight: 400 }}
+          >
+            Call Us on 
+            <motion.span variants={{ hover: { x: 5 } }}>
+              <ArrowRight size={20} />
+            </motion.span>
+          </motion.div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => window.open("https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd", "_blank", "noopener,noreferrer")}
             style={{
               backgroundColor: "#FFFFFF",
               color: "#000000",
@@ -527,52 +572,53 @@ export default function BrandingStrategyPage() {
           padding: "0 2rem"
         }}>
           {otherServices.map((service, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{
-                scale: 0.93,
-                zIndex: 50,
-                transition: { duration: 0.3, ease: "easeOut" },
-              }}
-              className="other-services-card"
-              style={{
-                width: "320px",
-                height: "560px",
-                position: "relative",
-                borderRadius: "40px",
-                overflow: "hidden",
-                cursor: "pointer",
-                marginLeft: idx === 0 ? 0 : "-4rem", // Overlap effect
-                boxShadow: "-15px 0 45px rgba(0,0,0,0.12)", // Depth between layers
-                backgroundColor: "#000",
-                flexShrink: 0,
-                transition: "margin-left 0.4s ease-out",
-              }}
-            >
-              <Image src={service.img} alt={service.title} fill style={{ objectFit: "cover" }} />
+            <Link key={idx} href={service.href} style={{ textDecoration: "none", flexShrink: 0 }}>
+              <motion.div
+                whileHover={{
+                  scale: 0.93,
+                  zIndex: 50,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+                className="other-services-card"
+                style={{
+                  width: "320px",
+                  height: "560px",
+                  position: "relative",
+                  borderRadius: "40px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  marginLeft: idx === 0 ? 0 : "-4rem", // Overlap effect
+                  boxShadow: "-15px 0 45px rgba(0,0,0,0.12)", // Depth between layers
+                  backgroundColor: "#000",
+                  transition: "margin-left 0.4s ease-out",
+                }}
+              >
+                <Image src={service.img} alt={service.title} fill style={{ objectFit: "cover" }} />
 
-              {/* Overlay with Title at Top-Left */}
-              <div style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
-                padding: "2.5rem"
-              }}>
-                <h3 style={{
-                  color: "#FFF",
-                  fontSize: "1.2rem",
-                  fontWeight: 500,
-                  lineHeight: 1.2,
-                  maxWidth: "200px"
+                {/* Overlay with Title at Top-Left */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
+                  padding: "2.5rem"
                 }}>
-                  {service.title}
-                </h3>
-              </div>
-            </motion.div>
+                  <h3 style={{
+                    color: "#FFF",
+                    fontSize: "1.2rem",
+                    fontWeight: 500,
+                    lineHeight: 1.2,
+                    maxWidth: "200px"
+                  }}>
+                    {service.title}
+                  </h3>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </section>
 
+      <ThankYouPopup isOpen={showThankYou} onClose={() => setShowThankYou(false)} />
       <Footer />
 
       <style jsx global>{`

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
+const MotionLink = motion(Link);
+
 export default function Footer() {
   return (
     <footer style={{
@@ -49,25 +51,32 @@ export default function Footer() {
             {/* Social Icons row */}
             <div style={{ display: "flex", gap: "0.5rem" }}>
               {[
-                { alt: "Facebook", src: "/images/logos/FB.png" },
-                { alt: "Instagram", src: "/images/logos/INSTA.png" },
-                { alt: "Threads", src: "/images/logos/THREADS.png" },
-                { alt: "YouTube", src: "/images/logos/YT.png" },
-                { alt: "X", src: "/images/logos/X.png" },
-                { alt: "LinkedIn", src: "/images/logos/LI.png" },
-                { alt: "TikTok", src: "/images/logos/TK.png" }
+                { alt: "Facebook", src: "/images/logos/FB.png", href: "https://www.facebook.com/profile.php?id=61573848512602" },
+                { alt: "Instagram", src: "/images/logos/INSTA.png", href: "https://www.instagram.com/thecultureroots/" },
+                { alt: "Threads", src: "/images/logos/THREADS.png", href: "https://www.threads.com/@culturerootsglobal" },
+                { alt: "YouTube", src: "/images/logos/YT.png", href: "https://www.youtube.com/@CultureRootsGlobal" },
+                { alt: "X", src: "/images/logos/X.png", href: "https://x.com/thecultureroots" },
+                { alt: "LinkedIn", src: "/images/logos/LI.png", href: "https://www.linkedin.com/company/culture-roots" }
               ].map((icon, i) => (
-                <div key={i} style={{
-                  width: "28px", height: "28px",
-                  borderRadius: "6px",
-                  border: "1px solid rgba(0,0,0,0.15)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  overflow: "hidden",
-                  position: "relative",
-                  backgroundColor: "white"
-                }}>
+                <Link
+                  key={i}
+                  href={icon.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    width: "28px", height: "28px",
+                    borderRadius: "6px",
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    position: "relative",
+                    backgroundColor: "white",
+                    transition: "transform 0.2s ease"
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
+                  onMouseOut={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                >
                   <Image src={icon.src} alt={icon.alt} fill style={{ objectFit: "contain" }} />
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -78,23 +87,41 @@ export default function Footer() {
             <div className="footer-links-row" style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
               {/* Contact Us */}
               <div>
-                <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#FF5E00", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
+                <MotionLink
+                  href="/contact"
+                  initial="initial"
+                  whileHover="hover"
+                  style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#FF5E00", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}
+                >
                   Contact Us
-                  <div style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <motion.div 
+                    variants={{ hover: { x: 3, y: -3 } }}
+                    style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}
+                  >
                     <ArrowUpRight size={12} strokeWidth={3} />
-                  </div>
-                </Link>
+                  </motion.div>
+                </MotionLink>
                 <div style={{ fontSize: "0.75rem", color: "#999", marginTop: "0.5rem", fontWeight: 500 }}>Let's Work Together</div>
               </div>
 
               {/* Call Us */}
               <div>
-                <Link href="#" style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#111", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}>
+                <MotionLink
+                  href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial="initial"
+                  whileHover="hover"
+                  style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "#111", fontWeight: 600, fontSize: "1.1rem", textDecoration: "none" }}
+                >
                   Call Us on
-                  <div style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <motion.div 
+                    variants={{ hover: { x: 3, y: -3 } }}
+                    style={{ backgroundColor: "#FF5E00", color: "white", borderRadius: "50%", padding: "2px", width: "16px", height: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}
+                  >
                     <ArrowUpRight size={12} strokeWidth={3} />
-                  </div>
-                </Link>
+                  </motion.div>
+                </MotionLink>
                 <div style={{ fontSize: "0.75rem", color: "#999", marginTop: "0.5rem", fontWeight: 500 }}>Book Your Free Discovery Call</div>
               </div>
             </div>
@@ -146,7 +173,7 @@ export default function Footer() {
             left: "50%",
             transform: "translateX(calc(-50% - 3vw))",
             whiteSpace: "nowrap",
-            fontSize: "clamp(6rem, 18vw, 16rem)",
+            fontSize: "clamp(6rem, 18vw, 15rem)",
             fontWeight: 900,
             color: "transparent",
             WebkitTextStroke: "1px rgba(0,0,0,0.12)", // Thin crisp outline
@@ -166,7 +193,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{
-              fontSize: "clamp(6rem, 18vw, 16rem)",
+              fontSize: "clamp(6rem, 16vw, 14rem)",
               fontWeight: 900,
               color: "#18191D",
               lineHeight: 0.75, // Crops bottom slightly to match design
@@ -194,7 +221,7 @@ export default function Footer() {
         fontWeight: 600,
         color: "#444"
       }}>
-        <span>TheCulture Roots ©2026</span>
+        <span>TheCultureRoots ©2026</span>
         <span style={{ opacity: 0.5 }}>•</span>
         <Link href="#" style={{ textDecoration: "none", color: "inherit" }}>Privacy Policy</Link>
       </div>

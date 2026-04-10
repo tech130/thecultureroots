@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
+const MotionLink = motion(Link);
+
 const services = [
   { num: "01", title: "Branding &\nStrategy", desc: "Build a brand identity that resonates across cultures — from positioning and messaging to full visual strategy tailored for diverse markets.", img: "/images/services/Branding-and-Strategy.png", href: "/services/branding-strategy" },
   { num: "02", title: "Translation & Localization", desc: "Beyond words. We adapt your content to sound native, feel local, and land with precision across languages and cultural contexts.", img: "/images/services/Translation-and-Localization.png", href: "/services/translation-localization" },
@@ -138,9 +140,11 @@ export default function Services() {
                         }}>
                           {svc.desc}
                         </p>
-                        <Link
+                        <MotionLink
                           href={svc.href}
                           onClick={(e) => e.stopPropagation()}
+                          initial="initial"
+                          whileHover="hover"
                           style={{
                             display: "inline-flex",
                             alignItems: "center",
@@ -157,8 +161,11 @@ export default function Services() {
                           onMouseOver={(e) => e.currentTarget.style.borderBottomColor = "white"}
                           onMouseOut={(e) => e.currentTarget.style.borderBottomColor = "rgba(255,255,255,0.4)"}
                         >
-                          Explore Service <ArrowUpRight size={16} />
-                        </Link>
+                          Explore Service 
+                          <motion.span variants={{ hover: { x: 3, y: -3 } }}>
+                            <ArrowUpRight size={16} />
+                          </motion.span>
+                        </MotionLink>
                       </motion.div>
                     ) : (
                       <h3 className="collapsed-title" style={{

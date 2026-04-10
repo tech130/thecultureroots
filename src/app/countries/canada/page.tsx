@@ -5,6 +5,8 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+
+const MotionLink = motion(Link);
 import Footer from "@/components/Footer";
 import { User, Languages, Calendar, LineChart, ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 
@@ -70,7 +72,6 @@ function HeroSection() {
         backgroundColor: "#000",
       }}
     >
-      {/* Sharp full-screen background */}
       <Image
         src="/images/markets/Canada-1.jpg"
         alt="Canada — Many Cultures, One Canada"
@@ -155,8 +156,12 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          <Link
-            href="/contact"
+          <MotionLink
+            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial="initial"
+            whileHover="hover"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -182,7 +187,8 @@ function HeroSection() {
             }}
           >
             Contact Us
-            <div
+            <motion.div
+              variants={{ hover: { x: 5 } }}
               style={{
                 width: "24px",
                 height: "24px",
@@ -196,8 +202,8 @@ function HeroSection() {
               }}
             >
               →
-            </div>
-          </Link>
+            </motion.div>
+          </MotionLink>
         </motion.div>
       </motion.div>
 
@@ -225,21 +231,27 @@ function HeroSection() {
   );
 }
 
-
-
 /* ═══════════════════════════════════════════════════════
-   SECTION 2 — WHERE EVERY CULTURE HAS A VOICE (WITH AUTO-SCROLL)
+   SECTION 2 — WHERE EVERY CULTURE HAS A VOICE
 ═══════════════════════════════════════════════════════ */
 function CultureSection() {
   const [activeCity, setActiveCity] = useState(0);
   const cities = ALL_CITIES;
 
-  // Auto-scroll effect
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 1024px)");
+    const onChange = () => setIsMobile(mql.matches);
+    setIsMobile(mql.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCity((prev) => (prev + 1) % cities.length);
-    }, 3500); // Change slide every 3.5 seconds
-
+    }, 3500);
     return () => clearInterval(interval);
   }, [cities.length]);
 
@@ -267,9 +279,7 @@ function CultureSection() {
           justifyContent: "center",
         }}
       >
-        <p style={{ fontSize: "2rem", color: "#000", fontWeight: 300 }}>
-          Canada
-        </p>
+        <p style={{ fontSize: "2rem", color: "#000", fontWeight: 300 }}>Canada</p>
         <h2
           style={{
             fontSize: "clamp(2.2rem, 4vw, 3.1rem)",
@@ -282,14 +292,7 @@ function CultureSection() {
         >
           Where Every Culture<br />Has a Voice.
         </h2>
-        <p
-          style={{
-            fontSize: "1.2rem",
-            color: "#000",
-            lineHeight: 1.8,
-            maxWidth: "560px",
-          }}
-        >
+        <p style={{ fontSize: "1.2rem", color: "#000", lineHeight: 1.8, maxWidth: "560px" }}>
           Canada is one of the most culturally diverse nations on earth. With over 200
           ethnic origins reported and immigration driving more than 80% of population
           growth, it is a market where multicultural relevance is not optional — it is
@@ -309,30 +312,20 @@ function CultureSection() {
           padding: "9rem 0 1rem 0",
         }}
       >
-        {/* Scrollable track */}
         <motion.div
-          animate={{ x: `calc(${-activeCity * 50}% - ${activeCity * 16}px)` }}
+          animate={{ x: isMobile ? `-${activeCity * 100}%` : `calc(${-activeCity * 55}%)` }}
           transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-          style={{
-            display: "flex",
-            gap: "16px",
-            paddingLeft: "2rem",
-            alignItems: "center",
-          }}
+          style={{ display: "flex", gap: isMobile ? "0" : "16px", paddingLeft: isMobile ? "0" : "2rem", alignItems: "center" }}
         >
           {cities.map((city, i) => (
             <motion.div
               key={city.name}
               onClick={() => setActiveCity(i)}
-              animate={{
-                scale: activeCity === i ? 1 : 0.94,
-                opacity: activeCity === i ? 1 : 0.65,
-              }}
+              animate={{ scale: activeCity === i ? 1 : 0.94, opacity: activeCity === i ? 1 : 0.65 }}
               transition={{ duration: 0.4 }}
               style={{
-                /* Match design: ~42% of container width, tall rounded cards */
-                minWidth: "calc(55% - 1rem)",
-                height: "420px",
+                minWidth: isMobile ? "100%" : "calc(55% - 1rem)",
+                height: isMobile ? "300px" : "420px",
                 overflow: "hidden",
                 position: "relative",
                 cursor: "pointer",
@@ -351,43 +344,21 @@ function CultureSection() {
                 }}
                 sizes="30vw"
               />
-              {/* Subtle gradient at bottom */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.45) 100%)",
-                  zIndex: 1,
-                }}
-              />
-              {/* City name label */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "1.25rem",
-                  left: "1.25rem",
-                  color: "#fff",
-                  fontWeight: 700,
-                  fontSize: "1.15rem",
-                  zIndex: 2,
-                  letterSpacing: "-0.01em",
-                }}
-              >
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.45) 100%)", zIndex: 1 }} />
+              <div style={{ position: "absolute", top: "1.25rem", left: "1.25rem", color: "#fff", fontWeight: 700, fontSize: "1.15rem", zIndex: 2, letterSpacing: "-0.01em" }}>
                 {city.name}
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Dot pagination — bottom left of carousel area */}
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            paddingLeft: "2rem",
-            marginTop: "1.5rem",
-          }}
-        >
+        <div style={{
+          display: "flex",
+          gap: "8px",
+          paddingLeft: isMobile ? "0" : "2rem",
+          justifyContent: isMobile ? "center" : "flex-start",
+          marginTop: "1.5rem"
+        }}>
           {cities.map((_, i) => (
             <button
               key={i}
@@ -406,13 +377,12 @@ function CultureSection() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }
 
 /* ═══════════════════════════════════════════════════════
-   SECTION 3 — HOW WE UNDERSTAND THEM  (Light bg)
+   SECTION 3 — HOW WE UNDERSTAND THEM
 ═══════════════════════════════════════════════════════ */
 function UnderstandSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -445,7 +415,7 @@ function UnderstandSection() {
             color: "#111",
             textAlign: "center",
             margin: 0,
-            letterSpacing: "-0.02em"
+            letterSpacing: "-0.02em",
           }}
         >
           How We Understand Them
@@ -460,7 +430,7 @@ function UnderstandSection() {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "4rem",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         {/* ── LEFT: Image card with stats ── */}
@@ -468,6 +438,7 @@ function UnderstandSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
+          className="understand-image-card"
           style={{
             position: "relative",
             borderRadius: "32px",
@@ -477,41 +448,32 @@ function UnderstandSection() {
             flexDirection: "column",
             justifyContent: "center",
             padding: "4rem 3rem",
-            color: "white"
+            color: "white",
           }}
         >
-          {/* Background Image */}
           <Image
             src="/images/markets/Canada-1.jpg"
             alt="Canada Landscape"
             fill
             style={{ objectFit: "cover", objectPosition: "center", zIndex: 0 }}
           />
-          {/* Dark Overlay */}
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%)", zIndex: 1 }} />
 
           <div style={{ position: "relative", zIndex: 2, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-            <p style={{ fontSize: "0.85rem", opacity: 0.8, marginBottom: "1.5rem" }}>Countries & Audiences</p>
-            <h2
-              style={{
-                fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
-                fontWeight: 300,
-                lineHeight: 1.1,
-                marginBottom: "1rem",
-                maxWidth: "500px"
-              }}
-            >
-              We Don&apos;t Study Cultures,<br />
-              We Live In Them
+            <p className="understand-card-label" style={{ fontSize: "0.85rem", opacity: 0.8, marginBottom: "1.5rem" }}>Countries & Audiences</p>
+            <h2 className="understand-card-heading" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 300, lineHeight: 1.1, marginBottom: "1rem", maxWidth: "500px" }}>
+              We Don&apos;t Study Cultures,<br />We Live In Them
             </h2>
-            <p style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
+            <p className="understand-card-desc" style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
               Our on-ground cultural intelligence across Canada goes beyond demographics — it captures language, sentiment, behaviour and belonging.
-
             </p>
           </div>
 
           {/* Stats Grid */}
-          <div style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+          <div
+            className="understand-stats-grid"
+            style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}
+          >
             {stats.map((s, i) => (
               <div
                 key={i}
@@ -521,7 +483,7 @@ function UnderstandSection() {
                   WebkitBackdropFilter: "blur(10px)",
                   padding: "1.5rem 2rem",
                   borderRadius: "16px",
-                  border: "1px solid rgba(255, 255, 255, 0.2)"
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
                 }}
               >
                 <div style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "0.2rem", lineHeight: 1 }}>{s.value}</div>
@@ -536,12 +498,9 @@ function UnderstandSection() {
           initial={{ opacity: 0, x: 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingRight: "2rem" }}
+          className="understand-right-panel"
+          style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
         >
-          {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
-            <p style={{ fontSize: "0.9rem", color: "#666", letterSpacing: "0.05em" }}>How We Understand Them</p>
-          </div> */}
-
           {understandFeatures.map((feat, i) => {
             const isActive = activeFeature === i;
             const Icon = feat.icon;
@@ -556,24 +515,17 @@ function UnderstandSection() {
                   cursor: "pointer",
                   backgroundColor: isActive ? "#fff" : "transparent",
                   transition: "all 0.3s ease",
-                  boxShadow: isActive ? "0 10px 30px rgba(0,0,0,0.05)" : "none"
+                  boxShadow: isActive ? "0 10px 30px rgba(0,0,0,0.05)" : "none",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem" }}>
-                  {/* Number & Icon */}
                   <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                     <span style={{ fontSize: "1.1rem", color: "#888", fontWeight: 300 }}>{feat.num}</span>
-                    <div style={{
-                      width: "48px", height: "48px",
-                      borderRadius: "12px",
-                      backgroundColor: "#f5f5f5",
-                      display: "flex", alignItems: "center", justifyContent: "center"
-                    }}>
+                    <div style={{ width: "48px", height: "48px", borderRadius: "12px", backgroundColor: "#f5f5f5", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <Icon size={20} color="#333" />
                     </div>
                   </div>
 
-                  {/* Title & Subtitle */}
                   <div style={{ flex: 1, paddingTop: "0.25rem" }}>
                     <h3 style={{ fontSize: "1.2rem", fontWeight: 600, color: "#111", margin: "0 0 0.25rem 0" }}>{feat.title}</h3>
                     <p style={{ fontSize: "0.9rem", color: "#666", margin: 0 }}>{feat.subtitle}</p>
@@ -586,23 +538,13 @@ function UnderstandSection() {
                           exit={{ height: 0, opacity: 0, marginTop: 0 }}
                           style={{ overflow: "hidden" }}
                         >
-                          <p style={{ fontSize: "0.95rem", color: "#555", lineHeight: 1.6, margin: 0 }}>
-                            {feat.desc}
-                          </p>
+                          <p style={{ fontSize: "0.95rem", color: "#555", lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  {/* Accordion Arrow */}
-                  <div style={{
-                    width: "36px", height: "36px",
-                    borderRadius: "50%",
-                    backgroundColor: "#f0f0f0",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    marginTop: "0.5rem",
-                    flexShrink: 0
-                  }}>
+                  <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "0.5rem", flexShrink: 0 }}>
                     {isActive ? <ChevronUp size={16} color="#333" /> : <ChevronDown size={16} color="#333" />}
                   </div>
                 </div>
@@ -612,8 +554,12 @@ function UnderstandSection() {
 
           {/* Start Campaign Button */}
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-            <Link
-              href="/contact"
+            <MotionLink
+              href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial="initial"
+              whileHover="hover"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -627,26 +573,17 @@ function UnderstandSection() {
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.02)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-              }}
             >
               Start a Canada Campaign
-              <div style={{
-                backgroundColor: "#fff",
-                borderRadius: "50%",
-                width: "28px", height: "28px",
-                display: "flex", alignItems: "center", justifyContent: "center"
-              }}>
+              <motion.div 
+                variants={{ hover: { x: 5 } }}
+                style={{ backgroundColor: "#fff", borderRadius: "50%", width: "28px", height: "28px", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >
                 <ArrowRight size={14} color="#111" />
-              </div>
-            </Link>
+              </motion.div>
+            </MotionLink>
           </div>
         </motion.div>
-
       </div>
     </section>
   );
@@ -683,10 +620,7 @@ function AudiencesSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
     },
   };
 
@@ -696,12 +630,7 @@ function AudiencesSection() {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 85,
-        damping: 12,
-        mass: 0.8
-      }
+      transition: { type: "spring" as const, stiffness: 85, damping: 12, mass: 0.8 },
     },
   };
 
@@ -724,7 +653,7 @@ function AudiencesSection() {
             textAlign: "center",
             color: "#111",
             margin: "0 0 4rem 0",
-            letterSpacing: "-0.02em"
+            letterSpacing: "-0.02em",
           }}
         >
           Audiences
@@ -743,7 +672,7 @@ function AudiencesSection() {
             width: "100%",
           }}
         >
-          {audiences.map((item, i) => {
+          {audiences.map((item) => {
             const isCircle = item.colSpan === 1 && item.rowSpan === 1;
             return (
               <motion.div
@@ -766,9 +695,8 @@ function AudiencesSection() {
                   alt={item.name}
                   fill
                   style={{ objectFit: "cover" }}
-                  sizes="(max-width: 1280px) 25vw, 20vw"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 20vw"
                 />
-
                 <div
                   style={{
                     position: "absolute",
@@ -788,14 +716,7 @@ function AudiencesSection() {
                       borderRadius: "20px",
                     }}
                   >
-                    <span
-                      style={{
-                        color: "#fff",
-                        fontSize: "0.85rem",
-                        fontWeight: 400,
-                        letterSpacing: "0.02em"
-                      }}
-                    >
+                    <span style={{ color: "#fff", fontSize: "0.85rem", fontWeight: 400, letterSpacing: "0.02em" }}>
                       {item.name}
                     </span>
                   </div>
@@ -810,9 +731,9 @@ function AudiencesSection() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   SECTION 5 — OTHER COUNTRIES  (dark)
+   SECTION 5 — OTHER COUNTRIES
 ═══════════════════════════════════════════════════════ */
-function CountryBlock({ c, i, inView }: { c: any, i: number, inView: boolean }) {
+function CountryBlock({ c, i, inView }: { c: any; i: number; inView: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -828,7 +749,7 @@ function CountryBlock({ c, i, inView }: { c: any, i: number, inView: boolean }) 
         borderBottom: "1px solid rgba(255,255,255,0.15)",
         cursor: "pointer",
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -844,14 +765,7 @@ function CountryBlock({ c, i, inView }: { c: any, i: number, inView: boolean }) 
             transition: "transform 0.7s ease",
           }}
         />
-        {/* Permanent light overlay */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "rgba(0,0,0,0.2)",
-        }} />
-
-        {/* Dark overlay that slides down on hover */}
+        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.2)" }} />
         <div style={{
           position: "absolute",
           inset: 0,
@@ -875,44 +789,25 @@ function CountryBlock({ c, i, inView }: { c: any, i: number, inView: boolean }) 
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
-          <span style={{
-            fontSize: "clamp(3.5rem, 7vw, 5.5rem)",
-            fontWeight: 200,
-            color: "white",
-            lineHeight: 1,
-            opacity: 0.95,
-          }}>{c.num}</span>
-
+          <span style={{ fontSize: "clamp(3.5rem, 7vw, 5.5rem)", fontWeight: 200, color: "white", lineHeight: 1, opacity: 0.95 }}>{c.num}</span>
           <div style={{ position: "relative" }}>
-            <span style={{
-              fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-              fontWeight: 800,
-              color: "white",
-              letterSpacing: "-0.01em",
-              lineHeight: 1,
-            }}>{c.name}</span>
-            <div style={{
-              position: "absolute",
-              bottom: "-4px",
-              left: 0,
-              height: "3px",
-              backgroundColor: "white",
-              width: isHovered ? "100%" : "0%",
-              transition: "width 0.4s ease",
-            }} />
+            <span style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)", fontWeight: 800, color: "white", letterSpacing: "-0.01em", lineHeight: 1 }}>{c.name}</span>
+            <div style={{ position: "absolute", bottom: "-4px", left: 0, height: "3px", backgroundColor: "white", width: isHovered ? "100%" : "0%", transition: "width 0.4s ease" }} />
           </div>
         </div>
 
         <motion.div
           initial={false}
-          animate={{
-            opacity: isHovered ? 1 : 0,
-            x: isHovered ? 0 : -20,
-          }}
+          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -20 }}
           transition={{ duration: 0.3 }}
           style={{ color: "white" }}
         >
-          <ArrowRight size={60} strokeWidth={2} />
+          <motion.div
+            animate={isHovered ? { x: 8 } : { x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ArrowRight size={60} strokeWidth={2} />
+          </motion.div>
         </motion.div>
       </Link>
     </motion.div>
@@ -958,56 +853,200 @@ export default function CanadaPage() {
       <Footer />
 
       <style jsx global>{`
+
+        /* ══════════════════════════════════════
+           CULTURE SECTION (Section 2)
+        ══════════════════════════════════════ */
         @media (max-width: 1024px) {
           .market-culture-section {
             grid-template-columns: 1fr !important;
           }
           .market-carousel-container {
-             padding-top: 2rem !important;
+            padding-top: 2rem !important;
           }
+        }
+
+        /* ══════════════════════════════════════
+           HOW WE UNDERSTAND (Section 3)
+        ══════════════════════════════════════ */
+
+        /* Desktop default: right panel has padding */
+        .understand-right-panel {
+          padding-right: 2rem;
+        }
+
+        @media (max-width: 1024px) {
           .market-understand-grid {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
           }
-          .market-understand-grid > div:first-of-type {
-            height: 500px !important;
+          .understand-image-card {
+            height: 560px !important;
+            padding: 3rem 2.5rem !important;
           }
-          .market-audience-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
+          .understand-image-card .understand-card-label {
+            font-size: 0.8rem !important;
+            margin-bottom: 1rem !important;
           }
-          .market-audience-grid .audience-item {
-            --col-span: 1 !important;
-            --row-span: 1 !important;
+          .understand-image-card .understand-card-heading {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+            margin-bottom: 0.75rem !important;
           }
-          /* Specific overrides to keep some interesting shapes on tablet */
-          .market-audience-grid .audience-item:nth-child(1) { --row-span: 2 !important; }
-          .market-audience-grid .audience-item:nth-child(5) { --col-span: 2 !important; }
+          .understand-image-card .understand-card-desc {
+            font-size: 0.95rem !important;
+          }
+          .understand-stats-grid {
+            gap: 0.85rem !important;
+          }
+          .understand-stats-grid > div {
+            padding: 1.25rem 1.5rem !important;
+          }
+          .understand-stats-grid > div > div:first-child {
+            font-size: 2rem !important;
+          }
+          .understand-stats-grid > div > div:last-child {
+            font-size: 0.9rem !important;
+          }
+          .understand-right-panel {
+            padding-right: 0 !important;
+          }
         }
 
         @media (max-width: 768px) {
-          .market-audience-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 16px !important;
+          .market-understand-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+            padding: 0 1rem !important;
           }
+          .understand-image-card {
+            height: auto !important;
+            min-height: 480px !important;
+            padding: 2rem 1.5rem !important;
+            border-radius: 20px !important;
+          }
+          .understand-image-card .understand-card-label {
+            font-size: 0.75rem !important;
+            margin-bottom: 0.75rem !important;
+          }
+          .understand-image-card .understand-card-heading {
+            font-size: clamp(1.5rem, 5vw, 2rem) !important;
+            margin-bottom: 0.6rem !important;
+          }
+          .understand-image-card .understand-card-desc {
+            font-size: 0.88rem !important;
+            line-height: 1.55 !important;
+            max-width: 100% !important;
+          }
+          .understand-stats-grid {
+            gap: 0.6rem !important;
+          }
+          .understand-stats-grid > div {
+            padding: 1rem 1.1rem !important;
+            border-radius: 12px !important;
+          }
+          .understand-stats-grid > div > div:first-child {
+            font-size: 1.65rem !important;
+            margin-bottom: 0.15rem !important;
+          }
+          .understand-stats-grid > div > div:last-child {
+            font-size: 0.8rem !important;
+          }
+          .understand-right-panel {
+            padding-right: 0 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .understand-image-card {
+            min-height: 420px !important;
+            padding: 1.5rem 1.25rem !important;
+            border-radius: 16px !important;
+          }
+          .understand-image-card .understand-card-label {
+            font-size: 0.7rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          .understand-image-card .understand-card-heading {
+            font-size: clamp(1.25rem, 6vw, 1.6rem) !important;
+            margin-bottom: 0.5rem !important;
+          }
+          .understand-image-card .understand-card-desc {
+            font-size: 0.82rem !important;
+            line-height: 1.5 !important;
+          }
+          .understand-stats-grid {
+            gap: 0.5rem !important;
+          }
+          .understand-stats-grid > div {
+            padding: 0.85rem 1rem !important;
+            border-radius: 10px !important;
+          }
+          .understand-stats-grid > div > div:first-child {
+            font-size: 1.4rem !important;
+          }
+          .understand-stats-grid > div > div:last-child {
+            font-size: 0.75rem !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           AUDIENCES (Section 4)
+        ══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 12px !important;
+          }
+          /* All cards: 1×1 uniform */
           .market-audience-grid .audience-item {
             --col-span: 1 !important;
             --row-span: 1 !important;
             min-height: 160px !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
           }
-          /* Keep the first one tall for visual interest */
-          .market-audience-grid .audience-item:nth-child(1) { --row-span: 2 !important; min-height: 340px !important; }
-          /* Arabic, Filipino, Malaysian (indices 5, 7, 11) - make them full width pills */
-          .market-audience-grid .audience-item:nth-child(5),
-          .market-audience-grid .audience-item:nth-child(7),
-          .market-audience-grid .audience-item:nth-child(11) {
-            --col-span: 2 !important;
-            min-height: 120px !important;
-          }
+        }
 
+        @media (max-width: 768px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 10px !important;
+          }
+          /* All cards: 1×1 uniform */
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+            min-height: 0 !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px !important;
+          }
+          /* All cards: 1×1 uniform */
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+            min-height: 0 !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           GENERAL SECTION PADDING (mobile)
+        ══════════════════════════════════════ */
+        @media (max-width: 768px) {
           .market-culture-section > div {
+            padding: 1rem 0 2rem 0 !important;
+          }
+          .market-culture-section > div:first-child {
             padding: 1rem 5% 2rem 5% !important;
           }
-
           section {
             padding-top: 3rem !important;
             padding-bottom: 3rem !important;

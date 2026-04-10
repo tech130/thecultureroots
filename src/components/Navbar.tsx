@@ -46,6 +46,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
+        className={scrolled ? "main-navbar scrolled" : "main-navbar"}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -55,14 +56,12 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: scrolled ? "1rem 2rem" : "1.5rem 3rem",
           display: "flex",
           justifyContent: "flex-end",
           alignItems: "center",
           transition: "padding 0.4s cubic-bezier(0.19, 1, 0.22, 1)",
           background: "transparent",
           pointerEvents: "none",
-          mixBlendMode: "difference",
         }}
       >
         <div style={{ flex: 1, display: "flex", justifyContent: "flex-start", pointerEvents: "auto" }}>
@@ -76,10 +75,11 @@ export default function Navbar() {
               >
                 <Link href="/" style={{ display: "flex", alignItems: "center" }}>
                   <Image
+                    className="nav-logo"
                     src="/images/logos/logo.png"
                     alt="CultureRoots Logo"
-                    width={180}
-                    height={40}
+                    width={220}
+                    height={60}
                     style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
                     priority
                   />
@@ -89,23 +89,32 @@ export default function Navbar() {
           </AnimatePresence>
         </div>
 
-        <button
+        <motion.button
           onClick={() => setMenuOpen(true)}
+          initial={{ backgroundColor: "transparent" }}
+          animate={{
+            backgroundColor: scrolled ? "#111111" : "transparent",
+            padding: scrolled ? "0.6rem" : "0.5rem",
+            boxShadow: scrolled ? "0 4px 12px rgba(0,0,0,0.15)" : "none",
+          }}
+          transition={{ duration: 0.3 }}
           style={{
-            background: "none",
-            border: "none",
+            border: "1px solid",
+            borderColor: scrolled ? "rgba(255, 255, 255, 0.2)" : "transparent",
             color: "white",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "0.5rem",
             pointerEvents: "auto",
+            borderRadius: "50%",
           }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           aria-label="Open Menu"
         >
-          <Menu size={36} strokeWidth={1} />
-        </button>
+          <Menu size={scrolled ? 28 : 36} strokeWidth={scrolled ? 1.5 : 1} />
+        </motion.button>
       </motion.nav>
 
       {/* Slide-in Right Side Drawer Menu */}
@@ -131,6 +140,7 @@ export default function Navbar() {
 
             {/* The Actual Sliding Menu Drawer */}
             <motion.div
+              className="nav-drawer"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -171,6 +181,7 @@ export default function Navbar() {
 
               {/* Menu Links List */}
               <div
+                className="nav-drawer-links"
                 style={{
                   flex: 1,
                   display: "flex",
@@ -197,6 +208,7 @@ export default function Navbar() {
                       style={{ position: "relative", cursor: "pointer", display: "inline-block" }}
                     >
                       <Link
+                        className="nav-menu-item"
                         href={
                           item === "Services" ? "/services" :
                             item === "Countries" ? "" :
@@ -209,6 +221,8 @@ export default function Navbar() {
                             setMenuOpen(false);
                           }
                         }}
+                        target={item === "Contact Us" ? "_blank" : undefined}
+                        rel={item === "Contact Us" ? "noopener noreferrer" : undefined}
                         style={{
                           color: "white",
                           textDecoration: "none",
@@ -268,6 +282,7 @@ export default function Navbar() {
                               { name: "New Zealand", slug: "new-zealand" },
                             ].map((market) => (
                               <Link
+                                className="nav-country-item"
                                 key={market.slug}
                                 href={`/countries/${market.slug}`}
                                 onClick={() => setMenuOpen(false)}
@@ -295,6 +310,81 @@ export default function Navbar() {
           </div>
         )}
       </AnimatePresence>
+
+      <style jsx global>{`
+        /* ══════════════════════════════════════
+           NAVBAR RESPONSIVENESS
+        ══════════════════════════════════════ */
+        
+        /* Base Default Padding */
+        .main-navbar {
+          padding: 1.5rem 3rem !important;
+        }
+        .main-navbar.scrolled {
+          padding: 1rem 2rem !important;
+        }
+
+        @media (max-width: 1024px) {
+          .main-navbar {
+            padding: 1.25rem 2rem !important;
+          }
+          .main-navbar.scrolled {
+            padding: 0.75rem 1.5rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .main-navbar {
+            padding: 1rem 1.5rem !important;
+          }
+          .main-navbar.scrolled {
+            padding: 0.5rem 1rem !important;
+          }
+          .nav-logo {
+            width: 100px !important;
+            height: auto !important;
+          }
+          .nav-drawer {
+            width: 85vw !important;
+            padding: 1.25rem 1.5rem !important;
+          }
+          .nav-menu-item {
+            font-size: 1.8rem !important;
+          }
+          .nav-country-item {
+            font-size: 1.15rem !important;
+          }
+          .nav-drawer-links {
+            gap: 1.8rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .main-navbar {
+            padding: 1rem 1rem !important;
+          }
+          .main-navbar.scrolled {
+            padding: 0.5rem 1rem !important;
+          }
+          .nav-logo {
+            width: 80px !important;
+          }
+          .nav-drawer {
+            width: 100vw !important;
+            padding: 1.25rem 1rem !important;
+          }
+          .nav-menu-item {
+            font-size: 1.5rem !important;
+          }
+          .nav-country-item {
+            font-size: 1.05rem !important;
+          }
+          .nav-drawer-links {
+            gap: 1.25rem !important;
+            margin-top: -1rem !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

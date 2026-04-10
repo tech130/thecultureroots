@@ -88,7 +88,6 @@ export default function HeroGrid() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            cursor: "pointer",
             background: "rgba(0,0,0,0.2)"
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">

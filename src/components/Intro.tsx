@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+
 
 const contentNodes = [
   { type: "text", content: "We're", shade: "light" },
@@ -54,11 +56,13 @@ export default function Intro() {
 
         {/* Schedule a call button */}
         <div className="intro-top-cta" style={{ position: "absolute", top: "-1rem", right: "2rem" }}>
-          <button style={{
-            background: "none", border: "none", color: "#666", display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "1rem", cursor: "pointer"
-          }}>
-            &rarr; Schedule a call
-          </button>
+          <div
+            style={{
+              background: "none", border: "none", color: "#666", display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "1rem",
+            }}
+          >
+            &rarr; Where ideas become reality
+          </div>
         </div>
 
         <motion.div
@@ -168,22 +172,26 @@ export default function Intro() {
             className="intro-bottom-cta"
             style={{ marginTop: "4rem" }}
           >
-            <button style={{
-              padding: "1rem 2rem",
-              background: "#ffffff",
-              color: "#111111",
-              border: "1px solid #e0e0e0",
-              borderRadius: "50px",
-              fontSize: "1rem",
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              boxShadow: "0 4px 6px rgba(0,0,0,0.05)"
-            }}>
-              Contact Us <span style={{ background: "#111", color: "#fff", borderRadius: "50%", width: "24px", height: "24px", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>&rarr;</span>
-            </button>
+            <Link
+              href="/contact"
+              style={{
+                padding: "1rem 2rem",
+                background: "#ffffff",
+                color: "#111111",
+                border: "1px solid #e0e0e0",
+                borderRadius: "50px",
+                fontSize: "1rem",
+                fontWeight: 700,
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                boxShadow: "0 4px 6px rgba(0,0,0,0.05)",
+                textDecoration: "none",
+              }}
+            >
+              Contact Us <span style={{ background: "#111", color: "#fff", borderRadius: "50%", width: "24px", height: "24px", display: "inline-flex", justifyContent: "center", fontSize: "14px" }}>&rarr;</span>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

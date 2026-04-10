@@ -7,12 +7,18 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import LightRays from "@/components/LightRays";
+import { useContactForm } from "@/hooks/useContactForm";
+import ThankYouPopup from "@/components/ThankYouPopup";
 
 export default function ContactUs() {
   const [isOn, setIsOn] = useState(false);
   const [isFlickering, setIsFlickering] = useState(true);
+  const [showThankYou, setShowThankYou] = useState(false);
 
-  // Simulate tubelight flickering on load
+  const { formData, handleChange, handleSubmit, isSubmitting } = useContactForm(() => {
+    setShowThankYou(true);
+  });
+
   useEffect(() => {
     const timer = setTimeout(() => setIsFlickering(false), 2000);
     return () => clearTimeout(timer);
@@ -21,7 +27,7 @@ export default function ContactUs() {
   return (
     <main
       style={{
-        backgroundColor: "#08081A", // Very dark background
+        backgroundColor: "#08081A",
         color: "#ffffff",
         fontFamily: "'Manrope', sans-serif",
         minHeight: "100vh",
@@ -31,20 +37,21 @@ export default function ContactUs() {
     >
       <Navbar />
 
-      {/* Wrapper for Hero + HELLO to share the background map */}
+      {/* Wrapper for Hero + HELLO */}
       <div style={{ position: "relative", width: "100%", zIndex: 0 }}>
-        {/* Grid Background Image spanning down to half of HELLO */}
+
+        {/* Grid Background Image */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            bottom: "12.8vh", // Stops approximately halfway through the HELLO section
+            bottom: "12.8vh",
             zIndex: -1,
-            opacity: 1, // User requested opacity tweak
+            opacity: 1,
             pointerEvents: "none",
-            overflow: "hidden" // Removed mixBlendMode to ensure visibility over dark background
+            overflow: "hidden",
           }}
         >
           <Image
@@ -54,15 +61,14 @@ export default function ContactUs() {
             style={{ objectFit: "cover", objectPosition: "center top" }}
             priority
           />
-          {/* Subtle gradient overlay to merge with dark background nicely */}
           <div style={{
             position: "absolute",
             top: 0, left: 0, right: 0, bottom: 0,
-            background: "linear-gradient(to bottom, rgba(8,8,26,0) 0%, rgba(8,8,26,1) 100%)"
+            background: "linear-gradient(to bottom, rgba(8,8,26,0) 0%, rgba(8,8,26,1) 100%)",
           }} />
         </div>
 
-        {/* 🪄 Atmosphere Light Rays */}
+        {/* Light Rays */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "100vh", zIndex: 0, pointerEvents: "none" }}>
           <LightRays
             raysOrigin="top-center"
@@ -81,8 +87,9 @@ export default function ContactUs() {
           />
         </div>
 
-        {/* Top Section */}
+        {/* ── Hero Section ── */}
         <section
+          className="contact-hero-section"
           style={{
             paddingTop: "12rem",
             paddingBottom: "8rem",
@@ -94,17 +101,17 @@ export default function ContactUs() {
             zIndex: 1,
           }}
         >
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{ textAlign: "center", zIndex: 2 }}
           >
-            {/* 'Your brand's' text */}
+            {/* "Your brand's" */}
             <h2
+              className="contact-your-brands"
               style={{
-                fontSize: "clamp(1.5rem, 5.5vw, 4.5rem)",
+                fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)",
                 fontWeight: 300,
                 letterSpacing: "-0.01em",
                 marginBottom: "-2rem",
@@ -114,52 +121,47 @@ export default function ContactUs() {
               Your brand's
             </h2>
 
+            {/* "growth" with toggle */}
             <h1
+              className="contact-growth-heading"
               style={{
-                fontSize: "clamp(5rem, 16vw, 12rem)", // Increased size for 'growth'
+                fontSize: "clamp(5rem, 16vw, 12rem)",
                 fontWeight: 700,
                 lineHeight: 1,
                 letterSpacing: "-0.03em",
                 margin: "0 0 1rem 0",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
               }}
             >
               gr
-              {/* Toggle Switch with Gradient Border representing 'o' */}
               <motion.div
+                className="contact-toggle"
                 style={{
                   display: "inline-block",
                   verticalAlign: "middle",
-                  width: "clamp(120px, 18vw, 220px)",
-                  height: "clamp(56px, 8vw, 160px)",
+                  width: "clamp(100px, 18vw, 220px)",
+                  height: "clamp(60px, 8vw, 160px)",
                   borderRadius: "600px",
-                  padding: "30px", // Increased padding for more 'around' space
-                  background: "linear-gradient(90deg, #FFFFFF 0%, #F0542c 100%)", // Gradient border
-                  margin: "0 clamp(8px, 1vw, 16px)",
+                  padding: "clamp(12px, 2vw, 30px)",
+                  background: "linear-gradient(90deg, #FFFFFF 0%, #F0542c 100%)",
+                  margin: "0 clamp(4px, 1vw, 16px)",
                   position: "relative",
                   boxShadow: "0 0 40px rgba(255, 107, 74, 0.3)",
-                  cursor: "pointer",
                   marginTop: "6%",
                 }}
               >
-                {/* Dark Inner Track (The 'Gap') */}
                 <div style={{
                   position: "relative",
                   width: "100%",
                   height: "100%",
                   background: "#08081A",
                   borderRadius: "700px",
-                  // Removed overflow: hidden to prevent clipping of the circle's glow
-                  zIndex: 2
+                  zIndex: 2,
                 }}>
-                  {/* Subtle track glow that moves with the knob */}
                   <motion.div
-                    animate={{
-                      x: ["-100%", "100%"],
-                      opacity: [0.1, 0.3, 0.1]
-                    }}
+                    animate={{ x: ["-100%", "100%"], opacity: [0.1, 0.3, 0.1] }}
                     transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
                     style={{
                       position: "absolute",
@@ -167,34 +169,32 @@ export default function ContactUs() {
                       height: "100%",
                       background: "linear-gradient(90deg, transparent, rgba(255, 107, 74, 0.2), transparent)",
                       zIndex: 1,
-                      borderRadius: "700px"
+                      borderRadius: "700px",
                     }}
                   />
-
-                  {/* Circular Knob (Automatic left-to-right with progressive glow) */}
                   <motion.div
                     animate={{
                       left: ["0%", "100%"],
                       x: ["0%", "-100%"],
                       boxShadow: [
-                        "0 15px 25px rgba(0,0,0,0.3), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)", // At 0% (No glow)
-                        "0 15px 30px rgba(255, 107, 74, 0.15), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)", // At 70% (Still low glow)
-                        "0 20px 45px rgba(255, 107, 74, 0.7), 0 0 60px rgba(255, 255, 255, 0.5), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)"  // At 100% (Full glow)
-                      ]
+                        "0 15px 25px rgba(0,0,0,0.3), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)",
+                        "0 15px 30px rgba(255, 107, 74, 0.15), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)",
+                        "0 20px 45px rgba(255, 107, 74, 0.7), 0 0 60px rgba(255, 255, 255, 0.5), inset 0 0 0 2px #E5E5E5, inset 0 4px 12px rgba(0,0,0,0.1)",
+                      ],
                     }}
                     transition={{
                       duration: 2.5,
                       repeat: Infinity,
                       repeatType: "reverse",
                       ease: [0.45, 0.05, 0.55, 0.95],
-                      times: [0, 0.7, 1] // Glow appears late in the move to the right
+                      times: [0, 0.7, 1],
                     }}
                     style={{
                       position: "absolute",
                       top: "-15%",
                       transform: "translateY(-50%)",
-                      width: "clamp(48px, 6vw, 84px)",
-                      height: "clamp(48px, 6vw, 84px)",
+                      width: "clamp(28px, 6vw, 84px)",
+                      height: "clamp(28px, 6vw, 84px)",
                       backgroundColor: "#FFFFFF",
                       borderRadius: "50%",
                       border: "6px solid #F8F9FA",
@@ -206,7 +206,9 @@ export default function ContactUs() {
               wth
             </h1>
 
+            {/* "Lives in Culture" */}
             <div
+              className="contact-lives-row"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -215,17 +217,18 @@ export default function ContactUs() {
                 marginBottom: "2rem",
               }}
             >
-              {/* The icon beside "Lives in Culture" */}
               <Image
                 src="/images/contact/Frame-52.svg"
                 alt="Culture Icon"
                 width={36}
                 height={36}
-                style={{ width: "clamp(24px, 4vw, 40px)", height: "auto" }}
+                className="contact-culture-icon"
+                style={{ width: "clamp(20px, 4vw, 40px)", height: "auto" }}
               />
               <h2
+                className="contact-lives-heading"
                 style={{
-                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                  fontSize: "clamp(1.6rem, 5vw, 3.5rem)",
                   fontWeight: 500,
                   letterSpacing: "-0.02em",
                   margin: 0,
@@ -235,7 +238,10 @@ export default function ContactUs() {
               </h2>
             </div>
 
-            <button
+            {/* CTA button */}
+            <motion.button
+              whileHover="hover"
+              className="contact-schedule-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -253,7 +259,8 @@ export default function ContactUs() {
               onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
             >
               Schedule a Call
-              <span
+              <motion.span
+                variants={{ hover: { x: 3 } }}
                 style={{
                   background: "white",
                   color: "#111",
@@ -265,40 +272,42 @@ export default function ContactUs() {
                 }}
               >
                 <ArrowRight size={14} />
-              </span>
-            </button>
+              </motion.span>
+            </motion.button>
           </motion.div>
         </section>
 
-        {/* Transitional HELLO & CultureRoots Signature Section */}
+        {/* ── HELLO + CultureRoots Signature ── */}
         <section
+          className="contact-hello-section"
           style={{
             position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "clamp(300px, 35vh, 600px)", // Increased organically so text doesn't cut
+            minHeight: "clamp(200px, 35vh, 600px)",
             paddingTop: "2rem",
             paddingBottom: "4rem",
-            overflow: "visible", // Removed 'hidden' so huge text can bleed without getting sliced
+            overflow: "visible",
             zIndex: 1,
           }}
         >
-          {/* Faint 'HELLO' background */}
+          {/* HELLO background text */}
           <div
+            className="contact-hello-bg"
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              fontSize: "clamp(7rem, 18vw, 18rem)",
+              fontSize: "clamp(5rem, 18vw, 18rem)",
               fontWeight: 700,
               textAlign: "center",
               whiteSpace: "nowrap",
               pointerEvents: "none",
               userSelect: "none",
               zIndex: 0,
-              opacity: 0.06, // boosted slightly because 0.05 is virtually invisible against #08081A
+              opacity: 0.06,
               background: "linear-gradient(180deg, #FFF 25.81%, rgba(255, 255, 255, 0.40) 51.98%, rgba(255, 255, 255, 0.00) 78.14%)",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
@@ -309,33 +318,39 @@ export default function ContactUs() {
             HELLO
           </div>
 
-          {/* Signature Image overlay */}
+          {/* CultureRoots signature */}
           <div
             style={{
               position: "absolute",
               top: "60%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: "clamp(180px, 30vw, 250px)",
-              height: "auto",
               pointerEvents: "none",
               zIndex: 2,
+              textAlign: "center",
+              whiteSpace: "nowrap",
             }}
           >
-            <Image
-              src="/images/contact/CultureRoots.png"
-              alt="CultureRoots Signature"
-              width={250}
-              height={50}
-              style={{ width: "100%", height: "auto", objectFit: "contain" }}
-              priority
-            />
+            <p
+              className="contact-signature"
+              style={{
+                fontFamily: "var(--font-brittney), cursive",
+                fontSize: "clamp(1.5rem, 8vw, 4rem)",
+                color: "#ffffff",
+                margin: 0,
+                lineHeight: 1.1,
+                opacity: 0.92,
+              }}
+            >
+              CultureRoots
+            </p>
           </div>
         </section>
       </div>
 
-      {/* Main Content (Let's Get In Touch + Form) */}
+      {/* ── Let's Get In Touch + Form ── */}
       <section
+        className="contact-form-section"
         style={{
           padding: "4rem 5%",
           maxWidth: "1400px",
@@ -343,6 +358,7 @@ export default function ContactUs() {
         }}
       >
         <div
+          className="contact-form-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
@@ -350,7 +366,7 @@ export default function ContactUs() {
             alignItems: "start",
           }}
         >
-          {/* Left Column: Heading */}
+          {/* Left: Heading */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -358,8 +374,9 @@ export default function ContactUs() {
             transition={{ duration: 0.8 }}
           >
             <h2
+              className="contact-lets-heading"
               style={{
-                fontSize: "clamp(4rem, 12vw, 9rem)",
+                fontSize: "clamp(3rem, 12vw, 9rem)",
                 fontWeight: 200,
                 lineHeight: 1,
                 letterSpacing: "-0.02em",
@@ -374,34 +391,32 @@ export default function ContactUs() {
             </h2>
           </motion.div>
 
-          {/* Right Column: Form */}
+          {/* Right: Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            style={{
-              paddingTop: "2rem",
-            }}
+            style={{ paddingTop: "2rem" }}
           >
             <form
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "3rem",
-              }}
-              onSubmit={(e) => e.preventDefault()}
+              style={{ display: "flex", flexDirection: "column", gap: "3rem" }}
+              onSubmit={handleSubmit}
             >
               {[
-                { label: "Full Name", type: "text" },
-                { label: "Mail Id", type: "email" },
-                { label: "Company (Optional)", type: "text" },
-                { label: "Message", type: "text" },
+                { label: "Full Name", type: "text", name: "fullName" as const },
+                { label: "Mail Id", type: "email", name: "email" as const },
+                { label: "Company (Optional)", type: "text", name: "company" as const },
+                { label: "Message", type: "text", name: "message" as const },
               ].map((field, idx) => (
                 <div key={idx} style={{ position: "relative" }}>
                   <input
                     type={field.type}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={handleChange}
                     placeholder={field.label}
+                    required={field.name !== "company"}
                     style={{
                       width: "100%",
                       background: "transparent",
@@ -421,8 +436,11 @@ export default function ContactUs() {
               ))}
 
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <button
+                <motion.button
                   type="submit"
+                  disabled={isSubmitting}
+                  initial="initial"
+                  whileHover={isSubmitting ? {} : "hover"}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -433,14 +451,16 @@ export default function ContactUs() {
                     padding: "0.75rem 1.5rem",
                     borderRadius: "50px",
                     fontSize: "0.875rem",
-                    cursor: "pointer",
+                    cursor: isSubmitting ? "not-allowed" : "pointer",
                     transition: "all 0.3s ease",
+                    opacity: isSubmitting ? 0.7 : 1,
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
+                  onMouseOver={(e) => !isSubmitting && (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
                   onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
                 >
-                  Submit
-                  <span
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                  <motion.span
+                    variants={{ hover: { x: 5 } }}
                     style={{
                       background: "white",
                       color: "#111",
@@ -452,26 +472,29 @@ export default function ContactUs() {
                     }}
                   >
                     <ArrowRight size={14} />
-                  </span>
-                </button>
+                  </motion.span>
+                </motion.button>
               </div>
             </form>
           </motion.div>
         </div>
 
-        {/* Contact Info Bottom */}
+        {/* ── Contact Info Bottom ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="contact-info-bottom"
           style={{
             marginTop: "6rem",
             marginBottom: "4rem",
             textAlign: "center",
           }}
         >
-          <div
+          <motion.div
+            initial="initial"
+            whileHover="hover"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -479,10 +502,12 @@ export default function ContactUs() {
               marginBottom: "1rem",
               fontSize: "1rem",
               fontWeight: 600,
+              cursor: "pointer",
             }}
           >
             Contact Us
-            <span
+            <motion.span
+              variants={{ hover: { x: 3 } }}
               style={{
                 background: "white",
                 color: "#111",
@@ -494,9 +519,11 @@ export default function ContactUs() {
               }}
             >
               <ArrowRight size={14} />
-            </span>
-          </div>
+            </motion.span>
+          </motion.div>
+
           <div
+            className="contact-info-details"
             style={{
               fontSize: "1.25rem",
               fontWeight: 300,
@@ -508,8 +535,198 @@ export default function ContactUs() {
         </motion.div>
       </section>
 
-      {/* Adding global footer at the bottom */}
+      <ThankYouPopup isOpen={showThankYou} onClose={() => setShowThankYou(false)} />
       <Footer />
-    </main >
+
+      <style jsx global>{`
+
+        /* ══════════════════════════════════════
+           HERO SECTION
+        ══════════════════════════════════════ */
+
+        @media (max-width: 1024px) {
+          .contact-hero-section {
+            padding-top: 10rem !important;
+            padding-bottom: 5rem !important;
+          }
+          .contact-your-brands {
+            margin-bottom: -1.5rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .contact-hero-section {
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+          }
+          .contact-your-brands {
+            font-size: clamp(1.6rem, 6vw, 2.5rem) !important;
+            margin-bottom: -1rem !important;
+          }
+          .contact-growth-heading {
+            font-size: clamp(3.5rem, 16vw, 7rem) !important;
+          }
+          .contact-lives-row {
+            gap: 0.5rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          .contact-lives-heading {
+            font-size: clamp(1.4rem, 6vw, 2.5rem) !important;
+          }
+          .contact-culture-icon {
+            width: clamp(18px, 5vw, 28px) !important;
+          }
+          .contact-schedule-btn {
+            font-size: 0.8rem !important;
+            padding: 0.45rem 0.9rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-hero-section {
+            padding-top: 8.5rem !important;
+            padding-bottom: 3rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+          }
+          .contact-your-brands {
+            font-size: clamp(1.3rem, 7vw, 2rem) !important;
+            margin-bottom: -0.75rem !important;
+          }
+          .contact-growth-heading {
+            font-size: clamp(3rem, 18vw, 5rem) !important;
+          }
+          .contact-toggle {
+            width: clamp(60px, 16vw, 100px) !important;
+            height: clamp(28px, 9vw, 50px) !important;
+            padding: clamp(8px, 1.5vw, 14px) !important;
+          }
+          .contact-lives-row {
+            gap: 0.4rem !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+          }
+          .contact-lives-heading {
+            font-size: clamp(1.2rem, 7vw, 2rem) !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           HELLO + SIGNATURE SECTION
+        ══════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+          .contact-hello-section {
+            min-height: clamp(160px, 25vh, 320px) !important;
+            padding-bottom: 2.5rem !important;
+          }
+          .contact-hello-bg {
+            font-size: clamp(4rem, 20vw, 10rem) !important;
+          }
+          .contact-signature {
+            font-size: clamp(1.25rem, 8vw, 2.5rem) !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-hello-section {
+            min-height: clamp(120px, 20vh, 240px) !important;
+            padding-bottom: 1.5rem !important;
+          }
+          .contact-hello-bg {
+            font-size: clamp(3rem, 22vw, 7rem) !important;
+          }
+          .contact-signature {
+            font-size: clamp(1rem, 9vw, 2rem) !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           FORM SECTION — LET'S GET IN TOUCH
+        ══════════════════════════════════════ */
+
+        @media (max-width: 1024px) {
+          .contact-form-section {
+            padding: 3rem 5% !important;
+          }
+          .contact-form-grid {
+            gap: 3rem !important;
+          }
+          .contact-lets-heading {
+            font-size: clamp(3rem, 10vw, 7rem) !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .contact-form-section {
+            padding: 2.5rem 5% !important;
+          }
+          /* Stack columns naturally via auto-fit, reduce gap */
+          .contact-form-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .contact-lets-heading {
+            font-size: clamp(2.5rem, 12vw, 5rem) !important;
+            /* Remove indent on mobile — too tight */
+          }
+          /* Tighten form field gaps */
+          .contact-form-grid form {
+            gap: 2rem !important;
+          }
+          /* Reduce form top padding */
+          .contact-form-grid > div:last-child {
+            padding-top: 0 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-form-section {
+            padding: 2rem 4% !important;
+          }
+          .contact-lets-heading {
+            font-size: clamp(2.2rem, 14vw, 4rem) !important;
+          }
+          .contact-form-grid form {
+            gap: 1.75rem !important;
+          }
+          /* Input font size */
+          .contact-form-grid input {
+            font-size: 1rem !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           CONTACT INFO BOTTOM
+        ══════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+          .contact-info-bottom {
+            margin-top: 3.5rem !important;
+            margin-bottom: 2.5rem !important;
+          }
+          .contact-info-details {
+            font-size: 1rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-info-bottom {
+            margin-top: 2.5rem !important;
+            margin-bottom: 2rem !important;
+          }
+          .contact-info-details {
+            font-size: 0.85rem !important;
+            /* Stack email and phone on very small screens */
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.35rem !important;
+            align-items: center !important;
+          }
+        }
+      `}</style>
+    </main>
   );
 }

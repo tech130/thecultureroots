@@ -1,14 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import GridDistortion from "./GridDistortion";
 import { ArrowRight } from "lucide-react";
 
 export default function HeroBanner() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize(); // Check initially
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const bannerImageSource = isMobile
+    ? "/images/hero-section/hero.jpeg"  // <-- IMPORTANT: Replace with your actual mobile image file name
+    : "/images/hero-section/Hero-banner.png";
+
   return (
     <section style={{
       position: "relative",
-      height: "95vh",
+      height: "100vh",
       width: "100%",
       display: "flex",
       alignItems: "center",
@@ -25,7 +41,7 @@ export default function HeroBanner() {
         zIndex: -1
       }}>
         <GridDistortion
-          imageSrc="/images/hero-section/Hero-banner.png"
+          imageSrc={bannerImageSource}
           grid={45}
           mouse={0.19}
           strength={0.15}
@@ -52,10 +68,10 @@ export default function HeroBanner() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           style={{ maxWidth: "800px" }}
         >
-          <motion.h1 
+          <motion.h1
             className="hero-title"
             style={{
-              fontSize: "clamp(2.5rem, 8vw, 4.8rem)",
+              fontSize: "clamp(2.5rem, 6vw, 4.8rem)",
               fontWeight: 600,
               lineHeight: 1.1,
               letterSpacing: "-0.03em",
@@ -78,9 +94,9 @@ export default function HeroBanner() {
           </p>
 
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover="hover"
             whileTap={{ scale: 0.95 }}
-            onClick={() => document.getElementById("hero-grid")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => window.open("https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd", "_blank", "noopener,noreferrer")}
             style={{
               padding: "1rem 2rem",
               background: "white",
@@ -95,7 +111,10 @@ export default function HeroBanner() {
               gap: "0.5rem"
             }}
           >
-            Let's Talk<ArrowRight size={20} />
+            Let's Talk
+            <motion.span variants={{ hover: { x: 5 } }}>
+              <ArrowRight size={20} />
+            </motion.span>
           </motion.button>
         </motion.div>
       </div>

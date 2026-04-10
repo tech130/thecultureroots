@@ -5,6 +5,8 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+
+const MotionLink = motion(Link);
 import Footer from "@/components/Footer";
 import { User, Languages, Calendar, LineChart, ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 
@@ -155,8 +157,12 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          <Link
-            href="/contact"
+          <MotionLink
+            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial="initial"
+            whileHover="hover"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -182,7 +188,8 @@ function HeroSection() {
             }}
           >
             Contact Us
-            <div
+            <motion.div
+              variants={{ hover: { x: 5 } }}
               style={{
                 width: "24px",
                 height: "24px",
@@ -196,8 +203,8 @@ function HeroSection() {
               }}
             >
               →
-            </div>
-          </Link>
+            </motion.div>
+          </MotionLink>
         </motion.div>
       </motion.div>
 
@@ -234,7 +241,16 @@ function CultureSection() {
   const [activeCity, setActiveCity] = useState(0);
   const cities = ALL_CITIES;
 
-  // Auto-scroll effect
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 1024px)");
+    const onChange = () => setIsMobile(mql.matches);
+    setIsMobile(mql.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCity((prev) => (prev + 1) % cities.length);
@@ -306,30 +322,20 @@ function CultureSection() {
           padding: "9rem 0 1rem 0",
         }}
       >
-        {/* Scrollable track */}
         <motion.div
-          animate={{ x: `calc(${-activeCity * 50}% - ${activeCity * 16}px)` }}
+          animate={{ x: isMobile ? `-${activeCity * 100}%` : `calc(${-activeCity * 55}%)` }}
           transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-          style={{
-            display: "flex",
-            gap: "16px",
-            paddingLeft: "2rem",
-            alignItems: "center",
-          }}
+          style={{ display: "flex", gap: isMobile ? "0" : "16px", paddingLeft: isMobile ? "0" : "2rem", alignItems: "center" }}
         >
           {cities.map((city, i) => (
             <motion.div
               key={city.name}
               onClick={() => setActiveCity(i)}
-              animate={{
-                scale: activeCity === i ? 1 : 0.94,
-                opacity: activeCity === i ? 1 : 0.65,
-              }}
+              animate={{ scale: activeCity === i ? 1 : 0.94, opacity: activeCity === i ? i === activeCity ? 1 : 0.65 : 0.65 }}
               transition={{ duration: 0.4 }}
               style={{
-                /* Match design: ~42% of container width, tall rounded cards */
-                minWidth: "calc(55% - 1rem)",
-                height: "420px",
+                minWidth: isMobile ? "100%" : "calc(55% - 1rem)",
+                height: isMobile ? "300px" : "420px",
                 overflow: "hidden",
                 position: "relative",
                 cursor: "pointer",
@@ -348,43 +354,21 @@ function CultureSection() {
                 }}
                 sizes="30vw"
               />
-              {/* Subtle gradient at bottom */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.45) 100%)",
-                  zIndex: 1,
-                }}
-              />
-              {/* City name label */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "1.25rem",
-                  left: "1.25rem",
-                  color: "#fff",
-                  fontWeight: 700,
-                  fontSize: "1.15rem",
-                  zIndex: 2,
-                  letterSpacing: "-0.01em",
-                }}
-              >
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.45) 100%)", zIndex: 1 }} />
+              <div style={{ position: "absolute", top: "1.25rem", left: "1.25rem", color: "#fff", fontWeight: 700, fontSize: "1.15rem", zIndex: 2, letterSpacing: "-0.01em" }}>
                 {city.name}
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Dot pagination — bottom left of carousel area */}
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            paddingLeft: "2rem",
-            marginTop: "1.5rem",
-          }}
-        >
+        <div style={{ 
+          display: "flex", 
+          gap: "8px", 
+          paddingLeft: isMobile ? "0" : "2rem", 
+          justifyContent: isMobile ? "center" : "flex-start",
+          marginTop: "1.5rem" 
+        }}>
           {cities.map((_, i) => (
             <button
               key={i}
@@ -465,6 +449,7 @@ function UnderstandSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
+          className="understand-image-card"
           style={{
             position: "relative",
             borderRadius: "32px",
@@ -488,8 +473,9 @@ function UnderstandSection() {
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%)", zIndex: 1 }} />
 
           <div style={{ position: "relative", zIndex: 2, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-            <p style={{ fontSize: "0.85rem", opacity: 0.8, marginBottom: "1.5rem" }}>Countries & Audiences</p>
+            <p className="understand-card-label" style={{ fontSize: "0.85rem", opacity: 0.8, marginBottom: "1.5rem" }}>Countries & Audiences</p>
             <h2
+              className="understand-card-heading"
               style={{
                 fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
                 fontWeight: 300,
@@ -501,13 +487,13 @@ function UnderstandSection() {
               We Don&apos;t Study Cultures,<br />
               We Live In Them
             </h2>
-            <p style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
+            <p className="understand-card-desc" style={{ fontSize: "1rem", opacity: 0.8, maxWidth: "450px", lineHeight: 1.6 }}>
               Our cultural intelligence across the US goes beyond demographics. It captures language, sentiment, consumer behaviour and what truly moves diverse communities to act.
             </p>
           </div>
 
           {/* Stats Grid */}
-          <div style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+          <div className="understand-stats-grid" style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
             {stats.map((s, i) => (
               <div
                 key={i}
@@ -532,7 +518,8 @@ function UnderstandSection() {
           initial={{ opacity: 0, x: 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingRight: "2rem" }}
+          className="understand-right-panel"
+          style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
         >
           {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.9rem", color: "#666", letterSpacing: "0.05em" }}>How We Understand Them</p>
@@ -608,8 +595,12 @@ function UnderstandSection() {
 
           {/* Start Campaign Button */}
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-            <Link
-              href="/contact"
+            <MotionLink
+              href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1PUl1axcbE4O_8tOgSeLP6OGYBJrBAem_WWsrJq9u6MNjgySisCJdUmz43NwVkuGppFuHrstYd"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial="initial"
+              whileHover="hover"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -623,23 +614,20 @@ function UnderstandSection() {
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.02)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-              }}
             >
               Start a US Campaign
-              <div style={{
-                backgroundColor: "#fff",
-                borderRadius: "50%",
-                width: "28px", height: "28px",
-                display: "flex", alignItems: "center", justifyContent: "center"
-              }}>
+              <motion.div 
+                variants={{ hover: { x: 5 } }}
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: "50%",
+                  width: "28px", height: "28px",
+                  display: "flex", alignItems: "center", justifyContent: "center"
+                }}
+              >
                 <ArrowRight size={14} color="#111" />
-              </div>
-            </Link>
+              </motion.div>
+            </MotionLink>
           </div>
         </motion.div>
 
@@ -734,6 +722,7 @@ function AudiencesSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(6, 1fr)",
+            gridAutoRows: "minmax(min-content, auto)",
             gap: "clamp(12px, 1.5vw, 24px)",
             width: "100%",
           }}
@@ -744,13 +733,15 @@ function AudiencesSection() {
               <motion.div
                 key={item.name}
                 variants={itemVariants}
+                className="audience-item"
                 style={{
-                  gridColumn: `span ${item.colSpan}`,
-                  gridRow: `span ${item.rowSpan}`,
+                  gridColumn: `span var(--col-span, ${item.colSpan})`,
+                  gridRow: `span var(--row-span, ${item.rowSpan})`,
                   position: "relative",
                   borderRadius: "9999px",
                   overflow: "hidden",
                   aspectRatio: isCircle ? "1 / 1" : "auto",
+                  minHeight: isCircle ? "auto" : "clamp(120px, 15vw, 180px)",
                   height: "100%",
                 }}
               >
@@ -897,11 +888,7 @@ function CountryBlock({ c, i, inView }: { c: any, i: number, inView: boolean }) 
         </div>
 
         <motion.div
-          initial={false}
-          animate={{
-            opacity: isHovered ? 1 : 0,
-            x: isHovered ? 0 : -20,
-          }}
+          animate={isHovered ? { x: 8 } : { x: 0 }}
           transition={{ duration: 0.3 }}
           style={{ color: "white" }}
         >
@@ -951,27 +938,203 @@ export default function UnitedStatesPage() {
       <Footer />
 
       <style jsx global>{`
+
+        /* ══════════════════════════════════════
+           CULTURE SECTION (Section 2)
+        ══════════════════════════════════════ */
         @media (max-width: 1024px) {
           .market-culture-section {
             grid-template-columns: 1fr !important;
           }
           .market-carousel-container {
-             padding-top: 2rem !important;
+            padding-top: 2rem !important;
           }
+        }
+
+        /* ══════════════════════════════════════
+           HOW WE UNDERSTAND (Section 3)
+        ══════════════════════════════════════ */
+
+        /* Desktop default: right panel has padding */
+        .understand-right-panel {
+          padding-right: 2rem;
+        }
+
+        @media (max-width: 1024px) {
           .market-understand-grid {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
           }
-          .market-audience-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
+          .understand-image-card {
+            height: 560px !important;
+            padding: 3rem 2.5rem !important;
+          }
+          .understand-image-card .understand-card-label {
+            font-size: 0.8rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .understand-image-card .understand-card-heading {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+            margin-bottom: 0.75rem !important;
+          }
+          .understand-image-card .understand-card-desc {
+            font-size: 0.95rem !important;
+          }
+          .understand-stats-grid {
+            gap: 0.85rem !important;
+          }
+          .understand-stats-grid > div {
+            padding: 1.25rem 1.5rem !important;
+          }
+          .understand-stats-grid > div > div:first-child {
+            font-size: 2rem !important;
+          }
+          .understand-stats-grid > div > div:last-child {
+            font-size: 0.9rem !important;
+          }
+          .understand-right-panel {
+            padding-right: 0 !important;
           }
         }
+
+        @media (max-width: 768px) {
+          .market-understand-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+            padding: 0 1rem !important;
+          }
+          .understand-image-card {
+            height: auto !important;
+            min-height: 480px !important;
+            padding: 2rem 1.5rem !important;
+            border-radius: 20px !important;
+          }
+          .understand-image-card .understand-card-label {
+            font-size: 0.75rem !important;
+            margin-bottom: 0.75rem !important;
+          }
+          .understand-image-card .understand-card-heading {
+            font-size: clamp(1.5rem, 5vw, 2rem) !important;
+            margin-bottom: 0.6rem !important;
+          }
+          .understand-image-card .understand-card-desc {
+            font-size: 0.88rem !important;
+            line-height: 1.55 !important;
+            max-width: 100% !important;
+          }
+          .understand-stats-grid {
+            gap: 0.6rem !important;
+          }
+          .understand-stats-grid > div {
+            padding: 1rem 1.1rem !important;
+            border-radius: 12px !important;
+          }
+          .understand-stats-grid > div > div:first-child {
+            font-size: 1.65rem !important;
+            margin-bottom: 0.15rem !important;
+          }
+          .understand-stats-grid > div > div:last-child {
+            font-size: 0.8rem !important;
+          }
+          .understand-right-panel {
+            padding-right: 0 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .understand-image-card {
+            min-height: 420px !important;
+            padding: 1.5rem 1.25rem !important;
+            border-radius: 16px !important;
+          }
+          .understand-image-card .understand-card-label {
+            font-size: 0.7rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          .understand-image-card .understand-card-heading {
+            font-size: clamp(1.25rem, 6vw, 1.6rem) !important;
+            margin-bottom: 0.5rem !important;
+          }
+          .understand-image-card .understand-card-desc {
+            font-size: 0.82rem !important;
+            line-height: 1.5 !important;
+          }
+          .understand-stats-grid {
+            gap: 0.5rem !important;
+          }
+          .understand-stats-grid > div {
+            padding: 0.85rem 1rem !important;
+            border-radius: 10px !important;
+          }
+          .understand-stats-grid > div > div:first-child {
+            font-size: 1.4rem !important;
+          }
+          .understand-stats-grid > div > div:last-child {
+            font-size: 0.75rem !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           AUDIENCES (Section 4)
+        ══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 12px !important;
+          }
+          /* All cards: 1×1 uniform */
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+            min-height: 160px !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
+          }
+        }
+
         @media (max-width: 768px) {
           .market-audience-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 10px !important;
           }
+          /* All cards: 1×1 uniform */
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+            min-height: 0 !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .market-audience-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px !important;
+          }
+          /* All cards: 1×1 uniform */
+          .market-audience-grid .audience-item {
+            --col-span: 1 !important;
+            --row-span: 1 !important;
+            min-height: 0 !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           GENERAL SECTION PADDING (mobile)
+        ══════════════════════════════════════ */
+        @media (max-width: 768px) {
           .market-culture-section > div {
+            padding: 1rem 0 2rem 0 !important;
+          }
+          .market-culture-section > div:first-child {
             padding: 1rem 5% 2rem 5% !important;
+          }
+          section {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
           }
         }
       `}</style>

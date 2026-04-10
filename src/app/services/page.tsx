@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+
+const MotionLink = motion(Link);
 import Ribbons from "@/components/Ribbons";
 
 const services = [
@@ -176,25 +178,29 @@ export default function ServicesPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.6 }}
             >
-              <Link
-                href="#services"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontSize: "1.25rem",
-                  fontWeight: 500,
-                  transition: "color 0.3s ease",
-                  opacity: 0.3,
-                }}
-                onMouseOver={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "#FF5E00"}
-                onMouseOut={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "#fff"}
-              >
-                Learn More
-                <ArrowRight size={20} />
-              </Link>
+                <MotionLink
+                  href="#services"
+                  initial="initial"
+                  whileHover="hover"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    color: "#fff",
+                    textDecoration: "none",
+                    fontSize: "1.25rem",
+                    fontWeight: 500,
+                    transition: "color 0.3s ease",
+                    opacity: 0.3,
+                  }}
+                  onMouseOver={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "#FF5E00"}
+                  onMouseOut={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.style.color = "#fff"}
+                >
+                  Learn More
+                  <motion.div variants={{ hover: { x: 5 } }}>
+                    <ArrowRight size={20} />
+                  </motion.div>
+                </MotionLink>
             </motion.div>
 
             {/* Get Started Button (P pill style) with Entance Animation */}
@@ -385,15 +391,20 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Learn More pill */}
-                    <Link
+                    <MotionLink
                       href={svc.slug}
                       className="learn-more-pill"
+                      initial="initial"
+                      whileHover="hover"
                     >
                       Learn More
-                      <div className="arrow-circle">
+                      <motion.div 
+                        variants={{ hover: { x: 5, rotate: 0 } }}
+                        className="arrow-circle"
+                      >
                         <ArrowRight size={16} strokeWidth={3} />
-                      </div>
-                    </Link>
+                      </motion.div>
+                    </MotionLink>
                   </div>
                 </motion.div>
               );
