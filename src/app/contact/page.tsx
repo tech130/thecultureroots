@@ -535,7 +535,7 @@ export default function ContactUs() {
               opacity: 0.8,
             }}
           >
-            hey@thecultureroots.com | +91 95000 11980
+            hey@thecultureroots.com | +91 89255 50102
           </div>
         </motion.div>
       </section>
